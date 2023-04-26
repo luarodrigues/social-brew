@@ -1,7 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { ChakraProvider, Avatar, Stack, Box } from "@chakra-ui/react";
-import signin from "../pages/signin.js";
+import { Avatar, Stack, Box } from "@chakra-ui/react";
 
 export default function Home() {
   return (
@@ -103,7 +102,7 @@ export default function Home() {
                   w="20px"
                   border="1px solid #323233"
                 />
-                <a className={styles.followerComments}></a>
+                <a className={styles.followerComments}>good coffee</a>
               </Box>
             ))}
           </section>
