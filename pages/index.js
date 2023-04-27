@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Avatar, Stack, Box, Flex } from "@chakra-ui/react";
+import { Avatar, Stack, Box, Flex, Button } from "@chakra-ui/react";
 
 export default function Home() {
   return (
@@ -27,13 +27,19 @@ export default function Home() {
               brew
             </text>
           </text>
-          <button
+          <Stack
             id="signInButton"
             className={styles.signInButton}
             onClick={() => window.open("/signin", "_blank")}
           >
-            Sign In
-          </button>
+            <Button
+              variant="outline"
+              borderRadius="10"
+              border="2px solid white"
+            >
+              Sign In
+            </Button>
+          </Stack>
           <a className={styles.createAccount}>create an account</a>
         </header>
 

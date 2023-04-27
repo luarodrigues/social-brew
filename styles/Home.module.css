@@ -1,8 +1,3 @@
-.title a {
-  color: #ffff;
-  text-decoration: none;
-}
-
 .logoText {
   flex-direction: row;
   position: absolute;
@@ -15,20 +10,6 @@
   font-weight: 300;
   font-size: 50px;
   line-height: 68px;
-  text-transform: uppercase;
-}
-
-.logoTextBold {
-  position: absolute;
-  width: 293px;
-  height: 79px;
-  left: 332px;
-  top: 64px;
-
-  font-style: normal;
-  font-weight: 800;
-  font-size: 66px;
-  line-height: 90px;
   text-transform: uppercase;
 }
 
@@ -47,31 +28,13 @@
 }
 
 .signInButton {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 16px;
-  gap: 8px;
   position: absolute;
-  width: 90px;
-  height: 40px;
   left: 1057px;
   top: 83px;
-  border: 2px solid #ffff;
-  border-radius: 10px;
-  background-color: #f7bd96;
-  color: white;
   font-family: "Avenir";
-  font-style: normal;
-  font-weight: 800;
-  font-size: 16px;
-  line-height: 24px;
 }
 
 .signInButton:hover {
-  background-color: #ffff;
   color: #f7bd96;
   transform: "scale(0.98)";
 }
