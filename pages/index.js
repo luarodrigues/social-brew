@@ -20,9 +20,13 @@ export default function Home() {
         bg={"#f7bd96"}
         color={"whiteAlpha.900"}
       >
-        <header className={styles.header}>
-          <a className={styles.logoText}>Social</a>{" "}
-          <a className={styles.logoTextBold}>Brew</a>
+        <header>
+          <text className={styles.logoText}>
+            Social{" "}
+            <text style={{ fontSize: 66, fontWeight: 800, marginLeft: 24 }}>
+              brew
+            </text>
+          </text>
           <button
             id="signInButton"
             className={styles.signInButton}
@@ -43,7 +47,6 @@ export default function Home() {
                   "https://honestcoffeeguide.com/tools/coffee-to-water-ratio/",
                   "_blank"
                 );
-                git;
               }}
             >
               coffee calculator

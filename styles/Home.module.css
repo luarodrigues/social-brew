@@ -1,41 +1,13 @@
-.content {
-  max-width: 1280px;
-  min-height: 100vh;
-  margin: 0 auto;
-  background-color: #f7bd96;
-
-  color: #ffff;
-  padding: 0 0.5rem;
-  box-sizing: border-box;
-}
-
-.content * {
-  box-sizing: inherit;
-}
-
-@media (max-width: 768px) {
-  .content {
-    max-width: 90%;
-    padding: 0 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .content {
-    max-width: 100%;
-    padding: 0 0.5rem;
-  }
-}
-
 .title a {
   color: #ffff;
   text-decoration: none;
 }
 
 .logoText {
+  flex-direction: row;
   position: absolute;
-  width: 293px;
-  height: 70px;
+  width: 393px;
+  height: 86px;
   left: 136px;
   top: 80px;
 
