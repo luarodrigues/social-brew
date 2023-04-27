@@ -4,13 +4,13 @@ import { Avatar, Stack, Box } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <body className={styles.content}>
-      <div>
-        <Head>
-          <title>social brew</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
+    <div>
+      <Head>
+        <title>social brew</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
+      <body className={styles.content}>
         <header className={styles.header}>
           <a className={styles.logoText}>Social</a>{" "}
           <a className={styles.logoTextBold}>Brew</a>
@@ -107,7 +107,7 @@ export default function Home() {
             ))}
           </section>
         </section>
-      </div>
-    </body>
+      </body>
+    </div>
   );
 }
