@@ -1,35 +1,121 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { Avatar, Stack, Box, Flex, Button } from "@chakra-ui/react";
+import {
+  Avatar,
+  Stack,
+  VStack,
+  Box,
+  Flex,
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  Heading,
+  Text,
+  Image,
+} from "@chakra-ui/react";
+
+const textStyles = {
+  fontFamily: "Avenir",
+  fontSize: 15,
+  display: "flex",
+  alignItems: "center",
+  color: "#ff9751",
+};
+
+const followStyles = {
+  fontFamily: "Avenir",
+  fontWeight: "400",
+  fontSize: "17px",
+  lineHeight: "23px",
+  color: "#323233",
+  name: "",
+  background: "#F7bd96",
+  height: "20px",
+  width: "20px",
+  border: "1px solid #323233",
+};
+const CoffeeData = () => {
+  const coffeeDataStyle = {
+    fontFamily: "Avenir",
+    fontWeight: "400",
+    fontSize: "17px",
+    lineHeight: "23px",
+    color: "#323233",
+  };
+
+  const beans = "Ethiopia, washed";
+  const roaster = "Three Marks";
+  const brewMethod = "V60";
+  const recipe = "20g coffee to 300g water";
+  const comments = "Add 50g water for bloom";
+
+  return (
+    <VStack align="stretch" style={coffeeDataStyle}>
+      <Box h="30px">Beans: {beans}</Box>
+      <Box h="30px">Roaster: {roaster}</Box>
+      <Box h="30px">Brew Method: {brewMethod}</Box>
+      <Box h="30px">Recipe: {recipe}</Box>
+      <Box h="30px">Comments: {comments}</Box>
+    </VStack>
+  );
+};
+
+const socialLinks = [
+  {
+    title: "coffee calculator",
+    url: "https://honestcoffeeguide.com/tools/coffee-to-water-ratio/",
+  },
+  {
+    title: "methods guide",
+    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
+  },
+  {
+    title: "grind size chart",
+    url: "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
+  },
+  {
+    title: "community",
+    url: "#",
+  },
+];
 
 export default function Home() {
   return (
-    // <div>
-
-    //   <body className={styles.content}>
     <Box>
       <Head>
         <title>social brew</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
+      </Head>{" "}
       <Flex
         minH={"100vh"}
         align={"center"}
         justify={"center"}
         bg={"#f7bd96"}
-        color={"whiteAlpha.900"}
+        color={"white"}
+        fontFamily={"avenir"}
       >
-        <header>
-          <text className={styles.logoText}>
-            Social{" "}
-            <text style={{ fontSize: 66, fontWeight: 800, marginLeft: 24 }}>
-              brew
-            </text>
-          </text>
+        <Stack>
+          <Text
+            position="absolute"
+            left="136px"
+            top="80px"
+            width="fit-content"
+            fontSize="50px"
+            fontWeight="300"
+          >
+            SOCIAL
+            <Text as="b" fontSize="66px" ml="24px" display="inline-block">
+              BREW
+            </Text>
+          </Text>
           <Stack
-            id="signInButton"
-            className={styles.signInButton}
+            position="absolute"
+            left="1057px"
+            top="83px"
+            _hover={{
+              color: "#f7bd96",
+              transform: "scale(0.98)",
+            }}
             onClick={() => window.open("/signin", "_blank")}
           >
             <Button
@@ -40,91 +126,100 @@ export default function Home() {
               Sign In
             </Button>
           </Stack>
-          <a className={styles.createAccount}>create an account</a>
-        </header>
-
-        <section>
-          <Stack className={styles.menuBar} spacing={"42px"}>
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(
-                  "https://honestcoffeeguide.com/tools/coffee-to-water-ratio/",
-                  "_blank"
-                );
-              }}
+          <Text
+            position="absolute"
+            width="104px"
+            height="20px"
+            left="1043px"
+            top="130px"
+            fontWeight="500"
+            fontSize="12px"
+            textAlign="center"
+          >
+            create an account
+          </Text>
+        </Stack>
+        <Stack>
+          <Box>
+            <Stack
+              position="absolute"
+              width="203px"
+              height="231px"
+              left="136px"
+              top="178px"
+              fontSize="20px"
+              fontWeight="500"
+              lineHeight="27px"
+              spacing="42px"
             >
-              coffee calculator
-            </a>
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(
-                  "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
-                  "_blank"
-                );
-              }}
-            >
-              methods guide
-            </a>
-
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(
-                  "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
-                  "_blank"
-                );
-              }}
-            >
-              grind size chart
-            </a>
-            <a>community</a>
-          </Stack>
-        </section>
-
-        <section className={styles.postContainer}>
-          <div className={styles.postedImage}></div>
-          <div className={styles.userProfile}>
-            <a>Lua</a>
-          </div>
-          <Box className={styles.userProfileAvatar}>
-            <Avatar
-              name="Luana"
-              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/718/original/PJF_8413.jpg?1682356621"
-              border="2px solid #F7BD96"
-            ></Avatar>
+              {socialLinks.map((link) => (
+                <Text
+                  key={link.title}
+                  href={link.url}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(link.url, "_blank");
+                  }}
+                >
+                  {link.title}
+                </Text>
+              ))}
+            </Stack>
           </Box>
+        </Stack>
+        <Card
+          border={"2px solid red"}
+          width="800px"
+          height="540"
+          direction={{ base: "column", sm: "row" }}
+          overflow="hidden"
+          variant="outline"
+        >
+          <Image
+            objectFit="cover"
+            maxW={{ base: "100%" }}
+            src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/725/original/IMG_1913.jpeg?1682359163
+            "
+          />
 
-          <Stack className={styles.coffeeData}>
-            <a className="beans">beans: ethiopia/washed</a>
-            <a className="roaster">roaster: nomad</a>
-            <a className="method">method: v60</a>
-            <a className="recipe">recipe: 20g</a>
-          </Stack>
-          <Stack className={styles.postSubtitle}>
-            <a>lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-          </Stack>
-
-          <section className={styles.postCommentsContainer}>
-            {[...Array(7)].map((_, i) => (
-              <Box key={i}>
+          <CardBody>
+            <CardHeader>
+              <Flex
+                flex="1"
+                gap="3"
+                alignItems="center"
+                flexWrap="wrap"
+                justifyContent="flex-end"
+                w="260px"
+                border={"2px solid green"}
+              >
+                <Heading fontFamily="avenir" size="sm">
+                  Luana Rodrigues
+                </Heading>
                 <Avatar
-                  className={styles.followerProfileAvatar}
-                  name=""
-                  background="#F7bd96"
-                  h="20px"
-                  w="20px"
-                  border="1px solid #323233"
+                  name="Luana Rodrigues"
+                  src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/718/original/PJF_8413.jpg?1682356621"
+                  border="3px solid #F7bd96"
                 />
-                <a className={styles.followerComments}>good coffee</a>
-              </Box>
-            ))}
-          </section>
-        </section>
+              </Flex>
+            </CardHeader>
+            <CardBody>
+              <Text py="2">
+                <VStack spacing={2} align="stretch">
+                  <CoffeeData />
+                  <VStack>
+                    {[...Array(7)].map((_, i) => (
+                      <Box key={i}>
+                        <Avatar style={followStyles}></Avatar>
+                        <Text style={textStyles}>good coffee 🧡</Text>
+                      </Box>
+                    ))}
+                  </VStack>
+                </VStack>
+              </Text>
+            </CardBody>
+          </CardBody>
+        </Card>
       </Flex>
     </Box>
   );
