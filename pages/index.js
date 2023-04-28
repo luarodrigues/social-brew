@@ -1,4 +1,6 @@
 import Head from "next/head";
+import styled from "styled-components";
+
 import {
   Avatar,
   Stack,
@@ -34,6 +36,55 @@ const followStyles = {
   width: "20px",
   border: "1px solid #323233",
 };
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+
+  align-items: center;
+`;
+
+const MainLogoText = styled.div`
+  font-size: 50px;
+  font-weight: 300;
+`;
+
+const BoldLogoText = styled.div`
+  font-size: 66px;
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 24px;
+`;
+const LogoText = () => (
+  <LogoContainer>
+    <MainLogoText>
+      SOCIAL<BoldLogoText>BREW</BoldLogoText>
+    </MainLogoText>
+  </LogoContainer>
+);
+
+const SignButton = (props) => (
+  <Button
+    variant="outline"
+    borderRadius="10"
+    border="2px solid white"
+    background="#F7bd96"
+    color="white"
+    padding="8px 16px"
+    cursor="pointer"
+    transition="background-color 0.3s ease-in-out"
+    _hover={{
+      background: "#FFFF",
+      color: "#f7bd96",
+      transform: "scale(0.98)",
+    }}
+    {...props}
+    onClick={() => window.open("/signin", "_blank")}
+  >
+    Sign In
+  </Button>
+);
+
 const CoffeeData = () => {
   const coffeeDataStyle = {
     fontFamily: "Avenir",
@@ -41,6 +92,7 @@ const CoffeeData = () => {
     fontSize: "17px",
     lineHeight: "23px",
     color: "#323233",
+    alignItems: "flex-start",
   };
 
   const beans = "Ethiopia, washed";
@@ -50,7 +102,7 @@ const CoffeeData = () => {
   const comments = "Add 50g water for bloom";
 
   return (
-    <VStack align="stretch" style={coffeeDataStyle}>
+    <VStack style={coffeeDataStyle}>
       <Box h="30px">Beans: {beans}</Box>
       <Box h="30px">Roaster: {roaster}</Box>
       <Box h="30px">Brew Method: {brewMethod}</Box>
@@ -60,7 +112,7 @@ const CoffeeData = () => {
   );
 };
 
-const socialLinks = [
+const socialBrewLinks = [
   {
     title: "coffee calculator",
     url: "https://honestcoffeeguide.com/tools/coffee-to-water-ratio/",
@@ -93,133 +145,104 @@ export default function Home() {
         bg={"#f7bd96"}
         color={"white"}
         fontFamily={"avenir"}
+        p={"50px"}
+        flexDirection="column"
       >
-        <Stack>
-          <Text
-            position="absolute"
-            left="136px"
-            top="80px"
-            width="fit-content"
-            fontSize="50px"
-            fontWeight="300"
-          >
-            SOCIAL
-            <Text as="b" fontSize="66px" ml="24px" display="inline-block">
-              BREW
-            </Text>
-          </Text>
-          <Stack
-            position="absolute"
-            left="1057px"
-            top="83px"
-            _hover={{
-              color: "#f7bd96",
-              transform: "scale(0.98)",
-            }}
-            onClick={() => window.open("/signin", "_blank")}
-          >
-            <Button
-              variant="outline"
-              borderRadius="10"
-              border="2px solid white"
-            >
-              Sign In
-            </Button>
-          </Stack>
-          <Text
-            position="absolute"
-            width="104px"
-            height="20px"
-            left="1043px"
-            top="130px"
-            fontWeight="500"
-            fontSize="12px"
-            textAlign="center"
-          >
-            create an account
-          </Text>
-        </Stack>
-        <Stack>
-          <Box>
-            <Stack
-              position="absolute"
-              width="203px"
-              height="231px"
-              left="136px"
-              top="178px"
-              fontSize="20px"
-              fontWeight="500"
-              lineHeight="27px"
-              spacing="42px"
-            >
-              {socialLinks.map((link) => (
-                <Text
-                  key={link.title}
-                  href={link.url}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.open(link.url, "_blank");
-                  }}
-                >
-                  {link.title}
-                </Text>
-              ))}
-            </Stack>
-          </Box>
-        </Stack>
-        <Card
-          border={"2px solid red"}
-          width="800px"
-          height="540"
-          direction={{ base: "column", sm: "row" }}
-          overflow="hidden"
-          variant="outline"
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          top="0"
+          zIndex="1"
+          py="4"
         >
-          <Image
-            objectFit="cover"
-            maxW={{ base: "100%" }}
-            src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/725/original/IMG_1913.jpeg?1682359163
-            "
-          />
-
-          <CardBody>
-            <CardHeader>
-              <Flex
-                flex="1"
-                gap="3"
-                alignItems="center"
-                flexWrap="wrap"
-                justifyContent="flex-end"
-                w="260px"
-                border={"2px solid green"}
+          <LogoContainer>
+            <LogoText />
+          </LogoContainer>
+          <Stack alignItems="center" justifyContent="center" marginLeft="520px">
+            <SignButton />
+            <Text fontSize="16px" as="b">
+              create an account
+            </Text>
+          </Stack>
+        </Flex>
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          alignItems={{ base: "flex-start", sm: "center" }}
+        >
+          <Stack alignSelf={{ sm: "flex-start" }}>
+            {socialBrewLinks.map((link) => (
+              <Text
+                marginRight="30px"
+                fontSize="20px"
+                key={link.title}
+                href={link.url}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(link.url, "_blank");
+                }}
               >
-                <Heading fontFamily="avenir" size="sm">
-                  Luana Rodrigues
-                </Heading>
-                <Avatar
-                  name="Luana Rodrigues"
-                  src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/718/original/PJF_8413.jpg?1682356621"
-                  border="3px solid #F7bd96"
-                />
-              </Flex>
-            </CardHeader>
-            <CardBody>
-              <Text py="2">
-                <VStack spacing={2} align="stretch">
-                  <CoffeeData />
-                  <VStack>
-                    {[...Array(7)].map((_, i) => (
-                      <Box key={i}>
-                        <Avatar style={followStyles}></Avatar>
-                        <Text style={textStyles}>good coffee 🧡</Text>
-                      </Box>
-                    ))}
-                  </VStack>
-                </VStack>
+                {link.title}
               </Text>
+            ))}
+          </Stack>
+
+          <Card
+            border="0px"
+            width="800px"
+            height="540"
+            direction={{ base: "column", sm: "row" }}
+            overflow="hidden"
+            variant="outline"
+          >
+            <Image
+              objectFit="cover"
+              maxW={{ base: "100%" }}
+              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/725/original/IMG_1913.jpeg?1682359163
+            "
+            />
+
+            <CardBody>
+              <CardHeader>
+                <Flex
+                  flex="1"
+                  gap="3"
+                  alignItems="center"
+                  flexWrap="wrap"
+                  justifyContent="flex-end"
+                  w="260px"
+                >
+                  <Heading fontFamily="avenir" size="sm">
+                    Luana Rodrigues
+                  </Heading>
+                  <Avatar
+                    name="Luana Rodrigues"
+                    src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/718/original/PJF_8413.jpg?1682356621"
+                    border="3px solid #F7bd96"
+                  />
+                </Flex>
+              </CardHeader>
+              <CardBody>
+                <VStack spacing={2} Itens="flex-start">
+                  <CoffeeData />
+                  <Flex
+                    alignItems="left"
+                    flex="1"
+                    gap="3"
+                    flexDirection="column"
+                    items="flex-start"
+                  >
+                    {[...Array(5)].map((_, i) => (
+                      <Flex key={i} flexDirection="row" alignItems="center">
+                        <Avatar style={followStyles}></Avatar>
+                        <Text style={textStyles}> good coffee 🧡</Text>
+                      </Flex>
+                    ))}
+                  </Flex>
+                </VStack>
+              </CardBody>
             </CardBody>
-          </CardBody>
-        </Card>
+          </Card>
+        </Flex>
       </Flex>
     </Box>
   );
