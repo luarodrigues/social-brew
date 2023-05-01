@@ -1,81 +1,40 @@
-import Head from "next/head";
-import styled from "styled-components";
+// #f7bd96 main colour
+// #A7D2DD light blue
+// #0F606B deep green
+// #FD6853 vibrante peach
+// #FFF4F0 light peach
 
 import {
-  Avatar,
+  Container,
   Stack,
-  VStack,
-  Box,
   Flex,
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
+  Box,
   Heading,
   Text,
+  Button,
   Image,
+  Icon,
+  IconButton,
+  createIcon,
+  IconProps,
+  useColorModeValue,
+  border,
 } from "@chakra-ui/react";
-
-const textStyles = {
-  fontFamily: "Avenir",
-  fontSize: 15,
-  display: "flex",
-  alignItems: "center",
-  color: "#ff9751",
-};
-
-const followStyles = {
-  fontFamily: "Avenir",
-  fontWeight: "400",
-  fontSize: "17px",
-  lineHeight: "23px",
-  color: "#323233",
-  name: "",
-  background: "#F7bd96",
-  height: "20px",
-  width: "20px",
-  border: "1px solid #323233",
-};
-
-const LogoContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-
-  align-items: center;
-`;
-
-const MainLogoText = styled.div`
-  font-size: 50px;
-  font-weight: 300;
-`;
-
-const BoldLogoText = styled.div`
-  font-size: 66px;
-  font-weight: bold;
-  display: inline-block;
-  margin-left: 24px;
-`;
-const LogoText = () => (
-  <LogoContainer>
-    <MainLogoText>
-      SOCIAL<BoldLogoText>BREW</BoldLogoText>
-    </MainLogoText>
-  </LogoContainer>
-);
 
 const SignButton = (props) => (
   <Button
     variant="outline"
-    borderRadius="10"
     border="2px solid white"
-    background="#F7bd96"
+    background="#A7D2DD"
     color="white"
     padding="8px 16px"
     cursor="pointer"
+    rounded={"full"}
+    size={"lg"}
     transition="background-color 0.3s ease-in-out"
     _hover={{
       background: "#FFFF",
-      color: "#f7bd96",
+      color: "#A7D2DD",
       transform: "scale(0.98)",
     }}
     {...props}
@@ -85,165 +44,130 @@ const SignButton = (props) => (
   </Button>
 );
 
-const CoffeeData = () => {
-  const coffeeDataStyle = {
-    fontFamily: "Avenir",
-    fontWeight: "400",
-    fontSize: "17px",
-    lineHeight: "23px",
-    color: "#323233",
-    alignItems: "flex-start",
-  };
-
-  const beans = "Ethiopia, washed";
-  const roaster = "Three Marks";
-  const brewMethod = "V60";
-  const recipe = "20g coffee to 300g water";
-  const comments = "Add 50g water for bloom";
-
+export default function CallToActionWithVideo() {
   return (
-    <VStack style={coffeeDataStyle}>
-      <Box h="30px">Beans: {beans}</Box>
-      <Box h="30px">Roaster: {roaster}</Box>
-      <Box h="30px">Brew Method: {brewMethod}</Box>
-      <Box h="30px">Recipe: {recipe}</Box>
-      <Box h="30px">Comments: {comments}</Box>
-    </VStack>
-  );
-};
-
-const socialBrewLinks = [
-  {
-    title: "coffee calculator",
-    url: "https://honestcoffeeguide.com/tools/coffee-to-water-ratio/",
-  },
-  {
-    title: "methods guide",
-    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
-  },
-  {
-    title: "grind size chart",
-    url: "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
-  },
-  {
-    title: "community",
-    url: "#",
-  },
-];
-
-export default function Home() {
-  return (
-    <Box>
-      <Head>
-        <title>social brew</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>{" "}
-      <Flex
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-        bg={"#f7bd96"}
-        color={"white"}
-        fontFamily={"avenir"}
-        p={"50px"}
-        flexDirection="column"
-      >
-        <Flex
-          justifyContent="space-between"
-          alignItems="center"
-          top="0"
-          zIndex="1"
-          py="4"
+    <Flex align={"center"} justify={"center"} p={"50px"}>
+      <title>welcome to social brew</title>
+      <Container maxW={"7xl"} fontFamily={"avenir"}>
+        <Stack
+          align={"center"}
+          spacing={{ base: 8, md: 10 }}
+          py={{ base: 20, md: 28 }}
+          direction={{ base: "column", md: "row" }}
         >
-          <LogoContainer>
-            <LogoText />
-          </LogoContainer>
-          <Stack alignItems="center" justifyContent="center" marginLeft="520px">
-            <SignButton />
-            <Text fontSize="16px" as="b">
-              create an account
-            </Text>
-          </Stack>
-        </Flex>
-        <Flex
-          direction={{ base: "column", sm: "row" }}
-          alignItems={{ base: "flex-start", sm: "center" }}
-        >
-          <Stack alignSelf={{ sm: "flex-start" }}>
-            {socialBrewLinks.map((link) => (
+          <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+            <Heading
+              lineHeight={1.1}
+              fontWeight={600}
+              fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+            >
               <Text
-                marginRight="30px"
-                fontSize="20px"
-                key={link.title}
-                href={link.url}
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(link.url, "_blank");
+                fontFamily={"avenir"}
+                color=" #0F606B"
+                as={"span"}
+                position={"relative"}
+                _after={{
+                  content: "''",
+                  width: "full",
+                  height: "30%",
+                  position: "absolute",
+                  bottom: 1,
+                  left: 0,
+                  bg: "#A7D2DD",
+                  zIndex: -1,
                 }}
               >
-                {link.title}
+                Welcome to <br />
+                <span style={{ color: "#FD6853" }}>Social Brew</span>
               </Text>
-            ))}
+              <br />
+              <Text as={"span"} color={" #0F606B"} fontSize={"4xl"}>
+                your coffee community app
+              </Text>
+            </Heading>
+            <Text color={"gray.500"}>
+              lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              sit ullam adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et do
+            </Text>
+            <Stack
+              spacing={{ base: 4, sm: 6 }}
+              direction={{ base: "column", sm: "row" }}
+            >
+              <SignButton />
+              <Button
+                color={"#0f606b"}
+                rounded={"full"}
+                size={"lg"}
+                fontWeight={"normal"}
+                px={6}
+              >
+                Create Account
+              </Button>
+            </Stack>
           </Stack>
-
-          <Card
-            border="0px"
-            width="800px"
-            height="540"
-            direction={{ base: "column", sm: "row" }}
-            overflow="hidden"
-            variant="outline"
+          <Flex
+            flex={1}
+            justify={"center"}
+            align={"center"}
+            position={"relative"}
+            w={"full"}
           >
-            <Image
-              objectFit="cover"
-              maxW={{ base: "100%" }}
-              src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/725/original/IMG_1913.jpeg?1682359163
-            "
+            <Blob
+              w={"150%"}
+              h={"150%"}
+              position={"absolute"}
+              top={"-20%"}
+              left={0}
+              zIndex={-1}
             />
-
-            <CardBody>
-              <CardHeader>
-                <Flex
-                  flex="1"
-                  gap="3"
-                  alignItems="center"
-                  flexWrap="wrap"
-                  justifyContent="flex-end"
-                  w="260px"
-                >
-                  <Heading fontFamily="avenir" size="sm">
-                    Luana Rodrigues
-                  </Heading>
-                  <Avatar
-                    name="Luana Rodrigues"
-                    src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/718/original/PJF_8413.jpg?1682356621"
-                    border="3px solid #F7bd96"
-                  />
-                </Flex>
-              </CardHeader>
-              <CardBody>
-                <VStack spacing={2} Itens="flex-start">
-                  <CoffeeData />
-                  <Flex
-                    alignItems="left"
-                    flex="1"
-                    gap="3"
-                    flexDirection="column"
-                    items="flex-start"
-                  >
-                    {[...Array(5)].map((_, i) => (
-                      <Flex key={i} flexDirection="row" alignItems="center">
-                        <Avatar style={followStyles}></Avatar>
-                        <Text style={textStyles}> good coffee 🧡</Text>
-                      </Flex>
-                    ))}
-                  </Flex>
-                </VStack>
-              </CardBody>
-            </CardBody>
-          </Card>
-        </Flex>
-      </Flex>
-    </Box>
+            <Box
+              position={"relative"}
+              height={"300px"}
+              rounded={"2xl"}
+              boxShadow={"2xl"}
+              width={"full"}
+              overflow={"hidden"}
+            >
+              <Image
+                alt={"Hero Image"}
+                fit={"cover"}
+                align={"center"}
+                w={"100%"}
+                h={"100%"}
+                src={
+                  "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/079/873/original/Laptop_Mockup_Testimonial_Facebook_Cover.png?1682954351"
+                }
+              />
+            </Box>
+          </Flex>
+        </Stack>
+      </Container>
+    </Flex>
   );
 }
+
+const PlayIcon = createIcon({
+  displayName: "PlayIcon",
+  viewBox: "0 0 58 58",
+  d: "M28.9999 0.562988C13.3196 0.562988 0.562378 13.3202 0.562378 29.0005C0.562378 44.6808 13.3196 57.438 28.9999 57.438C44.6801 57.438 57.4374 44.6808 57.4374 29.0005C57.4374 13.3202 44.6801 0.562988 28.9999 0.562988ZM39.2223 30.272L23.5749 39.7247C23.3506 39.8591 23.0946 39.9314 22.8332 39.9342C22.5717 39.9369 22.3142 39.8701 22.0871 39.7406C21.86 39.611 21.6715 39.4234 21.5408 39.1969C21.4102 38.9705 21.3421 38.7133 21.3436 38.4519V19.5491C21.3421 19.2877 21.4102 19.0305 21.5408 18.8041C21.6715 18.5776 21.86 18.3899 22.0871 18.2604C22.3142 18.1308 22.5717 18.064 22.8332 18.0668C23.0946 18.0696 23.3506 18.1419 23.5749 18.2763L39.2223 27.729C39.4404 27.8619 39.6207 28.0486 39.7458 28.2713C39.8709 28.494 39.9366 28.7451 39.9366 29.0005C39.9366 29.2559 39.8709 29.507 39.7458 29.7297C39.6207 29.9523 39.4404 30.1391 39.2223 30.272Z",
+});
+
+export const Blob = (props, IconProps) => {
+  return (
+    <Icon
+      width={"100%"}
+      viewBox="0 0 578 440"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M239.184 439.443c-55.13-5.419-110.241-21.365-151.074-58.767C42.307 338.722-7.478 282.729.938 221.217c8.433-61.644 78.896-91.048 126.871-130.712 34.337-28.388 70.198-51.348 112.004-66.78C282.34 8.024 325.382-3.369 370.518.904c54.019 5.115 112.774 10.886 150.881 49.482 39.916 40.427 49.421 100.753 53.385 157.402 4.13 59.015 11.255 128.44-30.444 170.44-41.383 41.683-111.6 19.106-169.213 30.663-46.68 9.364-88.56 35.21-135.943 30.551z"
+        fill="#f7bd96"
+      />
+    </Icon>
+  );
+};

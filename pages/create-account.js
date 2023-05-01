@@ -94,7 +94,7 @@ export default function SimpleCard() {
             Social <span style={{ fontWeight: "bold" }}>brew</span>
           </Text>
           <Heading fontSize={"4xl"} color={"white"} textTransform={"uppercase"}>
-            Sign in page
+            create an account
           </Heading>
           <Text fontSize={"lg"} color={"white"}>
             to enjoy all of our cool <Link color={"gray.700"}>features</Link>{" "}
@@ -136,9 +136,9 @@ export default function SimpleCard() {
                   color: "#FD6853",
                   border: "2px solid #FD6853",
                 }}
-                onClick={handleSignIn}
+                onClick={handleSignUp}
               >
-                Sign in
+                create an account
               </Button>
               {/* <Button
                 bg={"#FD6853"}
@@ -148,9 +148,9 @@ export default function SimpleCard() {
                   color: "#FD6853",
                   border: "2px solid #FD6853",
                 }}
-                onClick={handleSignUp}
+                onClick={handleSignIn}
               >
-                Don't have an account? Sign up
+                Already have an account? Sign in
               </Button> */}
             </Stack>
           </Stack>
