@@ -43,6 +43,25 @@ const SignButton = (props) => (
     Sign In
   </Button>
 );
+const CreateAccountButton = (props) => (
+  <Button
+    color={"#0f606b"}
+    rounded={"full"}
+    size={"lg"}
+    fontWeight={"normal"}
+    px={6}
+    transition="background-color 0.3s ease-in-out"
+    _hover={{
+      // background: "#FFFF",
+      // color: "#A7D2DD",
+      transform: "scale(0.98)",
+    }}
+    {...props}
+    onClick={() => window.open("/create-account")}
+  >
+    Create Account
+  </Button>
+);
 
 export default function CallToActionWithVideo() {
   return (
@@ -95,15 +114,7 @@ export default function CallToActionWithVideo() {
               direction={{ base: "column", sm: "row" }}
             >
               <SignButton />
-              <Button
-                color={"#0f606b"}
-                rounded={"full"}
-                size={"lg"}
-                fontWeight={"normal"}
-                px={6}
-              >
-                Create Account
-              </Button>
+              <CreateAccountButton />
             </Stack>
           </Stack>
           <Flex
