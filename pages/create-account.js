@@ -80,7 +80,7 @@ export default function SimpleCard() {
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
-      <title>sign in</title>
+      <title>create an account</title>
       <Stack
         spacing={8}
         mx={"auto"}
@@ -93,13 +93,9 @@ export default function SimpleCard() {
           <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
             Social <span style={{ fontWeight: "bold" }}>brew</span>
           </Text>
-          <Heading fontSize={"4xl"} color={"white"} textTransform={"uppercase"}>
-            create an account
+          <Heading fontSize={"2xl"} color={"white"}>
+            create an account ☕️
           </Heading>
-          <Text fontSize={"lg"} color={"white"}>
-            to enjoy all of our cool <Link color={"gray.700"}>features</Link>{" "}
-            ☕️
-          </Text>
         </Stack>
         <Box
           rounded={"lg"}
@@ -126,7 +122,9 @@ export default function SimpleCard() {
                 justify={"space-between"}
               >
                 <Checkbox>Remember me</Checkbox>
-                <Link color={"#FD6853"}>Forgot password?</Link>
+                <Link color={"#FD6853"} onClick={() => window.open("/signin")}>
+                  Already have an account?
+                </Link>
               </Stack>
               <Button
                 bg={"#FD6853"}
@@ -140,18 +138,6 @@ export default function SimpleCard() {
               >
                 create an account
               </Button>
-              {/* <Button
-                bg={"#FD6853"}
-                color={"white"}
-                _hover={{
-                  bg: "white",
-                  color: "#FD6853",
-                  border: "2px solid #FD6853",
-                }}
-                onClick={handleSignIn}
-              >
-                Already have an account? Sign in
-              </Button> */}
             </Stack>
           </Stack>
         </Box>
