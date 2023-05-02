@@ -40,7 +40,6 @@ const followStyles = {
 const LogoContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-
   align-items: center;
 `;
 
