@@ -39,6 +39,12 @@ const CoffeeCalculator = () => {
       case "Cold Brew":
         ratio = 10;
         break;
+      case "Moka Pot":
+        ratio = 12;
+        break;
+      case "Chemex":
+        ratio = 13;
+        break;
     }
 
     {
@@ -56,7 +62,7 @@ const CoffeeCalculator = () => {
       minH={"100vh"}
       align={"center"}
       justify={"center"}
-      bg={"#0F606B "}
+      bg={"white "}
       fontFamily={"avenir"}
     >
       <title>coffee calculator</title>
@@ -105,6 +111,8 @@ const CoffeeCalculator = () => {
                 Cold Brew (concentrate)
               </option>
               <option value="Cold Brew">Cold Brew</option>
+              <option value="Chemex">Chemex</option>
+              <option value="Moka Pot">Moka Pot</option>
             </Select>
           </FormControl>
           <Box align={"center"} justify={"center"}>

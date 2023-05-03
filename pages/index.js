@@ -19,6 +19,7 @@ import {
   IconProps,
   useColorModeValue,
   border,
+  textDecoration,
 } from "@chakra-ui/react";
 
 const SignButton = (props) => (
@@ -52,8 +53,6 @@ const CreateAccountButton = (props) => (
     px={6}
     transition="background-color 0.3s ease-in-out"
     _hover={{
-      // background: "#FFFF",
-      // color: "#A7D2DD",
       transform: "scale(0.98)",
     }}
     {...props}
@@ -97,7 +96,7 @@ export default function CallToActionWithVideo() {
                 }}
               >
                 Welcome to <br />
-                <span style={{ color: "#FD6853" }}>Social Brew</span>
+                <span style={{ color: "#FD6853" }}>SOCIAL BREW</span>
               </Text>
               <br />
               <Text as={"span"} color={" #0F606B"} fontSize={"4xl"}>
