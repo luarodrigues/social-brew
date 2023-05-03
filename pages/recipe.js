@@ -1,145 +1,124 @@
-import Head from "next/head";
-import styled from "styled-components";
-
+import React, { useState, useEffect } from "react";
 import {
-  Avatar,
-  Stack,
-  VStack,
   Box,
-  Flex,
   Button,
-  Card,
-  CardHeader,
-  CardBody,
   Heading,
   Text,
-  Image,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Stack,
 } from "@chakra-ui/react";
 
-const LogoContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-
-  align-items: center;
-`;
-
-const MainLogoText = styled.div`
-  font-size: 50px;
-  font-weight: 300;
-`;
-
-const BoldLogoText = styled.div`
-  font-size: 66px;
-  font-weight: bold;
-  display: inline-block;
-  margin-left: 24px;
-`;
-const LogoText = () => (
-  <LogoContainer>
-    <MainLogoText>
-      SOCIAL<BoldLogoText>BREW</BoldLogoText>
-    </MainLogoText>
-  </LogoContainer>
-);
-
-const CoffeeData = () => {
-  const coffeeDataStyle = {
-    fontFamily: "Avenir",
-    fontWeight: "400",
-    fontSize: "17px",
-    lineHeight: "23px",
-    color: "#323233",
-    alignItems: "flex-start",
-  };
-
-  const beans = "Ethiopia, washed";
-  const roaster = "Three Marks";
-  const brewMethod = "V60";
-  const recipe = "20g coffee to 300g water";
-  const comments = "Add 50g water for bloom";
-
+const CoffeeRecipe = () => {
   return (
-    <VStack style={coffeeDataStyle}>
-      <Box h="30px">Beans: {beans}</Box>
-      <Box h="30px">Roaster: {roaster}</Box>
-      <Box h="30px">Brew Method: {brewMethod}</Box>
-      <Box h="30px">Recipe: {recipe}</Box>
-      <Box h="30px">Comments: {comments}</Box>
-    </VStack>
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={"white "}
+      fontFamily={"avenir"}
+    >
+      {" "}
+      <Stack align={"center"}></Stack>
+      <title>recipe</title>
+      <Stack
+        spacing={5}
+        mx={"auto"}
+        maxW={"lg"}
+        py={10}
+        px={6}
+        bg={"#A7D2DD"}
+        borderRadius={"40px"}
+      >
+        <Stack align={"center"}>
+          <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
+            SOCIAL BREW
+          </Text>
+        </Stack>
+        <Stack align={"center"}>
+          <Heading
+            fontSize={"large"}
+            color={"white"}
+            textTransform={"uppercase"}
+          >
+            add your recipe
+          </Heading>
+        </Stack>
+        <Box color={"#0F606B"}>
+          <FormControl id="beans" mb={4}>
+            <FormLabel>Beans origin</FormLabel>
+            <Select placeholder="Select Beans">
+              <Select placeholder="american">
+                <option>Guatemala</option>
+                <option>Honduras</option>
+                <option>El-Salvador</option>
+                <option>Costa-Rica</option>
+                <option>Panama</option>
+                <option>Brazil</option>
+                <option>Colombia</option>
+                <option>Peru</option>
+                <option>Ecuador</option>
+                <option>Bolivia</option>
+              </Select>
+              <option>India</option>
+              <option>Indonesia</option>
+              <option>Papua-New-Guinea</option>
+              <option>Ethiopia</option>
+              <option>Kenya</option>
+              <option>Tanzania</option>
+              <option>Uganda</option>
+              <option>Rwanda</option>
+              <option>Burundi</option>
+              <option>Other</option>
+            </Select>
+          </FormControl>
+
+          <FormControl id="roaster" mb={4}>
+            <FormLabel>Roaster</FormLabel>
+            <Select placeholder="Select Roaster">
+              <option>Three Marks</option>
+              <option>Nomad</option>
+              <option>Tocaya</option>
+              <option>Roastberry</option>
+              <option>Right Side</option>
+              <option>Drop Coffee</option>
+              <option>Five Elephant</option>
+              <option>Coffee & CO</option>
+              <option>Other</option>
+              <option></option>
+            </Select>
+          </FormControl>
+
+          <FormControl id="brew-method" mb={4}>
+            <FormLabel>Brew Method</FormLabel>
+            <Select placeholder="Select brew method">
+              <option value="Espresso">Espresso</option>
+              <option value="V60 or Kalita">V60 or Kalita</option>
+              <option value="AeroPress">AeroPress</option>
+              <option value="French Press">French Press</option>
+              <option value="Cold Brew ">Cold Brew</option>
+              <option value="Chemex">Chemex</option>
+              <option value="Moka Pot">Moka Pot</option>
+              <option value="Other">Other</option>
+            </Select>
+          </FormControl>
+
+          <FormControl id="comments" mb={4}>
+            <FormLabel>add a comment</FormLabel>
+            <Input />
+          </FormControl>
+          <Box align={"center"} justify={"center"}>
+            <Button borderRadius="20" mb={4} color={"#FD6853"}>
+              submit recipe
+            </Button>
+          </Box>
+        </Box>
+      </Stack>
+    </Flex>
   );
 };
 
-const socialBrewLinks = [
-  {
-    title: "coffee calculator",
-    url: "https://honestcoffeeguide.com/tools/coffee-to-water-ratio/",
-  },
-  {
-    title: "methods guide",
-    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
-  },
-  {
-    title: "grind size chart",
-    url: "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
-  },
-  {
-    title: "your recipe",
-    url: "/recipe",
-  },
-];
-
-export default function Home() {
-  return (
-    <Box>
-      <Head>
-        <title>recipe</title>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>{" "}
-      <Flex
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-        bg={"#f7bd96"}
-        color={"white"}
-        fontFamily={"avenir"}
-        p={"50px"}
-        flexDirection="column"
-      >
-        <Flex
-          justifyContent="space-between"
-          S
-          alignItems="center"
-          top="0"
-          zIndex="1"
-          py="4"
-        >
-          <LogoContainer>
-            <LogoText />
-          </LogoContainer>
-        </Flex>
-        <Flex
-          direction={{ base: "column", sm: "row" }}
-          alignItems={{ base: "flex-start", sm: "center" }}
-        >
-          <Stack alignSelf={{ sm: "flex-start" }}>
-            {socialBrewLinks.map((link) => (
-              <Text
-                marginRight="30px"
-                fontSize="20px"
-                key={link.title}
-                href={link.url}
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(link.url);
-                }}
-              >
-                {link.title}
-              </Text>
-            ))}
-          </Stack>
-        </Flex>
-      </Flex>
-    </Box>
-  );
-}
+export default CoffeeRecipe;
