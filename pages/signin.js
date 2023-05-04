@@ -40,36 +40,9 @@ export default function SimpleCard() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
         // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
-  };
-
-  const handleSignUp = () => {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDmBSxMT3WJK40AF4K-W1oZ0p4__bTJHqs",
-      authDomain: "social-brew-9d81a.firebaseapp.com",
-      projectId: "social-brew-9d81a",
-      storageBucket: "social-brew-9d81a.appspot.com",
-      messagingSenderId: "387600670881",
-      appId: "1:387600670881:web:d1c60b0b1e5f2eb92410e0",
-      measurementId: "G-TD3H59BRHT",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -106,7 +79,7 @@ export default function SimpleCard() {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input ttype="email" onChange={(e) => setEmail(e.target.value)} />
+              <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
