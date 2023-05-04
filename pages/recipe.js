@@ -12,7 +12,23 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
+import coffeeCountriesData from "/Users/luarodrigues/Documents/social-brew/coffee-countries.json";
+
 const CoffeeRecipe = () => {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const countryNames = coffeeCountriesData[0].countries;
+        setCountries(countryNames);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <Flex
       minH={"100vh"}
@@ -51,18 +67,22 @@ const CoffeeRecipe = () => {
           <FormControl id="beans" mb={4}>
             <FormLabel>Beans origin</FormLabel>
             <Select placeholder="Select Beans">
-              <Select placeholder="american">
-                <option>Guatemala</option>
-                <option>Honduras</option>
-                <option>El-Salvador</option>
-                <option>Costa-Rica</option>
-                <option>Panama</option>
-                <option>Brazil</option>
-                <option>Colombia</option>
-                <option>Peru</option>
-                <option>Ecuador</option>
-                <option>Bolivia</option>
-              </Select>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+              <option>Other</option>
+              {/* <option>Guatemala</option>
+              <option>Honduras</option>
+              <option>El-Salvador</option>
+              <option>Costa-Rica</option>
+              <option>Panama</option>
+              <option>Brazil</option>
+              <option>Colombia</option>
+              <option>Peru</option>
+              <option>Ecuador</option>
+              <option>Bolivia</option>
               <option>India</option>
               <option>Indonesia</option>
               <option>Papua-New-Guinea</option>
@@ -72,7 +92,7 @@ const CoffeeRecipe = () => {
               <option>Uganda</option>
               <option>Rwanda</option>
               <option>Burundi</option>
-              <option>Other</option>
+              <option>Other</option> */}
             </Select>
           </FormControl>
 
