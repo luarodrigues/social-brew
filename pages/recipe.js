@@ -11,17 +11,25 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react";
-
-import coffeeCountriesData from "/Users/luarodrigues/Documents/social-brew/coffee-countries.json";
+import coffeeData from "../coffee-data.json";
 
 const CoffeeRecipe = () => {
   const [countries, setCountries] = useState([]);
+  const [roasters, setRoasters] = useState([]);
+  const [method, setMethod] = useState([]);
+  const [comments, setComments] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const countryNames = coffeeCountriesData[0].countries;
+        const roastersNames = coffeeData[0].roasters;
+        const methodNames = coffeeData[0].methods;
+        const countryNames = coffeeData[0].countries;
         setCountries(countryNames);
+        // localStorage.setItem("countries", countryNames);
+        setRoasters(roastersNames);
+
+        setMethod(methodNames);
       } catch (error) {
         console.error(error);
       }
@@ -37,8 +45,6 @@ const CoffeeRecipe = () => {
       bg={"white "}
       fontFamily={"avenir"}
     >
-      {" "}
-      <Stack align={"center"}></Stack>
       <title>recipe</title>
       <Stack
         spacing={5}
@@ -73,62 +79,39 @@ const CoffeeRecipe = () => {
                 </option>
               ))}
               <option>Other</option>
-              {/* <option>Guatemala</option>
-              <option>Honduras</option>
-              <option>El-Salvador</option>
-              <option>Costa-Rica</option>
-              <option>Panama</option>
-              <option>Brazil</option>
-              <option>Colombia</option>
-              <option>Peru</option>
-              <option>Ecuador</option>
-              <option>Bolivia</option>
-              <option>India</option>
-              <option>Indonesia</option>
-              <option>Papua-New-Guinea</option>
-              <option>Ethiopia</option>
-              <option>Kenya</option>
-              <option>Tanzania</option>
-              <option>Uganda</option>
-              <option>Rwanda</option>
-              <option>Burundi</option>
-              <option>Other</option> */}
             </Select>
           </FormControl>
 
           <FormControl id="roaster" mb={4}>
             <FormLabel>Roaster</FormLabel>
             <Select placeholder="Select Roaster">
-              <option>Three Marks</option>
-              <option>Nomad</option>
-              <option>Tocaya</option>
-              <option>Roastberry</option>
-              <option>Right Side</option>
-              <option>Drop Coffee</option>
-              <option>Five Elephant</option>
-              <option>Coffee & CO</option>
+              {roasters.map((roaster) => (
+                <option key={roaster} value={roaster}>
+                  {roaster}
+                </option>
+              ))}
               <option>Other</option>
-              <option></option>
             </Select>
           </FormControl>
 
           <FormControl id="brew-method" mb={4}>
             <FormLabel>Brew Method</FormLabel>
             <Select placeholder="Select brew method">
-              <option value="Espresso">Espresso</option>
-              <option value="V60 or Kalita">V60 or Kalita</option>
-              <option value="AeroPress">AeroPress</option>
-              <option value="French Press">French Press</option>
-              <option value="Cold Brew ">Cold Brew</option>
-              <option value="Chemex">Chemex</option>
-              <option value="Moka Pot">Moka Pot</option>
-              <option value="Other">Other</option>
+              {method.map((method) => (
+                <option key={method} value={method}>
+                  {method}
+                </option>
+              ))}
+              <option>Other</option>
             </Select>
           </FormControl>
 
           <FormControl id="comments" mb={4}>
             <FormLabel>add a comment</FormLabel>
-            <Input />
+            <Input
+              value={comments}
+              onChange={(event) => setComments(event.target.value)}
+            />
           </FormControl>
           <Box align={"center"} justify={"center"}>
             <Button borderRadius="20" mb={4} color={"#FD6853"}>
