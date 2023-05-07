@@ -1,0 +1,61 @@
+[
+  {
+    "countries": [
+      "Guatemala",
+      "Honduras",
+      "El-Salvador",
+      "Costa-Rica",
+      "Panama",
+      "Mexico",
+      "Brazil",
+      "Colombia",
+      "Peru",
+      "Ecuador",
+      "Bolivia",
+
+      "India",
+      "Indonesia",
+      "Papua-New-Guinea",
+
+      "Ethiopia",
+      "Kenya",
+      "Tanzania",
+      "Uganda",
+      "Rwanda",
+      "Burundi"
+    ],
+
+    "roasters": [
+      "Three Marks",
+      "Nomad",
+      "Tocaya",
+      "Roastberry",
+      "Right Side",
+      "Drop Coffee",
+      "Five Elephant",
+      "Coffee & CO",
+      "Buraca",
+      "So Coffee",
+      "Stumptown",
+      "Blue Bottle",
+      "Intelligentsia",
+      "Counter Culture",
+      "Verve",
+      "Ritual",
+      "Onyx Lab",
+      "Heart",
+      "Coava",
+      "Four Barrel"
+    ],
+
+    "methods": [
+      "Espresso",
+      "V60 or Kalita",
+      "AeroPress",
+      "French Press",
+      "Cold Brew ",
+      "Chemex",
+      "Moka Pot"
+    ]
+  }
+]
