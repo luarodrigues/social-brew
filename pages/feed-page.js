@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styled from "styled-components";
-
 import {
   Avatar,
   Stack,
@@ -94,11 +93,11 @@ const CoffeeData = () => {
     alignItems: "flex-start",
   };
 
-  const beans = "Ethiopia, washed";
-  const roaster = "Three Marks";
-  const brewMethod = "V60";
-  const recipe = "20g coffee to 300g water";
-  const comments = "Add 50g water for bloom";
+  let beans = "countries";
+  let roaster = "Three Marks";
+  let brewMethod = "V60";
+  let recipe = "20g coffee to 300g water";
+  let comments = "Add 50g water for bloom";
 
   return (
     <VStack style={coffeeDataStyle}>

@@ -10,6 +10,10 @@ import {
   Input,
   Select,
   Stack,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 import coffeeData from "../coffee-data.json";
 
@@ -18,6 +22,7 @@ const CoffeeRecipe = () => {
   const [roasters, setRoasters] = useState([]);
   const [method, setMethod] = useState([]);
   const [comments, setComments] = useState("");
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +41,9 @@ const CoffeeRecipe = () => {
     };
     fetchData();
   }, []);
+  const handleClick = () => {
+    setShowOptions(true);
+  };
 
   return (
     <Flex
@@ -84,14 +92,16 @@ const CoffeeRecipe = () => {
 
           <FormControl id="roaster" mb={4}>
             <FormLabel>Roaster</FormLabel>
-            <Select placeholder="Select Roaster">
-              {roasters.map((roaster) => (
-                <option key={roaster} value={roaster}>
-                  {roaster}
-                </option>
-              ))}
-              <option>Other</option>
-            </Select>
+            {showOptions && (
+              <Select placeholder="Select Roaster">
+                {roasters.map((roaster) => (
+                  <option key={roaster} value={roaster}>
+                    {roaster}
+                  </option>
+                ))}
+                <option>Other</option>
+              </Select>
+            )}
           </FormControl>
 
           <FormControl id="brew-method" mb={4}>
@@ -114,7 +124,12 @@ const CoffeeRecipe = () => {
             />
           </FormControl>
           <Box align={"center"} justify={"center"}>
-            <Button borderRadius="20" mb={4} color={"#FD6853"}>
+            <Button
+              borderRadius="20"
+              mb={4}
+              color={"#FD6853"}
+              onClick={() => alert("Sorry, we still not finished this page")}
+            >
               submit recipe
             </Button>
           </Box>

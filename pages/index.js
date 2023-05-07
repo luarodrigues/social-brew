@@ -22,20 +22,30 @@ import {
   textDecoration,
 } from "@chakra-ui/react";
 
+const socialBrewLinks = [
+  {
+    title: "🧮 coffee calculator",
+    url: "/coffee-calculator",
+  },
+  {
+    title: " ☕️ methods guide",
+    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
+  },
+  {
+    title: "🧑‍🍳 your recipe",
+    url: "/recipe",
+  },
+];
+
 const SignButton = (props) => (
   <Button
-    variant="outline"
-    border="2px solid white"
-    background="#A7D2DD"
-    color="white"
-    padding="8px 16px"
-    cursor="pointer"
+    color={"#0f606b"}
     rounded={"full"}
     size={"lg"}
+    fontWeight={"normal"}
+    px={6}
     transition="background-color 0.3s ease-in-out"
     _hover={{
-      background: "#FFFF",
-      color: "#A7D2DD",
       transform: "scale(0.98)",
     }}
     {...props}
@@ -116,6 +126,7 @@ export default function CallToActionWithVideo() {
               <CreateAccountButton />
             </Stack>
           </Stack>
+
           <Flex
             flex={1}
             justify={"center"}
@@ -151,6 +162,29 @@ export default function CallToActionWithVideo() {
               />
             </Box>
           </Flex>
+        </Stack>
+        <Stack
+          direction={{ base: "column", sm: "row" }}
+          justifyContent={"space-around"}
+        >
+          {socialBrewLinks.map((link) => (
+            <Text
+              color={"#FD6853 "}
+              fontSize="27px"
+              key={link.title}
+              href={link.url}
+              _hover={{
+                color: "#0F606B",
+                cursor: "pointer",
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                window.open(link.url);
+              }}
+            >
+              {link.title}
+            </Text>
+          ))}
         </Stack>
       </Container>
     </Flex>
