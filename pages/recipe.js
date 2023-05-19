@@ -16,7 +16,7 @@ import "firebase/firestore";
 import coffeeData from "coffee-data.json";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { SubmitAlert } from "./SubmitAlert";
+import { SubmitAlert } from "../components/SubmitAlert";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBAJrEAP1h3Yjx-zCLKTP_eXUggaqV1d1E",
@@ -46,9 +46,9 @@ const CoffeeRecipe = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const roastersNames = coffeeData[0].roasters;
-        const methodNames = coffeeData[0].methods;
-        const countryNames = coffeeData[0].countries;
+        const roastersNames = coffeeData.roasters;
+        const methodNames = coffeeData.methods;
+        const countryNames = coffeeData.countries;
         setCountries(countryNames);
         setRoasters(roastersNames);
         setMethods(methodNames);

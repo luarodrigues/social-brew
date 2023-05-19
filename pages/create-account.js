@@ -15,11 +15,7 @@ import {
 import "firebase/app";
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 
 export default function SimpleCard() {

@@ -7,7 +7,6 @@ import {
   VStack,
   Box,
   Flex,
-  Button,
   Link,
   Card,
   CardHeader,
@@ -16,7 +15,7 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import RecipeData from "./RecipeData";
+import RecipeData from "../components/RecipeData";
 
 const textStyles = {
   fontFamily: "Avenir",
