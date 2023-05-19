@@ -10,11 +10,9 @@ import {
   Input,
   Select,
   Stack,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 import "firebase/firestore";
-import coffeeData from "../coffee-data.json";
+import coffeeData from "coffee-data.json";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { SubmitAlert } from "./SubmitAlert";
