@@ -12,17 +12,37 @@ import {
   Stack,
   Alert,
   AlertIcon,
-  AlertTitle,
-  AlertDescription,
 } from "@chakra-ui/react";
+import "firebase/firestore";
 import coffeeData from "../coffee-data.json";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { SubmitAlert } from "./SubmitAlert";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBAJrEAP1h3Yjx-zCLKTP_eXUggaqV1d1E",
+  authDomain: "social-brew-2.firebaseapp.com",
+  projectId: "social-brew-2",
+  storageBucket: "social-brew-2.appspot.com",
+  messagingSenderId: "62701133382",
+  appId: "1:62701133382:web:6bc4836ed15d6b09d1f447",
+  measurementId: "G-39S3TF2VHV",
+};
+
+initializeApp(firebaseConfig);
+const db = getFirestore();
 
 const CoffeeRecipe = () => {
   const [countries, setCountries] = useState([]);
   const [roasters, setRoasters] = useState([]);
-  const [method, setMethod] = useState([]);
+  const [methods, setMethods] = useState([]);
   const [comments, setComments] = useState("");
-  const [showOptions, setShowOptions] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState({
+    beans: "",
+    roaster: "",
+    brewMethod: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,18 +51,42 @@ const CoffeeRecipe = () => {
         const methodNames = coffeeData[0].methods;
         const countryNames = coffeeData[0].countries;
         setCountries(countryNames);
-        // localStorage.setItem("countries", countryNames);
         setRoasters(roastersNames);
-
-        setMethod(methodNames);
+        setMethods(methodNames);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
   }, []);
-  const handleClick = () => {
-    setShowOptions(true);
+
+  const handleSubmit = async () => {
+    try {
+      const recipeRef = collection(db, "recipes");
+      const recipe = {
+        beans: selectedOptions.beans,
+        roaster: selectedOptions.roaster,
+        brewMethod: selectedOptions.brewMethod,
+        comments: comments,
+      };
+      await addDoc(recipeRef, recipe);
+      setSubmitted(true);
+      setSelectedOptions({
+        beans: "",
+        roaster: "",
+        brewMethod: "",
+      });
+      setComments("");
+    } catch (error) {
+      console.error("Error adding recipe: ", error);
+    }
+  };
+
+  const handleOptionChange = (field, value) => {
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [field]: value,
+    }));
   };
 
   return (
@@ -50,7 +94,7 @@ const CoffeeRecipe = () => {
       minH={"100vh"}
       align={"center"}
       justify={"center"}
-      bg={"white "}
+      bg={"white"}
       fontFamily={"avenir"}
     >
       <title>recipe</title>
@@ -80,7 +124,11 @@ const CoffeeRecipe = () => {
         <Box color={"#0F606B"}>
           <FormControl id="beans" mb={4}>
             <FormLabel>Beans origin</FormLabel>
-            <Select placeholder="Select Beans">
+            <Select
+              placeholder="Select Beans"
+              onChange={(e) => handleOptionChange("beans", e.target.value)}
+              isDisabled={submitted}
+            >
               {countries.map((country) => (
                 <option key={country} value={country}>
                   {country}
@@ -92,22 +140,28 @@ const CoffeeRecipe = () => {
 
           <FormControl id="roaster" mb={4}>
             <FormLabel>Roaster</FormLabel>
-            {showOptions && (
-              <Select placeholder="Select Roaster">
-                {roasters.map((roaster) => (
-                  <option key={roaster} value={roaster}>
-                    {roaster}
-                  </option>
-                ))}
-                <option>Other</option>
-              </Select>
-            )}
+            <Select
+              placeholder="Select Roaster"
+              onChange={(e) => handleOptionChange("roaster", e.target.value)}
+              isDisabled={submitted}
+            >
+              {roasters.map((roaster) => (
+                <option key={roaster} value={roaster}>
+                  {roaster}
+                </option>
+              ))}
+              <option>Other</option>
+            </Select>
           </FormControl>
 
           <FormControl id="brew-method" mb={4}>
             <FormLabel>Brew Method</FormLabel>
-            <Select placeholder="Select brew method">
-              {method.map((method) => (
+            <Select
+              placeholder="Select brew method"
+              onChange={(e) => handleOptionChange("brewMethod", e.target.value)}
+              isDisabled={submitted}
+            >
+              {methods.map((method) => (
                 <option key={method} value={method}>
                   {method}
                 </option>
@@ -121,17 +175,27 @@ const CoffeeRecipe = () => {
             <Input
               value={comments}
               onChange={(event) => setComments(event.target.value)}
+              isDisabled={submitted}
             />
           </FormControl>
+
           <Box align={"center"} justify={"center"}>
-            <Button
-              borderRadius="20"
-              mb={4}
-              color={"#FD6853"}
-              onClick={() => alert("Sorry, we still not finished this page")}
-            >
-              submit recipe
-            </Button>
+            {!submitted ? (
+              <Button
+                borderRadius="20"
+                mb={4}
+                color={"#FD6853"}
+                onClick={handleSubmit}
+              >
+                submit recipe
+              </Button>
+            ) : (
+              <SubmitAlert></SubmitAlert>
+              // <Alert status="success">
+              //   <AlertIcon />
+              //   Recipe submitted successfully
+              // </Alert>
+            )}
           </Box>
         </Box>
       </Stack>

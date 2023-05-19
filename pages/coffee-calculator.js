@@ -4,7 +4,6 @@ import {
   Button,
   Heading,
   Text,
-  Link,
   Flex,
   FormControl,
   FormLabel,
@@ -19,33 +18,18 @@ const CoffeeCalculator = () => {
   const [brewMethod, setBrewMethod] = useState("");
 
   const handleCalculate = () => {
-    let ratio;
-    switch (brewMethod) {
-      case "Espresso":
-        ratio = 2;
-        break;
-      case "V60 or Kalita":
-        ratio = 16;
-        break;
-      case "AeroPress":
-        ratio = 17;
-        break;
-      case "French Press":
-        ratio = 18;
-        break;
-      case "Cold Brew (concentrate)":
-        ratio = 5;
-        break;
-      case "Cold Brew":
-        ratio = 10;
-        break;
-      case "Moka Pot":
-        ratio = 12;
-        break;
-      case "Chemex":
-        ratio = 13;
-        break;
-    }
+    const brewMethodRatios = {
+      Espresso: 2,
+      "V60 or Kalita": 16,
+      AeroPress: 17,
+      "French Press": 18,
+      "Cold Brew (concentrate)": 5,
+      "Cold Brew": 10,
+      "Moka Pot": 12,
+      Chemex: 13,
+    };
+
+    const ratio = brewMethodRatios[brewMethod];
 
     {
       if (coffeeAmount === "" || isNaN(coffeeAmount) || brewMethod === "") {

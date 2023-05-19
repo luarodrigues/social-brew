@@ -102,11 +102,17 @@ const CoffeeData = () => {
 
   return (
     <VStack style={coffeeDataStyle}>
-      <Box h="30px">Beans: {beans}</Box>
-      <Box h="30px">Roaster: {roaster}</Box>
-      <Box h="30px">Brew Method: {brewMethod}</Box>
-      <Box h="30px">Recipe: {recipe}</Box>
-      <Box h="30px">Comments: {comments}</Box>
+      {[
+        { label: "Beans", value: beans },
+        { label: "Roaster", value: roaster },
+        { label: "Brew Method", value: brewMethod },
+        { label: "Recipe", value: recipe },
+        { label: "Comments", value: comments },
+      ].map((data, index) => (
+        <Box key={index} h="30px">
+          {`${data.label}: ${data.value}`}
+        </Box>
+      ))}
     </VStack>
   );
 };
