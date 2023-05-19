@@ -10,11 +10,15 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "firebase": "^9.22.0",
     "firebaseui": "^6.0.2",
     "framer-motion": "^10.12.4",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.10"
+  },
+  "devDependencies": {
+    "typescript": "5.0.4"
   }
 }

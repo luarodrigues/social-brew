@@ -191,10 +191,6 @@ const CoffeeRecipe = () => {
               </Button>
             ) : (
               <SubmitAlert></SubmitAlert>
-              // <Alert status="success">
-              //   <AlertIcon />
-              //   Recipe submitted successfully
-              // </Alert>
             )}
           </Box>
         </Box>

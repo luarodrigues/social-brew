@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import styled from "styled-components";
 import {
   Avatar,
@@ -14,6 +15,7 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
+import RecipeData from "./RecipeData";
 
 const textStyles = {
   fontFamily: "Avenir",
@@ -82,33 +84,6 @@ const SignButton = (props) => (
     Sign In
   </Button>
 );
-
-const CoffeeData = () => {
-  const coffeeDataStyle = {
-    fontFamily: "Avenir",
-    fontWeight: "400",
-    fontSize: "17px",
-    lineHeight: "23px",
-    color: "#323233",
-    alignItems: "flex-start",
-  };
-
-  let beans = "countries";
-  let roaster = "Three Marks";
-  let brewMethod = "V60";
-  let recipe = "20g coffee to 300g water";
-  let comments = "Add 50g water for bloom";
-
-  return (
-    <VStack style={coffeeDataStyle}>
-      <Box h="30px">Beans: {beans}</Box>
-      <Box h="30px">Roaster: {roaster}</Box>
-      <Box h="30px">Brew Method: {brewMethod}</Box>
-      <Box h="30px">Recipe: {recipe}</Box>
-      <Box h="30px">Comments: {comments}</Box>
-    </VStack>
-  );
-};
 
 const socialBrewLinks = [
   {
@@ -223,8 +198,8 @@ export default function Home() {
                 </Flex>
               </CardHeader>
               <CardBody>
-                <VStack spacing={2} Itens="flex-start">
-                  <CoffeeData />
+                <VStack spacing={2} itens="flex-start">
+                  <RecipeData />
                   <Flex
                     alignItems="left"
                     flex="1"
