@@ -8,6 +8,7 @@ import {
   Box,
   Flex,
   Button,
+  Link,
   Card,
   CardHeader,
   CardBody,
@@ -63,28 +64,6 @@ const LogoText = () => (
   </LogoContainer>
 );
 
-const SignButton = (props) => (
-  <Button
-    variant="outline"
-    borderRadius="20"
-    border="2px solid white"
-    background="#A7D2DD"
-    color="white"
-    padding="8px 16px"
-    cursor="pointer"
-    transition="background-color 0.3s ease-in-out"
-    _hover={{
-      background: "#FFFF",
-      color: "#A7D2DD",
-      transform: "scale(0.98)",
-    }}
-    {...props}
-    onClick={() => window.open("/signin", "_blank")}
-  >
-    Sign In
-  </Button>
-);
-
 const socialBrewLinks = [
   {
     title: "coffee calculator",
@@ -99,7 +78,7 @@ const socialBrewLinks = [
     url: "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
   },
   {
-    title: "your recipe",
+    title: "add recipe",
     url: "/recipe",
   },
 ];
@@ -133,10 +112,9 @@ export default function Home() {
             <LogoText />
           </LogoContainer>
           <Stack alignItems="center" justifyContent="center" marginLeft="520px">
-            <SignButton />
-            <Text fontSize="16px" as="b">
-              create an account
-            </Text>
+            <Link fontSize="16px" as="b" onClick={() => window.open("/")}>
+              sign out
+            </Link>
           </Stack>
         </Flex>
         <Flex
