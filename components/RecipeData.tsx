@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import { Box, VStack } from "@chakra-ui/react";
 import { initializeApp } from "firebase/app";
+import firebaseConfig from "../firebaseConfig/firebaseConfig";
 
 interface Recipe {
   beans: string;
@@ -11,16 +12,6 @@ interface Recipe {
 }
 
 const RecipeData = () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyBAJrEAP1h3Yjx-zCLKTP_eXUggaqV1d1E",
-    authDomain: "social-brew-2.firebaseapp.com",
-    projectId: "social-brew-2",
-    storageBucket: "social-brew-2.appspot.com",
-    messagingSenderId: "62701133382",
-    appId: "1:62701133382:web:6bc4836ed15d6b09d1f447",
-    measurementId: "G-39S3TF2VHV",
-  };
-
   initializeApp(firebaseConfig);
   const db = getFirestore();
 
