@@ -13,32 +13,23 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-const CoffeeCalculator = () => {
+const CoffeeCalculatorPage = () => {
   const [coffeeAmount, setCoffeeAmount] = useState("");
   const [waterAmount, setWaterAmount] = useState("");
   const [brewMethod, setBrewMethod] = useState("");
 
-  const handleCalculate = () => {
-    const brewMethodRatios = {
-      Espresso: 2,
-      "V60 or Kalita": 16,
-      AeroPress: 17,
-      "French Press": 18,
-      "Cold Brew (concentrate)": 5,
-      "Cold Brew": 10,
-      "Moka Pot": 12,
-      Chemex: 13,
-    };
-
-    const ratio = brewMethodRatios[brewMethod];
-
+  const handleCalculate = async () => {
     if (coffeeAmount === "" || isNaN(coffeeAmount) || brewMethod === "") {
       setWaterAmount(
         "Please enter a valid amount of coffee and method to calculate"
       );
     } else {
-      const calculatedWaterAmount = coffeeAmount * ratio;
-      setWaterAmount(calculatedWaterAmount);
+      const response = await fetch(
+        `/api/coffee-calculator?coffeeAmount=${coffeeAmount}&brewMethod=${brewMethod}`
+      );
+      const data = await response.text();
+      console.log(data);
+      setWaterAmount(data);
     }
   };
 
@@ -135,4 +126,4 @@ const CoffeeCalculator = () => {
   );
 };
 
-export default CoffeeCalculator;
+export default CoffeeCalculatorPage;

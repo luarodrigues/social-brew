@@ -11,15 +11,6 @@ interface Recipe {
 }
 
 const RecipeData = () => {
-  const coffeeDataStyle = {
-    fontFamily: "Avenir",
-    fontWeight: "400",
-    fontSize: "17px",
-    lineHeight: "23px",
-    color: "#323233",
-    alignItems: "flex-start",
-  };
-
   const firebaseConfig = {
     apiKey: "AIzaSyBAJrEAP1h3Yjx-zCLKTP_eXUggaqV1d1E",
     authDomain: "social-brew-2.firebaseapp.com",
@@ -38,7 +29,7 @@ const RecipeData = () => {
   useEffect(() => {
     const fetchData = async () => {
       const firestore = getFirestore();
-      const documentRef = doc(firestore, "recipes", "1U2n2wmeY9VKfWXg5aPc");
+      const documentRef = doc(firestore, "recipes", "C7Z6fIVl1yUWSgdwLkx0");
       onSnapshot(documentRef, (doc) => {
         if (doc.exists()) {
           const data: any = doc.data();
@@ -51,7 +42,14 @@ const RecipeData = () => {
   }, []);
 
   return (
-    <VStack style={coffeeDataStyle}>
+    <VStack
+      fontFamily="Avenir"
+      fontWeight="400"
+      fontSize="17px"
+      lineHeight="23px"
+      color="#323233"
+      alignItems="flex-start"
+    >
       <Box h="30px">Beans origin: {recipe ? recipe.beans : ""}</Box>
       <Box h="30px">Roaster: {recipe ? recipe.roaster : ""}</Box>
       <Box h="30px">Method: {recipe ? recipe.brewMethod : ""}</Box>

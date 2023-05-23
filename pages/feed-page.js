@@ -17,52 +17,6 @@ import {
 } from "@chakra-ui/react";
 import RecipeData from "../components/RecipeData";
 
-const textStyles = {
-  fontFamily: "Avenir",
-  fontSize: 15,
-  display: "flex",
-  alignItems: "center",
-  color: "#FD6853",
-};
-
-const followStyles = {
-  fontFamily: "Avenir",
-  fontWeight: "400",
-  fontSize: "17px",
-  lineHeight: "23px",
-  color: "#323233",
-  name: "",
-  background: "#A7D2DD",
-  height: "20px",
-  width: "20px",
-  border: "1px solid #323233",
-};
-
-const LogoContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const MainLogoText = styled.div`
-  font-size: 50px;
-  font-weight: 300;
-`;
-
-const BoldLogoText = styled.div`
-  font-size: 66px;
-  font-weight: bold;
-  display: inline-block;
-  margin-left: 24px;
-`;
-const LogoText = () => (
-  <LogoContainer>
-    <MainLogoText>
-      SOCIAL<BoldLogoText>BREW</BoldLogoText>
-    </MainLogoText>
-  </LogoContainer>
-);
-
 const socialBrewLinks = [
   {
     title: "coffee calculator",
@@ -107,9 +61,14 @@ export default function Home() {
           zIndex="1"
           py="4"
         >
-          <LogoContainer>
-            <LogoText />
-          </LogoContainer>
+          <Stack display="flex" justifyContent="flex-start" alignItems="center">
+            <Text fontSize="66px" marginLeft="24px" textTransform={"uppercase"}>
+              SOCIAL{" "}
+              <Text fontWeight="bold" as="span">
+                BREW
+              </Text>
+            </Text>
+          </Stack>
           <Stack alignItems="center" justifyContent="center" marginLeft="520px">
             <Link fontSize="16px" as="b" onClick={() => window.open("/")}>
               sign out
@@ -186,8 +145,27 @@ export default function Home() {
                   >
                     {[...Array(5)].map((_, i) => (
                       <Flex key={i} flexDirection="row" alignItems="center">
-                        <Avatar style={followStyles}></Avatar>
-                        <Text style={textStyles}> good coffee 🧡</Text>
+                        <Avatar
+                          fontWeight="400"
+                          fontSize="17px"
+                          lineHeight="23px"
+                          color="#323233"
+                          name=""
+                          background="#A7D2DD"
+                          height="20px"
+                          width="20px"
+                          border="1px solid #323233"
+                        ></Avatar>
+                        <Text
+                          fontFamily="Avenir"
+                          fontSize="15"
+                          display="flex"
+                          alignItems="center"
+                          color="#FD6853"
+                        >
+                          {" "}
+                          good coffee 🧡
+                        </Text>
                       </Flex>
                     ))}
                   </Flex>

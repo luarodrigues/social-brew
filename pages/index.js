@@ -60,8 +60,7 @@ const CreateAccountButton = (props) => (
   </Button>
 );
 
-export default function CallToActionWithVideo() {
-  //change
+export default function indexPage() {
   return (
     <Flex align={"center"} justify={"center"} p={"50px"}>
       <title>welcome to social brew</title>
@@ -123,7 +122,7 @@ export default function CallToActionWithVideo() {
             position={"relative"}
             w={"full"}
           >
-            <Blob
+            <BackGroundIcon
               w={"150%"}
               h={"150%"}
               position={"absolute"}
@@ -180,7 +179,7 @@ export default function CallToActionWithVideo() {
   );
 }
 
-export const Blob = (props) => {
+export const BackGroundIcon = (props) => {
   return (
     <Icon
       width={"100%"}
