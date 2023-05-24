@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 
 const CoffeeCalculatorPage = () => {
+  const router = useRouter();
   const [coffeeAmount, setCoffeeAmount] = useState("");
   const [waterAmount, setWaterAmount] = useState("");
   const [brewMethod, setBrewMethod] = useState("");
@@ -117,7 +119,8 @@ const CoffeeCalculatorPage = () => {
           adjust your recipe.
         </Box>
         <Stack align={"flex-end"}>
-          <Link color={"#FD6853"} onClick={() => window.open("/home-page")}>
+          {" "}
+          <Link color={"#FD6853"} onClick={() => router.push("/home-page")}>
             go to my page
           </Link>
         </Stack>

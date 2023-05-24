@@ -12,19 +12,18 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-
 import "firebase/auth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 
-export default function SimpleCard() {
+export default function SignInCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSignIn = () => {
     initializeApp(firebaseConfig);
-    console.log(firebaseConfig);
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {

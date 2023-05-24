@@ -18,10 +18,14 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
+import { useRouter } from "next/router";
 
-export default function SimpleCard() {
+export default function SignUpCard() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleSignUp = () => {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth();
@@ -83,7 +87,7 @@ export default function SimpleCard() {
                 <Checkbox>Remember me</Checkbox>
                 <Link
                   color={"#FD6853"}
-                  onClick={() => window.open("/sign-in-page")}
+                  onClick={() => router.push("/sign-in-page")}
                 >
                   Already have an account?
                 </Link>

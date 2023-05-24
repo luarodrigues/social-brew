@@ -1,6 +1,5 @@
 import Head from "next/head";
-
-import styled from "styled-components";
+import { useRouter } from "next/router";
 import {
   Avatar,
   Stack,
@@ -16,27 +15,11 @@ import {
   Image,
 } from "@chakra-ui/react";
 import RecipeData from "../components/RecipeData";
-
-const socialBrewLinks = [
-  {
-    title: "coffee calculator",
-    url: "/coffee-calculator",
-  },
-  {
-    title: "methods guide",
-    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
-  },
-  {
-    title: "grind size chart",
-    url: "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
-  },
-  {
-    title: "add recipe",
-    url: "/recipe",
-  },
-];
+import SocialBrewLinks from "../components/SocialBrewLinks";
 
 export default function HomePage() {
+  const router = useRouter();
+
   return (
     <Box>
       <Head>
@@ -70,7 +53,7 @@ export default function HomePage() {
             </Text>
           </Stack>
           <Stack alignItems="center" justifyContent="center" marginLeft="520px">
-            <Link fontSize="16px" as="b" onClick={() => window.open("/")}>
+            <Link fontSize="16px" as="b" onClick={() => router.push("/")}>
               sign out
             </Link>
           </Stack>
@@ -80,7 +63,7 @@ export default function HomePage() {
           alignItems={{ base: "flex-start", sm: "center" }}
         >
           <Stack alignSelf={{ sm: "flex-start" }}>
-            {socialBrewLinks.map((link) => (
+            {SocialBrewLinks.map((link) => (
               <Text
                 color={"#0F606B"}
                 fontWeight={700}
@@ -88,10 +71,7 @@ export default function HomePage() {
                 fontSize="20px"
                 key={link.title}
                 href={link.url}
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(link.url);
-                }}
+                onClick={() => router.push(link.url)}
               >
                 {link.title}
               </Text>
@@ -157,13 +137,14 @@ export default function HomePage() {
                           border="1px solid #323233"
                         ></Avatar>
                         <Text
+                          marginLeft="15px"
                           fontFamily="Avenir"
                           fontSize="15"
                           display="flex"
                           alignItems="center"
                           color="#FD6853"
                         >
-                          {" "}
+                          {"     "}
                           good coffee 🧡
                         </Text>
                       </Flex>

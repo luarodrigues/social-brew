@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import {
   Alert,
   AlertDescription,
@@ -14,8 +15,10 @@ function SubmitAlert() {
     defaultIsOpen: true,
   });
 
+  const router = useRouter();
+
   const handleRefresh = () => {
-    window.location.reload();
+    router.push("/recipe");
   };
 
   return isVisible ? (

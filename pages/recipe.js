@@ -14,24 +14,17 @@ import {
 } from "@chakra-ui/react";
 import "firebase/firestore";
 import coffeeData from "coffee-data.json";
-import { initializeApp } from "firebase/app";
+import { useRouter } from "next/router";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { SubmitAlert } from "../components/SubmitAlert";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBAJrEAP1h3Yjx-zCLKTP_eXUggaqV1d1E",
-  authDomain: "social-brew-2.firebaseapp.com",
-  projectId: "social-brew-2",
-  storageBucket: "social-brew-2.appspot.com",
-  messagingSenderId: "62701133382",
-  appId: "1:62701133382:web:6bc4836ed15d6b09d1f447",
-  measurementId: "G-39S3TF2VHV",
-};
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../firebaseConfig/firebaseConfig";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const CoffeeRecipe = () => {
+  const router = useRouter();
   const [countries, setCountries] = useState([]);
   const [roasters, setRoasters] = useState([]);
   const [methods, setMethods] = useState([]);
@@ -202,7 +195,7 @@ const CoffeeRecipe = () => {
           </Box>
           <Stack align={"flex-end"}>
             {" "}
-            <Link color={"#FD6853"} onClick={() => window.open("/home-page")}>
+            <Link color={"#FD6853"} onClick={() => router.push("/home-page")}>
               go to my page
             </Link>
           </Stack>

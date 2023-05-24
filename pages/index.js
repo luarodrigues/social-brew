@@ -1,66 +1,19 @@
 import {
   Container,
   Stack,
+  Button,
   Flex,
   Box,
   Heading,
   Text,
-  Button,
   Image,
   Icon,
 } from "@chakra-ui/react";
-
-const socialBrewLinks = [
-  {
-    title: "🧮 coffee calculator",
-    url: "/coffee-calculator",
-  },
-  {
-    title: " ☕️ methods guide",
-    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
-  },
-  {
-    title: "🧑‍🍳 your recipe",
-    url: "/recipe",
-  },
-];
-
-const SignButton = (props) => (
-  <Button
-    color={"#0f606b"}
-    rounded={"full"}
-    size={"lg"}
-    fontWeight={"normal"}
-    px={6}
-    transition="background-color 0.3s ease-in-out"
-    _hover={{
-      transform: "scale(0.98)",
-    }}
-    {...props}
-    onClick={() => window.open("/sign-in-page", "_blank")}
-  >
-    Sign In
-  </Button>
-);
-const CreateAccountButton = (props) => (
-  <Button
-    color={"#0f606b"}
-    rounded={"full"}
-    size={"lg"}
-    fontWeight={"normal"}
-    px={6}
-    transition="background-color 0.3s ease-in-out"
-    _hover={{
-      transform: "scale(0.98)",
-    }}
-    {...props}
-    onClick={() => window.open("/sign-up-page")}
-  >
-    Create Account
-  </Button>
-);
+import { useRouter } from "next/router";
+import SocialBrewLinks from "../components/SocialBrewLinks";
 
 export default function indexPage() {
+  const router = useRouter();
   return (
     <Flex align={"center"} justify={"center"} p={"50px"}>
       <title>welcome to social brew</title>
@@ -110,8 +63,30 @@ export default function indexPage() {
               spacing={{ base: 4, sm: 6 }}
               direction={{ base: "column", sm: "row" }}
             >
-              <SignButton />
-              <CreateAccountButton />
+              <Button
+                bg={"#FD6853"}
+                color={"white"}
+                _hover={{
+                  bg: "white",
+                  color: "#FD6853",
+                  border: "2px solid #FD6853",
+                }}
+                onClick={() => router.push("/sign-up-page")}
+              >
+                Sign In
+              </Button>
+              <Button
+                bg={"#FD6853"}
+                color={"white"}
+                _hover={{
+                  bg: "white",
+                  color: "#FD6853",
+                  border: "2px solid #FD6853",
+                }}
+                onClick={() => router.push("/sign-up-page")}
+              >
+                Create Account
+              </Button>
             </Stack>
           </Stack>
 
@@ -155,7 +130,7 @@ export default function indexPage() {
           direction={{ base: "column", sm: "row" }}
           justifyContent={"space-around"}
         >
-          {socialBrewLinks.map((link) => (
+          {SocialBrewLinks.map((link) => (
             <Text
               color={"#FD6853 "}
               fontSize="27px"
@@ -167,7 +142,7 @@ export default function indexPage() {
               }}
               onClick={(e) => {
                 e.preventDefault();
-                window.open(link.url);
+                router.push(link.url);
               }}
             >
               {link.title}
