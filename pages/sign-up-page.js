@@ -13,29 +13,20 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import "firebase/app";
-import { initializeApp } from "firebase/app";
 import "firebase/auth";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../firebaseConfig/firebaseConfig";
+import { useRouter } from "next/router";
 
-export default function SimpleCard() {
+export default function SignUpCard() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSignUp = () => {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDmBSxMT3WJK40AF4K-W1oZ0p4__bTJHqs",
-      authDomain: "social-brew-9d81a.firebaseapp.com",
-      projectId: "social-brew-9d81a",
-      storageBucket: "social-brew-9d81a.appspot.com",
-      messagingSenderId: "387600670881",
-      appId: "1:387600670881:web:d1c60b0b1e5f2eb92410e0",
-      measurementId: "G-TD3H59BRHT",
-    };
 
+  const handleSignUp = () => {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
@@ -94,7 +85,10 @@ export default function SimpleCard() {
                 justify={"space-between"}
               >
                 <Checkbox>Remember me</Checkbox>
-                <Link color={"#FD6853"} onClick={() => window.open("/signin")}>
+                <Link
+                  color={"#FD6853"}
+                  onClick={() => router.push("/sign-in-page")}
+                >
                   Already have an account?
                 </Link>
               </Stack>

@@ -12,31 +12,18 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import "firebase/app";
-import { initializeApp } from "firebase/app";
 import "firebase/auth";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../firebaseConfig/firebaseConfig";
 
-export default function SimpleCard() {
+export default function SignInCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSignIn = () => {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDmBSxMT3WJK40AF4K-W1oZ0p4__bTJHqs",
-      authDomain: "social-brew-9d81a.firebaseapp.com",
-      projectId: "social-brew-9d81a",
-      storageBucket: "social-brew-9d81a.appspot.com",
-      messagingSenderId: "387600670881",
-      appId: "1:387600670881:web:d1c60b0b1e5f2eb92410e0",
-      measurementId: "G-TD3H59BRHT",
-    };
+    initializeApp(firebaseConfig);
 
-    const app = initializeApp(firebaseConfig);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {

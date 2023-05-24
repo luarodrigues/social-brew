@@ -1,13 +1,12 @@
 import Head from "next/head";
-
-import styled from "styled-components";
+import { useRouter } from "next/router";
 import {
   Avatar,
   Stack,
   VStack,
   Box,
   Flex,
-  Button,
+  Link,
   Card,
   CardHeader,
   CardBody,
@@ -15,96 +14,12 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import RecipeData from "./RecipeData";
+import RecipeData from "../components/RecipeData";
+import SocialBrewLinks from "../components/SocialBrewLinks";
 
-const textStyles = {
-  fontFamily: "Avenir",
-  fontSize: 15,
-  display: "flex",
-  alignItems: "center",
-  color: "#FD6853",
-};
+export default function HomePage() {
+  const router = useRouter();
 
-const followStyles = {
-  fontFamily: "Avenir",
-  fontWeight: "400",
-  fontSize: "17px",
-  lineHeight: "23px",
-  color: "#323233",
-  name: "",
-  background: "#A7D2DD",
-  height: "20px",
-  width: "20px",
-  border: "1px solid #323233",
-};
-
-const LogoContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const MainLogoText = styled.div`
-  font-size: 50px;
-  font-weight: 300;
-`;
-
-const BoldLogoText = styled.div`
-  font-size: 66px;
-  font-weight: bold;
-  display: inline-block;
-  margin-left: 24px;
-`;
-const LogoText = () => (
-  <LogoContainer>
-    <MainLogoText>
-      SOCIAL<BoldLogoText>BREW</BoldLogoText>
-    </MainLogoText>
-  </LogoContainer>
-);
-
-const SignButton = (props) => (
-  <Button
-    variant="outline"
-    borderRadius="20"
-    border="2px solid white"
-    background="#A7D2DD"
-    color="white"
-    padding="8px 16px"
-    cursor="pointer"
-    transition="background-color 0.3s ease-in-out"
-    _hover={{
-      background: "#FFFF",
-      color: "#A7D2DD",
-      transform: "scale(0.98)",
-    }}
-    {...props}
-    onClick={() => window.open("/signin", "_blank")}
-  >
-    Sign In
-  </Button>
-);
-
-const socialBrewLinks = [
-  {
-    title: "coffee calculator",
-    url: "/coffee-calculator",
-  },
-  {
-    title: "methods guide",
-    url: "https://blog.bluebottlecoffee.com/posts/how-to-choose-a-brew-method",
-  },
-  {
-    title: "grind size chart",
-    url: "https://honestcoffeeguide.com/guides/coffee-grind-size-chart",
-  },
-  {
-    title: "your recipe",
-    url: "/recipe",
-  },
-];
-
-export default function Home() {
   return (
     <Box>
       <Head>
@@ -129,14 +44,18 @@ export default function Home() {
           zIndex="1"
           py="4"
         >
-          <LogoContainer>
-            <LogoText />
-          </LogoContainer>
-          <Stack alignItems="center" justifyContent="center" marginLeft="520px">
-            <SignButton />
-            <Text fontSize="16px" as="b">
-              create an account
+          <Stack display="flex" justifyContent="flex-start" alignItems="center">
+            <Text fontSize="66px" marginLeft="24px" textTransform={"uppercase"}>
+              SOCIAL{" "}
+              <Text fontWeight="bold" as="span">
+                BREW
+              </Text>
             </Text>
+          </Stack>
+          <Stack alignItems="center" justifyContent="center" marginLeft="520px">
+            <Link fontSize="16px" as="b" onClick={() => router.push("/")}>
+              sign out
+            </Link>
           </Stack>
         </Flex>
         <Flex
@@ -144,7 +63,7 @@ export default function Home() {
           alignItems={{ base: "flex-start", sm: "center" }}
         >
           <Stack alignSelf={{ sm: "flex-start" }}>
-            {socialBrewLinks.map((link) => (
+            {SocialBrewLinks.map((link) => (
               <Text
                 color={"#0F606B"}
                 fontWeight={700}
@@ -152,10 +71,7 @@ export default function Home() {
                 fontSize="20px"
                 key={link.title}
                 href={link.url}
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.open(link.url);
-                }}
+                onClick={() => router.push(link.url)}
               >
                 {link.title}
               </Text>
@@ -209,8 +125,28 @@ export default function Home() {
                   >
                     {[...Array(5)].map((_, i) => (
                       <Flex key={i} flexDirection="row" alignItems="center">
-                        <Avatar style={followStyles}></Avatar>
-                        <Text style={textStyles}> good coffee 🧡</Text>
+                        <Avatar
+                          fontWeight="400"
+                          fontSize="17px"
+                          lineHeight="23px"
+                          color="#323233"
+                          name=""
+                          background="#A7D2DD"
+                          height="20px"
+                          width="20px"
+                          border="1px solid #323233"
+                        ></Avatar>
+                        <Text
+                          marginLeft="15px"
+                          fontFamily="Avenir"
+                          fontSize="15"
+                          display="flex"
+                          alignItems="center"
+                          color="#FD6853"
+                        >
+                          {"     "}
+                          good coffee 🧡
+                        </Text>
                       </Flex>
                     ))}
                   </Flex>

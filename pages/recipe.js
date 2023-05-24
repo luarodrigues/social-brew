@@ -8,29 +8,23 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Link,
   Select,
   Stack,
 } from "@chakra-ui/react";
 import "firebase/firestore";
 import coffeeData from "coffee-data.json";
-import { initializeApp } from "firebase/app";
+import { useRouter } from "next/router";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { SubmitAlert } from "./SubmitAlert";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBAJrEAP1h3Yjx-zCLKTP_eXUggaqV1d1E",
-  authDomain: "social-brew-2.firebaseapp.com",
-  projectId: "social-brew-2",
-  storageBucket: "social-brew-2.appspot.com",
-  messagingSenderId: "62701133382",
-  appId: "1:62701133382:web:6bc4836ed15d6b09d1f447",
-  measurementId: "G-39S3TF2VHV",
-};
+import { SubmitAlert } from "../components/SubmitAlert";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "../firebaseConfig/firebaseConfig";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const CoffeeRecipe = () => {
+  const router = useRouter();
   const [countries, setCountries] = useState([]);
   const [roasters, setRoasters] = useState([]);
   const [methods, setMethods] = useState([]);
@@ -45,9 +39,9 @@ const CoffeeRecipe = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const roastersNames = coffeeData[0].roasters;
-        const methodNames = coffeeData[0].methods;
-        const countryNames = coffeeData[0].countries;
+        const roastersNames = coffeeData.roasters;
+        const methodNames = coffeeData.methods;
+        const countryNames = coffeeData.countries;
         setCountries(countryNames);
         setRoasters(roastersNames);
         setMethods(methodNames);
@@ -103,7 +97,7 @@ const CoffeeRecipe = () => {
         py={10}
         px={6}
         bg={"#A7D2DD"}
-        borderRadius={"40px"}
+        rounded={"lg"}
       >
         <Stack align={"center"}>
           <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
@@ -124,6 +118,7 @@ const CoffeeRecipe = () => {
             <FormLabel>Beans origin</FormLabel>
             <Select
               placeholder="Select Beans"
+              bg={"white"}
               onChange={(e) => handleOptionChange("beans", e.target.value)}
               isDisabled={submitted}
             >
@@ -140,6 +135,7 @@ const CoffeeRecipe = () => {
             <FormLabel>Roaster</FormLabel>
             <Select
               placeholder="Select Roaster"
+              bg={"white"}
               onChange={(e) => handleOptionChange("roaster", e.target.value)}
               isDisabled={submitted}
             >
@@ -156,6 +152,7 @@ const CoffeeRecipe = () => {
             <FormLabel>Brew Method</FormLabel>
             <Select
               placeholder="Select brew method"
+              bg={"white"}
               onChange={(e) => handleOptionChange("brewMethod", e.target.value)}
               isDisabled={submitted}
             >
@@ -172,6 +169,7 @@ const CoffeeRecipe = () => {
             <FormLabel>add a comment</FormLabel>
             <Input
               value={comments}
+              bg={"white"}
               onChange={(event) => setComments(event.target.value)}
               isDisabled={submitted}
             />
@@ -180,9 +178,13 @@ const CoffeeRecipe = () => {
           <Box align={"center"} justify={"center"}>
             {!submitted ? (
               <Button
-                borderRadius="20"
-                mb={4}
-                color={"#FD6853"}
+                bg={"#FD6853"}
+                color={"white"}
+                _hover={{
+                  bg: "white",
+                  color: "#FD6853",
+                  border: "2px solid #FD6853",
+                }}
                 onClick={handleSubmit}
               >
                 submit recipe
@@ -191,6 +193,12 @@ const CoffeeRecipe = () => {
               <SubmitAlert></SubmitAlert>
             )}
           </Box>
+          <Stack align={"flex-end"}>
+            {" "}
+            <Link color={"#FD6853"} onClick={() => router.push("/home-page")}>
+              go to my page
+            </Link>
+          </Stack>
         </Box>
       </Stack>
     </Flex>
