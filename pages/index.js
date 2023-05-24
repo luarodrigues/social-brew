@@ -37,7 +37,7 @@ const SignButton = (props) => (
       transform: "scale(0.98)",
     }}
     {...props}
-    onClick={() => window.open("/signin", "_blank")}
+    onClick={() => window.open("/sign-in-page", "_blank")}
   >
     Sign In
   </Button>
@@ -54,7 +54,7 @@ const CreateAccountButton = (props) => (
       transform: "scale(0.98)",
     }}
     {...props}
-    onClick={() => window.open("/create-account")}
+    onClick={() => window.open("/sign-up-page")}
   >
     Create Account
   </Button>

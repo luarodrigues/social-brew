@@ -14,7 +14,6 @@ interface Recipe {
 const RecipeData = () => {
   initializeApp(firebaseConfig);
   const db = getFirestore();
-
   const [recipe, setRecipe] = useState<Recipe>();
 
   useEffect(() => {

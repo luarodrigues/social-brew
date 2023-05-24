@@ -202,7 +202,7 @@ const CoffeeRecipe = () => {
           </Box>
           <Stack align={"flex-end"}>
             {" "}
-            <Link color={"#FD6853"} onClick={() => window.open("/feed-page")}>
+            <Link color={"#FD6853"} onClick={() => window.open("/home-page")}>
               go to my page
             </Link>
           </Stack>
