@@ -84,16 +84,7 @@ export default function SignInCard() {
                 <Checkbox>Remember me</Checkbox>
                 <Link color={"#FD6853"}>Forgot password?</Link>
               </Stack>
-              <Button
-                bg={"#FD6853"}
-                color={"white"}
-                _hover={{
-                  bg: "white",
-                  color: "#FD6853",
-                  border: "2px solid #FD6853",
-                }}
-                onClick={handleSignIn}
-              >
+              <Button variant={"brandColor"} onClick={handleSignIn}>
                 sign in
               </Button>
             </Stack>

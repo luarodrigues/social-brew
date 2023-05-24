@@ -38,16 +38,7 @@ function SubmitAlert() {
       />
     </Alert>
   ) : (
-    <Button
-      bg={"#FD6853"}
-      color={"white"}
-      _hover={{
-        bg: "white",
-        color: "#FD6853",
-        border: "2px solid #FD6853",
-      }}
-      onClick={handleRefresh}
-    >
+    <Button variant={"brandColor"} onClick={handleRefresh}>
       add new recipe
     </Button>
   );

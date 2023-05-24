@@ -92,16 +92,7 @@ export default function SignUpCard() {
                   Already have an account?
                 </Link>
               </Stack>
-              <Button
-                bg={"#FD6853"}
-                color={"white"}
-                _hover={{
-                  bg: "white",
-                  color: "#FD6853",
-                  border: "2px solid #FD6853",
-                }}
-                onClick={handleSignUp}
-              >
+              <Button variant={"brandColor"} onClick={handleSignUp}>
                 create an account
               </Button>
             </Stack>
