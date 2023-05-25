@@ -92,16 +92,7 @@ const CoffeeCalculatorPage = () => {
             </Select>
           </FormControl>
           <Box align="center" justify="center">
-            <Button
-              bg="#FD6853"
-              color="white"
-              _hover={{
-                bg: "white",
-                color: "#FD6853",
-                border: "2px solid #FD6853",
-              }}
-              onClick={handleCalculate}
-            >
+            <Button onClick={handleCalculate} variant={"brandColor"}>
               Calculate Water Amount
             </Button>
           </Box>
