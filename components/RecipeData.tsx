@@ -1,36 +1,27 @@
 import { useState, useEffect } from "react";
-import { getFirestore, doc, onSnapshot } from "firebase/firestore";
-import { Box, VStack } from "@chakra-ui/react";
-import { initializeApp } from "firebase/app";
-import firebaseConfig from "../firebaseConfig/firebaseConfig";
+import { VStack, Box } from "@chakra-ui/react";
 
-interface Recipe {
-  beans: string;
-  brewMethod: string;
-  roaster: string;
-  comments: string;
-}
-
-const RecipeData = () => {
-  initializeApp(firebaseConfig);
-  const db = getFirestore();
-  const [recipe, setRecipe] = useState<Recipe>();
+export default function RecipeOnFeed() {
+  const [recipeFeed, setRecipeFeed] = useState({
+    beans: "",
+    brewMethod: "",
+    roaster: "",
+    comments: "",
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      const firestore = getFirestore();
-      const documentRef = doc(firestore, "recipes", "C7Z6fIVl1yUWSgdwLkx0");
-      onSnapshot(documentRef, (doc) => {
-        if (doc.exists()) {
-          const data: any = doc.data();
-          setRecipe(data);
-        }
-      });
-    };
+    console.log("getting the data");
 
+    const fetchData = async () => {
+      const response = await fetch(`api/home-api?`);
+      const recipeFeed = await response.text();
+
+      setRecipeFeed(JSON.parse(recipeFeed));
+
+      console.log(recipeFeed);
+    };
     fetchData();
   }, []);
-
   return (
     <VStack
       fontFamily="Avenir"
@@ -40,12 +31,10 @@ const RecipeData = () => {
       color="#323233"
       alignItems="flex-start"
     >
-      <Box h="30px">Beans origin: {recipe ? recipe.beans : ""}</Box>
-      <Box h="30px">Roaster: {recipe ? recipe.roaster : ""}</Box>
-      <Box h="30px">Method: {recipe ? recipe.brewMethod : ""}</Box>
-      <Box h="30px">My thoughts: {recipe ? recipe.comments : ""}</Box>
+      <Box h="30px">Beans origin: {recipeFeed ? recipeFeed.beans : ""}</Box>
+      <Box h="30px">Roaster: {recipeFeed ? recipeFeed.roaster : ""}</Box>
+      <Box h="30px">Method: {recipeFeed ? recipeFeed.brewMethod : ""}</Box>
+      <Box h="30px">My thoughts: {recipeFeed ? recipeFeed.comments : ""}</Box>
     </VStack>
   );
-};
-
-export default RecipeData;
+}

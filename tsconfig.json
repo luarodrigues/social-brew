@@ -19,7 +19,9 @@
     "**/*.ts",
     "**/*.tsx",
     "components/firebaseConfig.js",
-    "firebaseConfig/firebaseConfig.js"
+    "firebaseConfig/firebaseConfig.js",
+    "pages/api/home-api.jsx",
+    "pages/api/coffee-calculator.js"
   ],
   "exclude": ["node_modules"]
 }
