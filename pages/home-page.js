@@ -14,12 +14,11 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import RecipeData from "../components/RecipeData";
+import RecipeOnFeed from "../components/RecipeData";
 import SocialBrewLinks from "../components/SocialBrewLinks";
 
 export default function HomePage() {
   const router = useRouter();
-
   return (
     <Box>
       <Head>
@@ -115,7 +114,7 @@ export default function HomePage() {
               </CardHeader>
               <CardBody>
                 <VStack spacing={2} itens="flex-start">
-                  <RecipeData />
+                  <RecipeOnFeed />
                   <Flex
                     alignItems="left"
                     flex="1"
