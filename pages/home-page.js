@@ -60,7 +60,7 @@ export default function HomePage() {
             <Text fontSize="66px" marginLeft="24px" textTransform={"uppercase"}>
               SOCIAL{" "}
               <Text fontWeight="bold" as="span">
-                BREW
+                BREw
               </Text>
             </Text>
           </Stack>
