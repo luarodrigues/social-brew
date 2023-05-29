@@ -17,10 +17,13 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
+import { useRouter } from "next/router";
 
 export default function SignInCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+
   const handleSignIn = () => {
     initializeApp(firebaseConfig);
 
@@ -28,8 +31,8 @@ export default function SignInCard() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        // ...
+
+        router.push("/home-page");
       })
       .catch((error) => {
         const errorCode = error.code;
