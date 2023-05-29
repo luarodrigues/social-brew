@@ -19,6 +19,19 @@ import SocialBrewLinks from "../components/SocialBrewLinks";
 
 export default function HomePage() {
   const router = useRouter();
+  const signOut = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        router.push("/index");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+      });
+  };
+
   return (
     <Box>
       <Head>
