@@ -65,7 +65,7 @@ export default function indexPage() {
             >
               <Button
                 variant={"brandColor"}
-                onClick={() => router.push("/sign-up-page")}
+                onClick={() => router.push("/sign-in-page")}
               >
                 Sign In
               </Button>
