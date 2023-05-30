@@ -12,12 +12,13 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "dotenv": "^16.0.3",
-    "firebase": "^9.22.0",
+    "firebase": "^9.22.1",
     "firebaseui": "^6.0.2",
     "framer-motion": "^10.12.16",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
     "styled-components": "^5.3.10"
   },
   "devDependencies": {

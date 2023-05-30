@@ -1,38 +1,49 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getFirestore, doc, onSnapshot } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  DocumentData,
+} from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../../firebaseConfig/firebaseConfig";
 
-interface Recipe {
+initializeApp(firebaseConfig);
+const db = getFirestore();
+
+interface CoffeeRecipe {
+  id: string;
   beans: string;
-  brewMethod: string;
   roaster: string;
+  brewMethod: string;
   comments: string;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Recipe | string>
+  res: NextApiResponse<CoffeeRecipe[] | string>
 ) {
-  initializeApp(firebaseConfig);
-  const db = getFirestore();
+  try {
+    const recipeRef = collection(db, "recipes");
+    const recipeSnapshot = await getDocs(recipeRef);
+    const recipes: CoffeeRecipe[] = [];
 
-  const fetchData = async () => {
-    try {
-      const firestore = getFirestore();
-      const documentRef = doc(firestore, "recipes", "C7Z6fIVl1yUWSgdwLkx0");
-      onSnapshot(documentRef, (doc) => {
-        if (doc.exists()) {
-          const data: any = doc.data();
-          res.status(200).json(data);
-        }
-      });
-    } catch (error) {
-      res.status(500).json("Internal server error");
-    }
-  };
+    recipeSnapshot.forEach((doc) => {
+      if (doc.exists()) {
+        const data = doc.data() as DocumentData;
+        recipes.push({
+          id: doc.id,
+          beans: data.beans,
+          roaster: data.roaster,
+          brewMethod: data.brewMethod,
+          comments: data.comments,
+        });
+      }
+    });
 
-  if (req.method === "GET") {
-    await fetchData();
+    res.status(200).json(recipes);
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    res.status(500).json("Internal server error");
   }
 }
