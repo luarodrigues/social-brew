@@ -3,6 +3,8 @@ import {
   getFirestore,
   collection,
   getDocs,
+  orderBy,
+  query,
   DocumentData,
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
@@ -12,11 +14,13 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 interface CoffeeRecipe {
+  userName: string;
   id: string;
   beans: string;
   roaster: string;
   brewMethod: string;
   comments: string;
+  date: string;
 }
 
 export default async function handler(
@@ -25,13 +29,18 @@ export default async function handler(
 ) {
   try {
     const recipeRef = collection(db, "recipes");
-    const recipeSnapshot = await getDocs(recipeRef);
+    const recipeQuery = query(recipeRef, orderBy("date", "desc"));
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString("en-GB");
+    const recipeSnapshot = await getDocs(recipeQuery);
     const recipes: CoffeeRecipe[] = [];
 
     recipeSnapshot.forEach((doc) => {
       if (doc.exists()) {
         const data = doc.data() as DocumentData;
         recipes.push({
+          date: formattedDate,
+          userName: data.userName,
           id: doc.id,
           beans: data.beans,
           roaster: data.roaster,
