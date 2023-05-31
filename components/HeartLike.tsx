@@ -12,8 +12,9 @@ function HeartLike({ onClick }: Props) {
     setStatus(!status);
     onClick();
   };
-  if (status) return <AiFillHeart color="#FD6853" size={20} onClick={toggle} />;
-  return <AiOutlineHeart color="#FD6853" size={20} onClick={toggle} />;
+  if (status)
+    return <AiOutlineHeart color="#FD6853" size={20} onClick={toggle} />;
+  return <AiFillHeart color="#FD6853" size={20} onClick={toggle} />;
 }
 
 export default HeartLike;

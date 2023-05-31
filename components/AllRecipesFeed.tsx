@@ -11,7 +11,7 @@ import {
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
-import { LuThumbsUp } from "react-icons/lu";
+import CoffeeLike from "./CoffeeLike";
 import HeartLike from "../components/HeartLike";
 
 initializeApp(firebaseConfig);
@@ -25,7 +25,6 @@ type CoffeeRecipe = {
   roaster: string;
   brewMethod: string;
   comments: string;
-  likes: number;
 };
 
 const AllRecipesFeed: React.FC = () => {
@@ -49,14 +48,6 @@ const AllRecipesFeed: React.FC = () => {
     fetchRecipes();
   }, []);
 
-  const handleLikeClick = (recipeId: string) => {
-    setRecipes((prevRecipes) =>
-      prevRecipes.map((recipe) =>
-        recipe.id === recipeId ? { ...recipe, likes: recipe.likes + 1 } : recipe
-      )
-    );
-  };
-
   return (
     <Flex
       align={"center"}
@@ -69,7 +60,7 @@ const AllRecipesFeed: React.FC = () => {
           <Box key={recipe.id} mb={4} p={4} bg={"white"} rounded={"md"}>
             <Stack direction={"row"} align={"center"} mb={2}>
               <Avatar size={"sm"} />
-              <Text fontWeight={"bold"}>{recipe.id}</Text>
+              <Text fontWeight={"bold"}>{recipe.userName}</Text>
             </Stack>
             <VStack align={"flex-start"}>
               <Box>Beans origin: {recipe ? recipe.beans : ""}</Box>
@@ -77,11 +68,13 @@ const AllRecipesFeed: React.FC = () => {
               <Box>Method: {recipe ? recipe.brewMethod : ""}</Box>
               <Box>My thoughts: {recipe ? recipe.comments : ""}</Box>
             </VStack>
+            <Box fontSize={"smaller"} mt={"5px"}>
+              {" "}
+              {recipe ? recipe.date : ""}
+            </Box>
             <Stack direction={"row"} mt={2} align={"center"}>
               <HeartLike onClick={() => console.log("liked")} />
-              <Text>{isNaN(recipe.likes) ? "" : recipe.likes}</Text>
-
-              <LuThumbsUp onClick={() => console.log("click")} />
+              <CoffeeLike onClick={() => console.log("click")} />
             </Stack>
           </Box>
         ))}

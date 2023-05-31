@@ -21,7 +21,8 @@
     "components/firebaseConfig.js",
     "firebaseConfig/firebaseConfig.js",
     "pages/api/home-api.jsx",
-    "pages/api/coffee-calculator.js"
+    "pages/api/coffee-calculator.js",
+    "pages/recipe.jsx"
   ],
   "exclude": ["node_modules"]
 }

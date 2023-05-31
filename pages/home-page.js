@@ -1,13 +1,27 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Button, Box, Flex, Stack, Text } from "@chakra-ui/react";
+import { Button, Box, Flex, Text } from "@chakra-ui/react";
 import AllRecipesFeed from "../components/AllRecipesFeed";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import React, { useState, useEffect } from "react";
 
 export default function HomePage() {
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/");
+      } else {
+        setUser(user);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSignOut = () => {
     initializeApp(firebaseConfig);

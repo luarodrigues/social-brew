@@ -15,8 +15,9 @@ import {
 import "firebase/firestore";
 import coffeeData from "coffee-data.json";
 import { useRouter } from "next/router";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { SubmitAlert } from "../components/SubmitAlert";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 
@@ -25,16 +26,33 @@ const db = getFirestore();
 
 const CoffeeRecipe = () => {
   const router = useRouter();
+  const [user, setUser] = useState(null);
   const [countries, setCountries] = useState([]);
   const [roasters, setRoasters] = useState([]);
   const [methods, setMethods] = useState([]);
   const [comments, setComments] = useState("");
+  const [userName, setUserName] = useState("");
+  const [date, setDate] = useState("");
+
   const [submitted, setSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
     beans: "",
     roaster: "",
     brewMethod: "",
   });
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/");
+      } else {
+        setUser(user);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +74,8 @@ const CoffeeRecipe = () => {
     try {
       const recipeRef = collection(db, "recipes");
       const recipe = {
+        date: new Date().toISOString(),
+        userName: user.email,
         beans: selectedOptions.beans,
         roaster: selectedOptions.roaster,
         brewMethod: selectedOptions.brewMethod,
@@ -69,6 +89,8 @@ const CoffeeRecipe = () => {
         brewMethod: "",
       });
       setComments("");
+      setUserName("");
+      setDate("");
     } catch (error) {
       console.error("Error adding recipe: ", error);
     }
@@ -177,10 +199,7 @@ const CoffeeRecipe = () => {
 
           <Box align={"center"} justify={"center"}>
             {!submitted ? (
-              <Button variant={"brandColor"}
-               
-                onClick={handleSubmit}
-              >
+              <Button variant={"brandColor"} onClick={handleSubmit}>
                 submit recipe
               </Button>
             ) : (

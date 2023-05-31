@@ -3,6 +3,7 @@ import { VStack, Box } from "@chakra-ui/react";
 
 export default function RecipeOnFeed() {
   const [recipeFeed, setRecipeFeed] = useState({
+    user: "",
     id: "",
     beans: "",
     brewMethod: "",
