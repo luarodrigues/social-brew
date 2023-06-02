@@ -1,5 +1,17 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
+import firebaseConfig from "../firebaseConfig/firebaseConfig";
+
+initializeApp(firebaseConfig);
+const db = getFirestore();
 
 interface Props {
   onClick: () => void;
@@ -7,92 +19,41 @@ interface Props {
 
 function HeartLike({ onClick }: Props) {
   const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const [likesCount, setLikesCount] = useState(0);
 
-  const handleclick = () => {
+  useEffect(() => {
+    const fetchLikesCount = async () => {
+      const likesRef = collection(db, "likes");
+      const likesDocRef = doc(db, "likes", "heart-likes");
+      const likesDoc = await getDoc(likesDocRef);
+
+      if (likesDoc.exists()) {
+        setLikesCount(likesDoc.data().count);
+      }
+    };
+
+    fetchLikesCount();
+  }, []);
+
+  const handleLike = async () => {
+    const newLikesCount = liked ? likesCount - 1 : likesCount + 1;
+    await setDoc(doc(db, "likes", "heart-likes"), {
+      count: newLikesCount,
+    });
     setLiked(!liked);
     onClick();
-
-    setLikes(liked ? likes - 1 : likes + 1);
+    setLikesCount(newLikesCount);
   };
 
   return (
-    <div onClick={handleclick}>
+    <div onClick={handleLike}>
       {liked ? (
         <AiFillHeart color="#FD6853" size={20} />
       ) : (
         <AiOutlineHeart color="#FD6853" size={20} />
       )}{" "}
-      {likes > 0 && <span>{likes}</span>}
+      {likesCount > 0 && <span>{likesCount}</span>}
     </div>
   );
 }
 export default HeartLike;
-
-// import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-// import { useState, useEffect } from "react";
-
-// interface Props {
-//   onClick: () => void;
-// }
-
-// interface LikeResponse {
-//   likes: number;
-// }
-
-// function HeartLike({ onClick }: Props) {
-//   const [liked, setLiked] = useState(false);
-//   const [likes, setLikes] = useState(0);
-
-//   useEffect(() => {
-//     fetchLikes();
-//   }, []);
-
-//   const fetchLikes = async () => {
-//     try {
-//       const response = await fetch("/api/like-api");
-//       if (response.ok) {
-//         const data: LikeResponse = await response.json();
-//         setLikes(data.likes);
-//       } else {
-//         console.error("Error fetching likes:", response.status);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching likes:", error);
-//     }
-//   };
-
-//   const handleClick = async () => {
-//     setLiked(!liked);
-//     onClick();
-
-//     try {
-//       const response = await fetch("/api/like-api", {
-//         method: "POST",
-//       });
-//       if (response.ok) {
-//         const data: LikeResponse = await response.json();
-//         setLikes(data.likes);
-
-//         fetchLikes();
-//       } else {
-//         console.error("Error updating likes:", response.status);
-//       }
-//     } catch (error) {
-//       console.error("Error updating likes:", error);
-//     }
-//   };
-
-//   return (
-//     <div onClick={handleClick}>
-//       {/* {liked ? (
-//         <AiFillHeart color="#FD6853" size={20} />
-//       ) : ( */}
-//       <AiOutlineHeart color="#FD6853" size={20} />
-//       {/* )}{" "} */}
-//       {likes > 0 && <span>{likes}</span>}
-//     </div>
-//   );
-// }
-
-// export default HeartLike;
