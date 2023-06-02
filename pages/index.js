@@ -55,9 +55,12 @@ export default function indexPage() {
               </Text>
             </Heading>
             <Text color={"gray.500"}>
-              lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              sit ullam adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et do
+              Welcome to Social Brew, the ultimate web app for coffee lovers!
+              Whether you're a seasoned barista or a coffee newbie, we've got
+              something special brewing for you. Discover a whole new level of
+              coffee brewing experience with Social Brew. Join us today and
+              unlock a world of possibilities where the art and science of
+              coffee converge. Cheers to the perfect cup!
             </Text>
             <Stack
               spacing={{ base: 4, sm: 6 }}
