@@ -31,6 +31,11 @@ const CoffeeRecipe = () => {
   const [roasters, setRoasters] = useState([]);
   const [methods, setMethods] = useState([]);
   const [comments, setComments] = useState("");
+  const [heartLikes, setHeartLikes] = useState("");
+  const [coffeeLikes, setCoffeeLikes] = useState("");
+  const [waterAmmount, setWaterAmmount] = useState("");
+  const [coffeeAmmount, setCoffeeAmmount] = useState("");
+  const [brewTime, setBrewTime] = useState("");
   const [userName, setUserName] = useState("");
   const [date, setDate] = useState("");
 
@@ -79,8 +84,14 @@ const CoffeeRecipe = () => {
         beans: selectedOptions.beans,
         roaster: selectedOptions.roaster,
         brewMethod: selectedOptions.brewMethod,
-        comments: comments,
+        heartLikes: heartLikes,
+        coffeeLikes: coffeeLikes,
+        coffeeAmmount: selectedOptions.coffeeAmmount,
+        waterAmmount: selectedOptions.waterAmmount,
+        brewTime: selectedOptions.brewTime,
+        comments: `${selectedOptions.coffeeAmmount}g🫘,  ${selectedOptions.waterAmmount}g💦,  ${selectedOptions.brewTime}min ⏱️`,
       };
+      console.log(comments);
       await addDoc(recipeRef, recipe);
       setSubmitted(true);
       setSelectedOptions({
@@ -90,6 +101,11 @@ const CoffeeRecipe = () => {
       });
       setComments("");
       setUserName("");
+      setCoffeeLikes([]);
+      setHeartLikes([]);
+      setCoffeeAmmount("");
+      setWaterAmmount("");
+      setBrewTime("");
       setDate("");
     } catch (error) {
       console.error("Error adding recipe: ", error);
@@ -102,6 +118,15 @@ const CoffeeRecipe = () => {
       [field]: value,
     }));
   };
+
+  const ammountOptions = Array.from({ length: 900 }, (_, i) => i + 1);
+  const minuteOptions = Array.from({ length: 60 * 60 }, (_, i) => {
+    const minutes = Math.floor(i / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = (i % 60).toString().padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  });
 
   return (
     <Flex
@@ -187,14 +212,62 @@ const CoffeeRecipe = () => {
             </Select>
           </FormControl>
 
-          <FormControl id="comments" mb={4}>
-            <FormLabel>add a comment</FormLabel>
-            <Input
-              value={comments}
+          <FormControl id="coffeeAmmount" mb={4}>
+            <FormLabel>Coffee Ammount (g)</FormLabel>
+            <Select
+              id="coffeeAmmount"
+              mb={4}
+              placeholder="Select a number"
               bg={"white"}
-              onChange={(event) => setComments(event.target.value)}
+              onChange={(e) =>
+                handleOptionChange("coffeeAmmount", e.target.value)
+              }
               isDisabled={submitted}
-            />
+            >
+              {ammountOptions.map((coffeeAmmount) => (
+                <option key={coffeeAmmount} value={coffeeAmmount}>
+                  {coffeeAmmount}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl id="waterAmmount" mb={4}>
+            <FormLabel>Water Ammount (g)</FormLabel>
+            <Select
+              id="waterAmmount"
+              mb={4}
+              placeholder="Select a number"
+              bg={"white"}
+              onChange={(e) =>
+                handleOptionChange("waterAmmount", e.target.value)
+              }
+              isDisabled={submitted}
+            >
+              {ammountOptions.map((waterAmmount) => (
+                <option key={waterAmmount} value={waterAmmount}>
+                  {waterAmmount}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl id="brewTime" mb={4}>
+            <FormLabel>Brew Time (min)</FormLabel>
+            <Select
+              id="brewTime"
+              mb={4}
+              placeholder="Select a number"
+              bg={"white"}
+              onChange={(e) => handleOptionChange("brewTime", e.target.value)}
+              isDisabled={submitted}
+            >
+              {minuteOptions.map((brewTime) => (
+                <option key={brewTime} value={brewTime}>
+                  {brewTime}
+                </option>
+              ))}
+            </Select>
           </FormControl>
 
           <Box align={"center"} justify={"center"}>

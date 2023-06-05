@@ -21,6 +21,8 @@ interface CoffeeRecipe {
   brewMethod: string;
   comments: string;
   date: string;
+  heartLikes: number;
+  coffeeLikes: number;
 }
 
 export default async function handler(
@@ -30,16 +32,17 @@ export default async function handler(
   try {
     const recipeRef = collection(db, "recipes");
     const recipeQuery = query(recipeRef, orderBy("date", "desc"));
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString("en-GB");
     const recipeSnapshot = await getDocs(recipeQuery);
     const recipes: CoffeeRecipe[] = [];
 
     recipeSnapshot.forEach((doc) => {
       if (doc.exists()) {
         const data = doc.data() as DocumentData;
+        // const recipeDate = data.date.toLocaleDateString("en-GB");
         recipes.push({
-          date: formattedDate,
+          heartLikes: data.heartLikes,
+          coffeeLikes: data.coffeeLikes,
+          date: data.date,
           userName: data.userName,
           id: doc.id,
           beans: data.beans,
