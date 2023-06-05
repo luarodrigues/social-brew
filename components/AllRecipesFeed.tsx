@@ -18,6 +18,8 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 type CoffeeRecipe = {
+  heartLikes: number;
+  coffeeLikes: number;
   id: string;
   date: string;
   userName: string;
@@ -25,6 +27,9 @@ type CoffeeRecipe = {
   roaster: string;
   brewMethod: string;
   comments: string;
+  waterAmmount: number;
+  coffeeAmmount: number;
+  brewTime: string;
 };
 
 const AllRecipesFeed: React.FC = () => {
@@ -66,12 +71,12 @@ const AllRecipesFeed: React.FC = () => {
               <Box>Beans origin: {recipe ? recipe.beans : ""}</Box>
               <Box>Roaster: {recipe ? recipe.roaster : ""}</Box>
               <Box>Method: {recipe ? recipe.brewMethod : ""}</Box>
-              <Box>My thoughts: {recipe ? recipe.comments : ""}</Box>
+              <Box>Recipe: {recipe ? recipe.comments : ""}</Box>
             </VStack>
             <Box fontSize={"smaller"} mt={"5px"}>
-              {" "}
-              {recipe ? recipe.date : ""}
+              {recipe.date}
             </Box>
+
             <Stack direction={"row"} mt={2} align={"center"}>
               <HeartLike onClick={() => console.log("liked")} />
               <CoffeeLike onClick={() => console.log("click")} />
