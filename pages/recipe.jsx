@@ -7,10 +7,15 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Input,
   Link,
   Select,
   Stack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Input,
 } from "@chakra-ui/react";
 import "firebase/firestore";
 import coffeeData from "coffee-data.json";
@@ -119,7 +124,6 @@ const CoffeeRecipe = () => {
     }));
   };
 
-  const ammountOptions = Array.from({ length: 900 }, (_, i) => i + 1);
   const minuteOptions = Array.from({ length: 60 * 60 }, (_, i) => {
     const minutes = Math.floor(i / 60)
       .toString()
@@ -213,43 +217,37 @@ const CoffeeRecipe = () => {
           </FormControl>
 
           <FormControl id="coffeeAmmount" mb={4}>
-            <FormLabel>Coffee Ammount (g)</FormLabel>
-            <Select
+            <FormLabel>Coffee Amount (g)</FormLabel>
+            <NumberInput
               id="coffeeAmmount"
-              mb={4}
-              placeholder="Select a number"
-              bg={"white"}
-              onChange={(e) =>
-                handleOptionChange("coffeeAmmount", e.target.value)
-              }
+              onChange={(value) => handleOptionChange("coffeeAmmount", value)}
               isDisabled={submitted}
+              min={1}
+              max={1000}
             >
-              {ammountOptions.map((coffeeAmmount) => (
-                <option key={coffeeAmmount} value={coffeeAmmount}>
-                  {coffeeAmmount}
-                </option>
-              ))}
-            </Select>
+              <NumberInputField bg={"white"} />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
           </FormControl>
 
           <FormControl id="waterAmmount" mb={4}>
-            <FormLabel>Water Ammount (g)</FormLabel>
-            <Select
+            <FormLabel>Water Amount (g)</FormLabel>
+            <NumberInput
               id="waterAmmount"
-              mb={4}
-              placeholder="Select a number"
-              bg={"white"}
-              onChange={(e) =>
-                handleOptionChange("waterAmmount", e.target.value)
-              }
+              onChange={(value) => handleOptionChange("waterAmmount", value)}
               isDisabled={submitted}
+              min={1}
+              max={10000}
             >
-              {ammountOptions.map((waterAmmount) => (
-                <option key={waterAmmount} value={waterAmmount}>
-                  {waterAmmount}
-                </option>
-              ))}
-            </Select>
+              <NumberInputField bg={"white"} />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
           </FormControl>
 
           <FormControl id="brewTime" mb={4}>
