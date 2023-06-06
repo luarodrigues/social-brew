@@ -13,7 +13,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import "firebase/auth";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
@@ -40,6 +44,21 @@ export default function SignInCard() {
         console.log(error);
       });
   };
+
+  const handleResetPassword = () => {
+    initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("Password reset email sent successfully");
+      })
+      .catch((error) => {
+        console.log("Error sending password reset email:", error);
+      });
+  };
+
+  const [rememberMe, setRememberMe] = useState(false);
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
@@ -84,8 +103,15 @@ export default function SignInCard() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Remember me</Checkbox>
-                <Link color={"#FD6853"}>Forgot password?</Link>
+                <Checkbox
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                >
+                  Remember me
+                </Checkbox>
+                <Link color={"#FD6853"} onClick={handleResetPassword}>
+                  Forgot password?
+                </Link>
               </Stack>
               <Button variant={"brandColor"} onClick={handleSignIn}>
                 sign in
