@@ -41,8 +41,12 @@ export default function HomePage() {
     <Box>
       <Head>
         <title>social brew</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>{" "}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
+      </Head>
+
       <Flex
         bg="#A7D2DD"
         color="white"
@@ -53,7 +57,7 @@ export default function HomePage() {
       >
         <Flex align={"center"} justify={"flex-end"}>
           <Button
-            m="10px"
+            m={{ base: "5px", md: "10px" }}
             variant={"brandColorGhost"}
             fontSize="16px"
             onClick={() => router.push("/recipe")}
@@ -61,7 +65,7 @@ export default function HomePage() {
             Add Recipe
           </Button>
           <Button
-            m="10px"
+            m={{ base: "5px", md: "10px" }}
             variant={"brandColorGhost"}
             fontSize="16px"
             onClick={() => router.push("/coffee-calculator")}
@@ -69,6 +73,7 @@ export default function HomePage() {
             Coffee Calculator
           </Button>
           <Button
+            m={{ base: "5px", md: "10px" }}
             variant={"brandColor"}
             fontSize="16px"
             onClick={handleSignOut}
