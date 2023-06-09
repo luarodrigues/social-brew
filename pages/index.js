@@ -8,27 +8,30 @@ import {
   Text,
   Image,
   Icon,
+  Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import SocialBrewLinks from "../components/SocialBrewLinks";
 
-export default function indexPage() {
+export default function IndexPage() {
   const router = useRouter();
+
   return (
-    <Flex align={"center"} justify={"center"} p={"50px"}>
-      <title>welcome to social brew</title>
+    <Flex align={"center"} justify={"center"} p={"20px"}>
+      <title>Welcome to Social Brew</title>
       <Container maxW={"7xl"} fontFamily={"avenir"}>
         <Stack
           align={"center"}
-          spacing={{ base: 8, md: 10 }}
-          py={{ base: 20, md: 28 }}
+          spacing={8}
+          py={20}
           direction={{ base: "column", md: "row" }}
         >
-          <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+          <Stack flex={1} spacing={5}>
             <Heading
               lineHeight={1.1}
               fontWeight={600}
               fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
+              textAlign={{ base: "center", sm: "left" }}
             >
               <Text
                 fontFamily={"avenir"}
@@ -47,14 +50,15 @@ export default function indexPage() {
                 }}
               >
                 Welcome to <br />
-                <span style={{ color: "#FD6853" }}>SOCIAL BREW</span>
+                <Text as={"span"} color={"#FD6853"}>
+                  SOCIAL BREW
+                </Text>
               </Text>
-              <br />
               <Text as={"span"} color={" #0F606B"} fontSize={"4xl"}>
                 your coffee community app
               </Text>
             </Heading>
-            <Text color={"gray.500"}>
+            <Text color={"gray.500"} textAlign={{ base: "center", sm: "left" }}>
               Welcome to Social Brew, the ultimate web app for coffee lovers!
               Whether you're a seasoned barista or a coffee newbie, we've got
               something special brewing for you. Discover a whole new level of
@@ -63,8 +67,9 @@ export default function indexPage() {
               coffee converge. Cheers to the perfect cup!
             </Text>
             <Stack
-              spacing={{ base: 4, sm: 6 }}
+              spacing={4}
               direction={{ base: "column", sm: "row" }}
+              align={{ base: "center", sm: "flex-start" }}
             >
               <Button
                 variant={"brandColor"}
@@ -86,7 +91,6 @@ export default function indexPage() {
             justify={"center"}
             align={"center"}
             position={"relative"}
-            w={"full"}
           >
             <BackGroundIcon
               w={"150%"}
@@ -117,16 +121,13 @@ export default function indexPage() {
             </Box>
           </Flex>
         </Stack>
-        <Stack
-          direction={{ base: "column", sm: "row" }}
-          justifyContent={"space-around"}
-        >
+        <Stack direction={"row"} justifyContent={"space-around"} mt={10}>
           {SocialBrewLinks.map((link) => (
-            <Text
-              color={"#FD6853 "}
-              fontSize="27px"
+            <Link
               key={link.title}
               href={link.url}
+              color={"#FD6853"}
+              fontSize={{ base: "lg", sm: "xl" }}
               _hover={{
                 color: "#0F606B",
                 cursor: "pointer",
@@ -137,7 +138,7 @@ export default function indexPage() {
               }}
             >
               {link.title}
-            </Text>
+            </Link>
           ))}
         </Stack>
       </Container>
