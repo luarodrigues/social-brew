@@ -4,6 +4,14 @@ const theme = extendTheme({
   components: {
     Button: {
       variants: {
+        brandColorGhost: {
+          bg: "#A7D2DD",
+          color: "white",
+          _hover: {
+            bg: "#A7D2DD",
+            color: "#FD6853",
+          },
+        },
         brandColor: {
           bg: "#FD6853",
           color: "white",

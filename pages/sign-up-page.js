@@ -1,46 +1,44 @@
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
   Stack,
   Link,
   Button,
   Heading,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import "firebase/app";
-import "firebase/auth";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { FcGoogle } from "react-icons/fc";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
-import { useRouter } from "next/router";
 
 export default function SignUpCard() {
   const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const handleGoogleSignUp = async () => {
+    try {
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
 
-  const handleSignUp = () => {
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        router.push("/sign-in-page");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
+      const googleProvider = new GoogleAuthProvider();
+      await signInWithPopup(auth, googleProvider);
+      setIsRedirecting(true);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(error);
+    }
   };
+  useEffect(() => {
+    if (isRedirecting) {
+      setTimeout(() => {
+        router.push("/home-page");
+      }, 4000);
+    }
+  }, [isRedirecting, router]);
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
@@ -61,31 +59,24 @@ export default function SignUpCard() {
             create an account ☕️
           </Heading>
         </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
+        <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
           <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input ttype="email" onChange={(e) => setEmail(e.target.value)} />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: "column", sm: "row" }}
-                align={"start"}
-                justify={"space-between"}
+            <Stack spacing={4}>
+              <Button
+                variant={"brandColor"}
+                onClick={() => router.push("/sign-up-page-email")}
               >
-                <Checkbox>Remember me</Checkbox>
+                Sign up with email
+              </Button>
+              <Button
+                variant={"brandColor"}
+                onClick={handleGoogleSignUp}
+                leftIcon={<FcGoogle />}
+              >
+                Sign up with Google
+              </Button>
+
+              <Stack spacing={4}>
                 <Link
                   color={"#FD6853"}
                   onClick={() => router.push("/sign-in-page")}
@@ -93,9 +84,6 @@ export default function SignUpCard() {
                   Already have an account?
                 </Link>
               </Stack>
-              <Button variant={"brandColor"} onClick={handleSignUp}>
-                create an account
-              </Button>
             </Stack>
           </Stack>
         </Box>

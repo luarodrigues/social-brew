@@ -1,65 +1,46 @@
 import {
   Flex,
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import "firebase/auth";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from "firebase/auth";
-import { useState } from "react";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { useRouter } from "next/router";
+import { FcGoogle } from "react-icons/fc";
+import React, { useState, useEffect } from "react";
 
 export default function SignInCard() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
-  const handleSignIn = () => {
-    initializeApp(firebaseConfig);
+  const handleGoogleSignIn = async () => {
+    try {
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
 
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
+      const googleProvider = new GoogleAuthProvider();
+      await signInWithPopup(auth, googleProvider);
+      setIsRedirecting(true);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (isRedirecting) {
+      setTimeout(() => {
         router.push("/home-page");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
-  };
-
-  const handleResetPassword = () => {
-    initializeApp(firebaseConfig);
-    const auth = getAuth();
-
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        console.log("Password reset email sent successfully");
-      })
-      .catch((error) => {
-        console.log("Error sending password reset email:", error);
-      });
-  };
-
-  const [rememberMe, setRememberMe] = useState(false);
-
+      }, 4000);
+    }
+  }, [isRedirecting, router]);
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
       <title>sign in</title>
@@ -86,35 +67,19 @@ export default function SignInCard() {
           p={8}
         >
           <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(e) => setEmail(e.target.value)} />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
             <Stack spacing={10}>
-              <Stack
-                direction={{ base: "column", sm: "row" }}
-                align={"start"}
-                justify={"space-between"}
+              <Button
+                variant={"brandColor"}
+                onClick={() => router.push("/sign-in-page-email")}
               >
-                <Checkbox
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                >
-                  Remember me
-                </Checkbox>
-                <Link color={"#FD6853"} onClick={handleResetPassword}>
-                  Forgot password?
-                </Link>
-              </Stack>
-              <Button variant={"brandColor"} onClick={handleSignIn}>
-                sign in
+                Sign in with email
+              </Button>
+              <Button
+                variant={"brandColor"}
+                onClick={handleGoogleSignIn}
+                leftIcon={<FcGoogle />}
+              >
+                Sign up with Google
               </Button>
             </Stack>
           </Stack>
