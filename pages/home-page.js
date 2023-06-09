@@ -54,11 +54,19 @@ export default function HomePage() {
         <Flex align={"center"} justify={"flex-end"}>
           <Button
             m="10px"
-            variant={"brandColor"}
+            variant={"brandColorGhost"}
             fontSize="16px"
             onClick={() => router.push("/recipe")}
           >
             Add Recipe
+          </Button>
+          <Button
+            m="10px"
+            variant={"brandColorGhost"}
+            fontSize="16px"
+            onClick={() => router.push("/coffee-calculator")}
+          >
+            Coffee Calculator
           </Button>
           <Button
             variant={"brandColor"}

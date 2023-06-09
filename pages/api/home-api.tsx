@@ -21,7 +21,7 @@ interface CoffeeRecipe {
   brewMethod: string;
   comments: string;
   date: string;
-  heartLikes: number;
+
   coffeeLikes: number;
 }
 
@@ -37,18 +37,11 @@ export default async function handler(
 
     recipeSnapshot.forEach((doc) => {
       if (doc.exists()) {
-        const data = doc.data() as DocumentData;
-        // const recipeDate = data.date.toLocaleDateString("en-GB");
+        const data = doc.data() as CoffeeRecipe;
+
         recipes.push({
-          heartLikes: data.heartLikes,
-          coffeeLikes: data.coffeeLikes,
-          date: data.date,
-          userName: data.userName,
+          ...data,
           id: doc.id,
-          beans: data.beans,
-          roaster: data.roaster,
-          brewMethod: data.brewMethod,
-          comments: data.comments,
         });
       }
     });

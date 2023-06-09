@@ -36,12 +36,12 @@ const CoffeeRecipe = () => {
   const [roasters, setRoasters] = useState([]);
   const [methods, setMethods] = useState([]);
   const [comments, setComments] = useState("");
-  const [heartLikes, setHeartLikes] = useState("");
+
   const [coffeeLikes, setCoffeeLikes] = useState("");
   const [waterAmmount, setWaterAmmount] = useState("");
   const [coffeeAmmount, setCoffeeAmmount] = useState("");
   const [brewTime, setBrewTime] = useState("");
-  const [userName, setUserName] = useState("");
+  const [userName, setuserName] = useState("");
   const [date, setDate] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
@@ -83,19 +83,30 @@ const CoffeeRecipe = () => {
   const handleSubmit = async () => {
     try {
       const recipeRef = collection(db, "recipes");
+      const date = new Date();
+      const options = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      };
+      const formattedDate = date.toLocaleString("en-GB", options);
       const recipe = {
-        date: new Date().toISOString(),
-        userName: user.email,
+        date: formattedDate,
+        userName: user.email.split("@")[0],
         beans: selectedOptions.beans,
         roaster: selectedOptions.roaster,
         brewMethod: selectedOptions.brewMethod,
-        heartLikes: heartLikes,
+
         coffeeLikes: coffeeLikes,
         coffeeAmmount: selectedOptions.coffeeAmmount,
         waterAmmount: selectedOptions.waterAmmount,
         brewTime: selectedOptions.brewTime,
         comments: `${selectedOptions.coffeeAmmount}g🫘,  ${selectedOptions.waterAmmount}g💦,  ${selectedOptions.brewTime}min ⏱️`,
       };
+
       console.log(comments);
       await addDoc(recipeRef, recipe);
       setSubmitted(true);
@@ -105,9 +116,9 @@ const CoffeeRecipe = () => {
         brewMethod: "",
       });
       setComments("");
-      setUserName("");
+      setuserName("");
       setCoffeeLikes([]);
-      setHeartLikes([]);
+
       setCoffeeAmmount("");
       setWaterAmmount("");
       setBrewTime("");

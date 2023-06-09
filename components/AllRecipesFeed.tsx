@@ -1,57 +1,112 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Text,
-  Flex,
-  VStack,
-  Stack,
-  Avatar,
-  Button,
-} from "@chakra-ui/react";
-import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
-import CoffeeLike from "./CoffeeLike";
-import HeartLike from "../components/HeartLike";
+import { Box, Flex, VStack, Text, Stack, Avatar } from "@chakra-ui/react";
+import { MdOutlineCoffee, MdCoffee } from "react-icons/md";
+import { RiUserSmileLine } from "react-icons/ri";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
 
-type CoffeeRecipe = {
-  heartLikes: number;
-  coffeeLikes: number;
+interface CoffeeRecipe {
   id: string;
-  date: string;
   userName: string;
   beans: string;
   roaster: string;
   brewMethod: string;
   comments: string;
-  waterAmmount: number;
-  coffeeAmmount: number;
-  brewTime: string;
-};
+  date: string;
+  coffeeLikes: number;
+}
 
-const AllRecipesFeed: React.FC = () => {
+interface coffeeLikeProps {
+  recipeId: string;
+  onClick: () => void;
+}
+
+function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
+  const [coffeeLiked, setCoffeeLiked] = useState(false);
+  const [coffeeLikesCount, setCoffeeLikesCount] = useState(0);
+
+  useEffect(() => {
+    const fetchLikesCount = async () => {
+      const recipeRef = doc(db, "recipes", recipeId);
+      const recipeSnapshot = await getDoc(recipeRef);
+      if (recipeSnapshot.exists()) {
+        setCoffeeLikesCount(recipeSnapshot.data().coffeeLikes);
+        setCoffeeLiked(recipeSnapshot.data().likedByCurrentUser);
+      }
+    };
+
+    fetchLikesCount();
+  }, [db, recipeId]);
+
+  const handleLike = async () => {
+    try {
+      const recipeRef = doc(db, "recipes", recipeId);
+      const recipeSnapshot = await getDoc(recipeRef);
+
+      if (recipeSnapshot.exists()) {
+        const currentCoffeeLikes = recipeSnapshot.data().coffeeLikes || 0;
+        const newCoffeeLikesCount = coffeeLiked
+          ? currentCoffeeLikes - 1
+          : currentCoffeeLikes + 1;
+
+        await updateDoc(recipeRef, {
+          coffeeLikes: newCoffeeLikesCount,
+          likedByCurrentUser: !coffeeLiked,
+        });
+
+        setCoffeeLiked(!coffeeLiked);
+        onClick();
+        setCoffeeLikesCount(newCoffeeLikesCount);
+      }
+    } catch (error) {
+      console.error("Error updating coffeeLikes:", error);
+    }
+  };
+
+  return (
+    <div onClick={handleLike}>
+      {coffeeLiked ? (
+        <MdCoffee color="#0F606B " size={20} />
+      ) : (
+        <MdOutlineCoffee color="#A7D2DD " size={20} />
+      )}{" "}
+      {coffeeLikesCount > 0 && <span>{coffeeLikesCount}</span>}
+    </div>
+  );
+}
+
+function AllRecipesFeed() {
   const [recipes, setRecipes] = useState<CoffeeRecipe[]>([]);
 
   useEffect(() => {
-    const fetchRecipes = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("/api/home-api");
-        if (response.ok) {
-          const data = await response.json();
-          setRecipes(data);
-        } else {
-          console.error("Failed to fetch recipes:", response.status);
-        }
+        const response = await fetch(`api/home-api`);
+        const recipeFeed = await response.json();
+
+        setRecipes(recipeFeed);
       } catch (error) {
         console.error("Error fetching recipes:", error);
       }
     };
 
-    fetchRecipes();
+    fetchData();
   }, []);
+
+  const handleCoffeeLike = (recipeId: string) => {
+    console.log("clicked for recipe ID:", recipeId);
+  };
 
   return (
     <Flex
@@ -62,10 +117,22 @@ const AllRecipesFeed: React.FC = () => {
     >
       <Box minW={"550px"} bg={"#A7D2DD"} rounded={"lg"}>
         {recipes.map((recipe) => (
-          <Box key={recipe.id} mb={4} p={4} bg={"white"} rounded={"md"}>
-            <Stack direction={"row"} align={"center"} mb={2}>
-              <Avatar size={"sm"} />
-              <Text fontWeight={"bold"}>{recipe.userName}</Text>
+          <Box
+            key={recipe.id}
+            p={4}
+            shadow="md"
+            borderWidth="1px"
+            borderRadius="md"
+            bg="white"
+            mb={4}
+          >
+            <Stack direction="row" spacing={4} alignItems="center">
+              <Avatar
+                size="sm"
+                bg="#FD6853"
+                icon={<RiUserSmileLine fontSize="1.5rem" />}
+              />
+              <Text>{recipe.userName}</Text>
             </Stack>
             <VStack align={"flex-start"}>
               <Box>Beans origin: {recipe ? recipe.beans : ""}</Box>
@@ -76,16 +143,17 @@ const AllRecipesFeed: React.FC = () => {
             <Box fontSize={"smaller"} mt={"5px"}>
               {recipe.date}
             </Box>
-
-            <Stack direction={"row"} mt={2} align={"center"}>
-              <HeartLike onClick={() => console.log("liked")} />
-              <CoffeeLike onClick={() => console.log("click")} />
-            </Stack>
+            <Flex mt={4} alignItems="center">
+              <CoffeeLike
+                recipeId={recipe.id}
+                onClick={() => handleCoffeeLike(recipe.id)}
+              />
+            </Flex>
           </Box>
         ))}
       </Box>
     </Flex>
   );
-};
+}
 
 export default AllRecipesFeed;
