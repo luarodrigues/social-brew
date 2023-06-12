@@ -146,7 +146,7 @@ const CoffeeRecipe = () => {
   return (
     <Flex
       p={"20px"}
-      minH={"50vh"}
+      minH={"100vh"}
       align={"center"}
       justify={"center"}
       bg={"#393E46"}
