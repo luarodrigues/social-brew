@@ -48,7 +48,7 @@ export default function HomePage() {
       </Head>
 
       <Flex
-        bg="#A7D2DD"
+        bg="#393E46"
         color="white"
         fontFamily="avenir"
         p="20px"
@@ -79,7 +79,7 @@ export default function HomePage() {
           </Button>
         </Flex>
         <Flex align={"center"} justify={"center"}>
-          <Text fontSize="66px" textTransform="uppercase" mb={8}>
+          <Text fontSize="58px" textTransform="uppercase" mb={5}>
             SOCIAL{" "}
             <Text fontWeight="bold" as="span">
               BREw

@@ -35,26 +35,26 @@ export default function IndexPage() {
             >
               <Text
                 fontFamily={"avenir"}
-                color=" #0F606B"
+                color=" #222831"
                 as={"span"}
                 position={"relative"}
                 _after={{
                   content: "''",
                   width: "full",
-                  height: "30%",
+                  height: "25%",
                   position: "absolute",
                   bottom: 1,
                   left: 0,
-                  bg: "#A7D2DD",
+                  bg: "#B6B7B9",
                   zIndex: -1,
                 }}
               >
                 Welcome to <br />
-                <Text as={"span"} color={"#FD6853"}>
+                <Text as={"span"} color={"#00ADB5"}>
                   SOCIAL BREW
                 </Text>
               </Text>
-              <Text as={"span"} color={" #0F606B"} fontSize={"4xl"}>
+              <Text as={"span"} color={" #222831"} fontSize={"4xl"}>
                 your coffee community app
               </Text>
             </Heading>
@@ -113,10 +113,10 @@ export default function IndexPage() {
             <Link
               key={link.title}
               href={link.url}
-              color={"#FD6853"}
+              color={"#00ADB5"}
               fontSize={{ base: "lg", sm: "xl" }}
               _hover={{
-                color: "#0F606B",
+                color: "#222831",
                 cursor: "pointer",
               }}
               onClick={(e) => {

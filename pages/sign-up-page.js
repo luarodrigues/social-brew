@@ -13,6 +13,7 @@ import { FcGoogle } from "react-icons/fc";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
+import { MdCoffee } from "react-icons/md";
 
 export default function SignUpCard() {
   const router = useRouter();
@@ -36,12 +37,12 @@ export default function SignUpCard() {
     if (isRedirecting) {
       setTimeout(() => {
         router.push("/home-page");
-      }, 4000);
+      }, 2000);
     }
   }, [isRedirecting, router]);
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
+    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#393E46"}>
       <title>create an account</title>
       <Stack
         spacing={8}
@@ -52,12 +53,18 @@ export default function SignUpCard() {
         fontFamily={"avenir"}
       >
         <Stack align={"center"}>
-          <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
+          <Text fontSize={"58px"} color={"white"} textTransform={"uppercase"}>
             Social <span style={{ fontWeight: "bold" }}>brew</span>
           </Text>
-          <Heading fontSize={"2xl"} color={"white"}>
-            create an account ☕️
-          </Heading>
+          <Flex
+            fontSize={"2xl"}
+            color={"white"}
+            align={"center"}
+            justify={"center"}
+          >
+            create an account{"  "}
+            <MdCoffee style={{ marginLeft: "10px" }} />
+          </Flex>
         </Stack>
         <Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
           <Stack spacing={4}>
@@ -78,7 +85,7 @@ export default function SignUpCard() {
 
               <Stack spacing={4}>
                 <Link
-                  color={"#FD6853"}
+                  color={"#00ADB5"}
                   onClick={() => router.push("/sign-in-page")}
                 >
                   Already have an account?

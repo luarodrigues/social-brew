@@ -58,32 +58,39 @@ function AllRecipesFeed() {
       align={"center"}
       justify={"center"}
       fontFamily={"avenir"}
-      color={"#0F606B"}
+      color={"#222831"}
     >
-      <Box minW={"sm"} bg={"#A7D2DD"} rounded={"lg"}>
+      <Box minW={"sm"} bg={"#393E46"} rounded={"lg"}>
         {recipes.map((recipe) => (
           <Box
             key={recipe.id}
             p={4}
             shadow="md"
-            borderWidth="1px"
             borderRadius="md"
-            bg="white"
+            bg="#EEEEEE"
             mb={4}
           >
             <Stack direction="row" mb={2} alignItems="center">
               <Avatar
                 size="sm"
-                bg="#FD6853"
+                bg="#00ADB5"
                 icon={<RiUserSmileLine fontSize="1.5rem" />}
               />
-              <Text>{recipe.userName}</Text>
+              <Text fontWeight={"bold"}>{recipe.userName}</Text>
             </Stack>
             <VStack align={"flex-start"}>
-              <Box>Beans origin: {recipe ? recipe.beans : ""}</Box>
-              <Box>Roaster: {recipe ? recipe.roaster : ""}</Box>
-              <Box>Method: {recipe ? recipe.brewMethod : ""}</Box>
-              <Box>Recipe: {recipe ? recipe.comments : ""}</Box>
+              <Box>
+                <strong>Beans origin:</strong> {recipe ? recipe.beans : ""}
+              </Box>
+              <Box>
+                <strong>Roaster:</strong> {recipe ? recipe.roaster : ""}
+              </Box>
+              <Box>
+                <strong>Method:</strong> {recipe ? recipe.brewMethod : ""}
+              </Box>
+              <Box>
+                <strong>Recipe:</strong> {recipe ? recipe.comments : ""}
+              </Box>
               <Box fontSize={"xs"} mt={"5px"}>
                 {recipe.date}
               </Box>

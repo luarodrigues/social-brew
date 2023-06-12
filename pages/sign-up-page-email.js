@@ -14,17 +14,12 @@ import {
 } from "@chakra-ui/react";
 import "firebase/app";
 import "firebase/auth";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { useRouter } from "next/router";
-import { FcGoogle } from "react-icons/fc";
+import { MdCoffee } from "react-icons/md";
 
 export default function SignUpCard() {
   const router = useRouter();
@@ -49,7 +44,7 @@ export default function SignUpCard() {
   };
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
+    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#393E46"}>
       <title>create an account w/email</title>
       <Stack
         spacing={8}
@@ -60,12 +55,18 @@ export default function SignUpCard() {
         fontFamily={"avenir"}
       >
         <Stack align={"center"}>
-          <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
+          <Text fontSize={"58px"} color={"white"} textTransform={"uppercase"}>
             Social <span style={{ fontWeight: "bold" }}>brew</span>
           </Text>
-          <Heading fontSize={"2xl"} color={"white"}>
-            create an account ☕️
-          </Heading>
+          <Flex
+            fontSize={"2xl"}
+            color={"white"}
+            align={"center"}
+            justify={"center"}
+          >
+            create an account{"  "}
+            <MdCoffee style={{ marginLeft: "10px" }} />
+          </Flex>
         </Stack>
         <Box
           rounded={"lg"}
@@ -93,7 +94,7 @@ export default function SignUpCard() {
               >
                 <Checkbox>Remember me</Checkbox>
                 <Link
-                  color={"#FD6853"}
+                  color={"#00ADB5"}
                   onClick={() => router.push("/sign-in-page")}
                 >
                   Already have an account?

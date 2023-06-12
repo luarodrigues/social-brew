@@ -15,7 +15,6 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Input,
 } from "@chakra-ui/react";
 import "firebase/firestore";
 import coffeeData from "coffee-data.json";
@@ -25,6 +24,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
+import { IoWaterOutline } from "react-icons/io";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
@@ -104,7 +104,7 @@ const CoffeeRecipe = () => {
         coffeeAmmount: selectedOptions.coffeeAmmount,
         waterAmmount: selectedOptions.waterAmmount,
         brewTime: selectedOptions.brewTime,
-        comments: `${selectedOptions.coffeeAmmount}g🫘,  ${selectedOptions.waterAmmount}g💦,  ${selectedOptions.brewTime}min ⏱️`,
+        comments: `${selectedOptions.coffeeAmmount}g 🫘,  ${selectedOptions.waterAmmount}g 💧,  ${selectedOptions.brewTime}min ⏱️`,
       };
 
       console.log(comments);
@@ -145,10 +145,11 @@ const CoffeeRecipe = () => {
 
   return (
     <Flex
-      minH={"100vh"}
+      p={"20px"}
+      minH={"50vh"}
       align={"center"}
       justify={"center"}
-      bg={"white"}
+      bg={"#393E46"}
       fontFamily={"avenir"}
     >
       <title>recipe</title>
@@ -158,24 +159,24 @@ const CoffeeRecipe = () => {
         maxW={"lg"}
         py={10}
         px={6}
-        bg={"#A7D2DD"}
+        bg={"#EEEEEE"}
         rounded={"lg"}
       >
         <Stack align={"center"}>
-          <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
+          <Text fontSize={"66px"} color={"#222831"} textTransform={"uppercase"}>
             SOCIAL BREW
           </Text>
         </Stack>
         <Stack align={"center"}>
           <Heading
             fontSize={"large"}
-            color={"white"}
+            color={"#393E46"}
             textTransform={"uppercase"}
           >
             add your recipe
           </Heading>
         </Stack>
-        <Box color={"#0F606B"}>
+        <Box color={"#222831"}>
           <FormControl id="beans" mb={4}>
             <FormLabel>Beans origin</FormLabel>
             <Select
@@ -248,6 +249,7 @@ const CoffeeRecipe = () => {
             <FormLabel>Water Amount (g)</FormLabel>
             <NumberInput
               id="waterAmmount"
+              color={"#B6B7B9"}
               onChange={(value) => handleOptionChange("waterAmmount", value)}
               isDisabled={submitted}
               min={1}
@@ -290,7 +292,7 @@ const CoffeeRecipe = () => {
           </Box>
           <Stack align={"flex-end"}>
             {" "}
-            <Link color={"#FD6853"} onClick={() => router.push("/home-page")}>
+            <Link color={"#00ADB5"} onClick={() => router.push("/home-page")}>
               go to my page
             </Link>
           </Stack>

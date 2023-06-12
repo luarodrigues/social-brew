@@ -93,9 +93,9 @@ function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
   return (
     <Flex mt="5px" align="center" onClick={handleLike}>
       {coffeeLiked ? (
-        <MdCoffee color="#0F606B " size={21} />
+        <MdCoffee color="#222831 " size={21} />
       ) : (
-        <MdOutlineCoffee color="#A7D2DD " size={20} />
+        <MdOutlineCoffee color="#B6B7B9 " size={20} />
       )}{" "}
       {coffeeLikesCount > 0 && (
         <Text fontSize="12px" mx="5px">
