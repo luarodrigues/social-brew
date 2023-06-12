@@ -154,7 +154,7 @@ function AllRecipesFeed() {
       fontFamily={"avenir"}
       color={"#0F606B"}
     >
-      <Box minW={"550px"} bg={"#A7D2DD"} rounded={"lg"}>
+      <Box minW={"500px"} bg={"#A7D2DD"} rounded={"lg"}>
         {recipes.map((recipe) => (
           <Box
             key={recipe.id}
