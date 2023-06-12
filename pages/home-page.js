@@ -66,7 +66,7 @@ export default function HomePage() {
           <Button
             variant={"brandColorGhost"}
             fontSize="16px"
-            onClick={() => router.push("/coffee-calculator")}
+            onClick={() => router.push("/coffee-calculator-page")}
           >
             Coffee Calculator
           </Button>
