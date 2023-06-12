@@ -47,7 +47,11 @@ function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
       const recipeSnapshot = await getDoc(recipeRef);
       if (recipeSnapshot.exists()) {
         setCoffeeLikesCount(recipeSnapshot.data().coffeeLikes);
-        setCoffeeLiked(recipeSnapshot.data().likedByCurrentUser);
+
+        if (currentUser) {
+          const likedBy = recipeSnapshot.data().likedBy || [];
+          setCoffeeLiked(likedBy.includes(currentUser.uid));
+        }
       }
     };
 
@@ -60,7 +64,7 @@ function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
     return () => {
       unsubscribe();
     };
-  }, [db, recipeId]);
+  }, [db, recipeId, currentUser]);
 
   const handleLike = async () => {
     try {
@@ -114,6 +118,7 @@ function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
 
 function AllRecipesFeed() {
   const [recipes, setRecipes] = useState<CoffeeRecipe[]>([]);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,7 +132,15 @@ function AllRecipesFeed() {
       }
     };
 
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
     fetchData();
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const handleCoffeeLike = (recipeId: string) => {
@@ -152,7 +165,7 @@ function AllRecipesFeed() {
             bg="white"
             mb={4}
           >
-            <Stack direction="row" spacing={4} alignItems="center">
+            <Stack direction="row" mb={2} alignItems="center">
               <Avatar
                 size="sm"
                 bg="#FD6853"
@@ -170,10 +183,12 @@ function AllRecipesFeed() {
               {recipe.date}
             </Box>
             <Flex mt={4} alignItems="center">
-              <CoffeeLike
-                recipeId={recipe.id}
-                onClick={() => handleCoffeeLike(recipe.id)}
-              />
+              {currentUser && (
+                <CoffeeLike
+                  recipeId={recipe.id}
+                  onClick={() => handleCoffeeLike(recipe.id)}
+                />
+              )}
             </Flex>
           </Box>
         ))}
