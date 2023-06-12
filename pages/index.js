@@ -59,10 +59,9 @@ export default function IndexPage() {
               </Text>
             </Heading>
             <Text color={"gray.500"} textAlign={{ base: "center", sm: "left" }}>
-              Welcome to Social Brew, the web app for coffee lovers! Whether
-              you're a barista or a coffee newbie, we've got something special
-              brewing for you. Discover a new level of coffee brewing experience
-              with Social Brew. Cheers to the perfect cup!
+              Social Brew is a web app for coffee lovers! Whether you're a
+              barista or a coffee newbie, this app is for you. Share your coffee
+              recipes with your friends!
             </Text>
             <Stack
               spacing={4}
@@ -101,14 +100,12 @@ export default function IndexPage() {
                 alt={"Hero Image"}
                 fit={"cover"}
                 align={"center"}
-                src={
-                  "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/079/873/original/Laptop_Mockup_Testimonial_Facebook_Cover.png?1682954351"
-                }
+                src={"https://shorturl.at/oVY18"}
               />
             </Box>
           </Flex>
         </Stack>
-        <Stack direction={"row"} justifyContent={"space-around"} mt={10}>
+        {/* <Stack direction={"row"} justifyContent={"space-evenly"} mt={10}>
           {SocialBrewLinks.map((link) => (
             <Link
               key={link.title}
@@ -127,7 +124,7 @@ export default function IndexPage() {
               {link.title}
             </Link>
           ))}
-        </Stack>
+        </Stack> */}
       </Container>
     </Flex>
   );
