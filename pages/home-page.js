@@ -40,7 +40,7 @@ export default function HomePage() {
   return (
     <Box>
       <Head>
-        <title>social brew</title>
+        <title>Social Brew feed</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"

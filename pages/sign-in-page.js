@@ -43,7 +43,7 @@ export default function SignInCard() {
   }, [isRedirecting, router]);
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
-      <title>sign in</title>
+      <title>sign in page</title>
       <Stack
         spacing={8}
         mx={"auto"}
