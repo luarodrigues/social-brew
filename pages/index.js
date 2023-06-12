@@ -59,10 +59,10 @@ export default function IndexPage() {
               </Text>
             </Heading>
             <Text color={"gray.500"} textAlign={{ base: "center", sm: "left" }}>
-              Welcome to Social Brew, the ultimate web app for coffee lovers!
-              Whether you're a barista or a coffee newbie, we've got something
-              special brewing for you. Discover a whole new level of coffee
-              brewing experience with Social Brew. Cheers to the perfect cup!
+              Welcome to Social Brew, the web app for coffee lovers! Whether
+              you're a barista or a coffee newbie, we've got something special
+              brewing for you. Discover a new level of coffee brewing experience
+              with Social Brew. Cheers to the perfect cup!
             </Text>
             <Stack
               spacing={4}
