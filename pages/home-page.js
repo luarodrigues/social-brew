@@ -51,13 +51,12 @@ export default function HomePage() {
         bg="#A7D2DD"
         color="white"
         fontFamily="avenir"
-        p="50px"
+        p="20px"
         flexDirection="column"
-        minHeight="100vh"
+        minHeight="50vh"
       >
         <Flex align={"center"} justify={"flex-end"}>
           <Button
-            m={{ base: "5px", md: "10px" }}
             variant={"brandColorGhost"}
             fontSize="16px"
             onClick={() => router.push("/recipe")}
@@ -65,7 +64,6 @@ export default function HomePage() {
             Add Recipe
           </Button>
           <Button
-            m={{ base: "5px", md: "10px" }}
             variant={"brandColorGhost"}
             fontSize="16px"
             onClick={() => router.push("/coffee-calculator")}
@@ -73,7 +71,6 @@ export default function HomePage() {
             Coffee Calculator
           </Button>
           <Button
-            m={{ base: "5px", md: "10px" }}
             variant={"brandColor"}
             fontSize="16px"
             onClick={handleSignOut}

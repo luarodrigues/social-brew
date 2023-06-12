@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-} from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { Box, Flex, VStack, Text, Stack, Avatar } from "@chakra-ui/react";
-import { MdOutlineCoffee, MdCoffee } from "react-icons/md";
 import { RiUserSmileLine } from "react-icons/ri";
+import CoffeeLike from "./CoffeeLike";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
@@ -29,91 +20,6 @@ interface CoffeeRecipe {
   comments: string;
   date: string;
   coffeeLikes: number;
-}
-
-interface coffeeLikeProps {
-  recipeId: string;
-  onClick: () => void;
-}
-
-function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
-  const [coffeeLiked, setCoffeeLiked] = useState(false);
-  const [coffeeLikesCount, setCoffeeLikesCount] = useState(0);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const fetchLikesCount = async () => {
-      const recipeRef = doc(db, "recipes", recipeId);
-      const recipeSnapshot = await getDoc(recipeRef);
-      if (recipeSnapshot.exists()) {
-        setCoffeeLikesCount(recipeSnapshot.data().coffeeLikes);
-
-        if (currentUser) {
-          const likedBy = recipeSnapshot.data().likedBy || [];
-          setCoffeeLiked(likedBy.includes(currentUser.uid));
-        }
-      }
-    };
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-    });
-
-    fetchLikesCount();
-
-    return () => {
-      unsubscribe();
-    };
-  }, [db, recipeId, currentUser]);
-
-  const handleLike = async () => {
-    try {
-      if (currentUser) {
-        const recipeRef = doc(db, "recipes", recipeId);
-        const recipeSnapshot = await getDoc(recipeRef);
-
-        if (recipeSnapshot.exists()) {
-          const currentCoffeeLikes = recipeSnapshot.data().coffeeLikes || 0;
-          const newCoffeeLikesCount = coffeeLiked
-            ? currentCoffeeLikes - 1
-            : currentCoffeeLikes + 1;
-
-          await updateDoc(recipeRef, {
-            coffeeLikes: newCoffeeLikesCount,
-          });
-
-          const likedByCurrentUser = !coffeeLiked;
-
-          if (likedByCurrentUser) {
-            await updateDoc(recipeRef, {
-              likedBy: arrayUnion(currentUser.uid),
-            });
-          } else {
-            await updateDoc(recipeRef, {
-              likedBy: arrayRemove(currentUser.uid),
-            });
-          }
-
-          setCoffeeLiked(likedByCurrentUser);
-          onClick();
-          setCoffeeLikesCount(newCoffeeLikesCount);
-        }
-      }
-    } catch (error) {
-      console.error("Error updating coffeeLikes:", error);
-    }
-  };
-
-  return (
-    <div onClick={handleLike}>
-      {coffeeLiked ? (
-        <MdCoffee color="#0F606B " size={20} />
-      ) : (
-        <MdOutlineCoffee color="#A7D2DD " size={20} />
-      )}{" "}
-      {coffeeLikesCount > 0 && <span>{coffeeLikesCount}</span>}
-    </div>
-  );
 }
 
 function AllRecipesFeed() {
@@ -154,7 +60,7 @@ function AllRecipesFeed() {
       fontFamily={"avenir"}
       color={"#0F606B"}
     >
-      <Box minW={"500px"} bg={"#A7D2DD"} rounded={"lg"}>
+      <Box minW={"sm"} bg={"#A7D2DD"} rounded={"lg"}>
         {recipes.map((recipe) => (
           <Box
             key={recipe.id}
@@ -178,18 +84,18 @@ function AllRecipesFeed() {
               <Box>Roaster: {recipe ? recipe.roaster : ""}</Box>
               <Box>Method: {recipe ? recipe.brewMethod : ""}</Box>
               <Box>Recipe: {recipe ? recipe.comments : ""}</Box>
+              <Box fontSize={"xs"} mt={"5px"}>
+                {recipe.date}
+              </Box>
             </VStack>
-            <Box fontSize={"smaller"} mt={"5px"}>
-              {recipe.date}
-            </Box>
-            <Flex mt={4} alignItems="center">
+            <Stack align="flex-start" justify={"center"}>
               {currentUser && (
                 <CoffeeLike
                   recipeId={recipe.id}
                   onClick={() => handleCoffeeLike(recipe.id)}
                 />
               )}
-            </Flex>
+            </Stack>
           </Box>
         ))}
       </Box>
