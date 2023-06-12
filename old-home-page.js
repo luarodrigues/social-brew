@@ -43,7 +43,7 @@
 //         minH={"100vh"}
 //         align={"center"}
 //         justify={"center"}
-//         bg={"#A7D2DD"}
+//         bg={"#393E46"}
 //         color={"white"}
 //         fontFamily={"avenir"}
 //         p={"50px"}
@@ -77,7 +77,7 @@
 //           <Stack alignSelf={{ sm: "flex-start" }}>
 //             {SocialBrewLinks.map((link) => (
 //               <Text
-//                 color={"#0F606B"}
+//                 color={"#222831"}
 //                 fontWeight={700}
 //                 marginRight="30px"
 //                 fontSize="20px"
@@ -121,7 +121,7 @@
 //                   <Avatar
 //                     name="Luana Rodrigues"
 //                     src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/078/718/original/PJF_8413.jpg?1682356621"
-//                     border="3px solid #FD6853"
+//                     border="3px solid #00ADB5"
 //                   />
 //                 </Flex>
 //               </CardHeader>
@@ -143,7 +143,7 @@
 //                           lineHeight="23px"
 //                           color="#323233"
 //                           name=""
-//                           background="#A7D2DD"
+//                           background="#393E46"
 //                           height="20px"
 //                           width="20px"
 //                           border="1px solid #323233"
@@ -154,7 +154,7 @@
 //                           fontSize="15"
 //                           display="flex"
 //                           alignItems="center"
-//                           color="#FD6853"
+//                           ="#00ADB5"
 //                         >
 //                           {"     "}
 //                           good coffee 🧡

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdCoffee } from "react-icons/md";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -40,7 +41,7 @@ const CoffeeCalculatorPage = () => {
       minH="100vh"
       align="center"
       justify="center"
-      bg="white"
+      bg="#393E46"
       fontFamily="avenir"
     >
       <title>coffee calculator</title>
@@ -50,18 +51,32 @@ const CoffeeCalculatorPage = () => {
         maxW="lg"
         py={10}
         px={6}
-        bg="#A7D2DD"
+        bg="#EEEEEE"
         rounded="lg"
       >
-        <Stack align="center">
-          <Text fontSize="66px" color="white" textTransform="uppercase">
-            Let's brew ☕️
-          </Text>
-          <Heading fontSize="large" color="white" textTransform="uppercase">
-            Coffee Calculator
-          </Heading>
-        </Stack>
-        <Box color="#0F606B">
+        <Flex
+          fontSize="x-large"
+          fontWeight="bold"
+          color="#222831"
+          textTransform="uppercase"
+          align="center"
+          justifyContent="center"
+        >
+          Coffee {"  "}
+          <MdCoffee color="#222831" style={{ marginLeft: "10px" }} />
+        </Flex>
+        <Flex
+          fontSize="x-large"
+          fontWeight="bold"
+          color="#222831"
+          textTransform="uppercase"
+          align="center"
+          justifyContent="center"
+        >
+          Calculator
+        </Flex>
+
+        <Box color="#222831">
           <FormControl id="coffee-amount" mb={4}>
             <FormLabel>Coffee Amount (in grams)</FormLabel>
             <Input
@@ -104,14 +119,14 @@ const CoffeeCalculatorPage = () => {
             </Stack>
           )}
         </Box>
-        <Box fontSize="sm" textAlign="center" color="white">
+        <Box fontSize="sm" textAlign="center" color="#393E46">
           Remember, this is a standard coffee recipe calculator. The most
           important factor is the taste - so be sure to try your coffee and
           adjust your recipe.
         </Box>
         <Stack align={"flex-end"}>
           {" "}
-          <Link color={"#FD6853"} onClick={() => router.push("/home-page")}>
+          <Link color={"#00ADB5"} onClick={() => router.push("/home-page")}>
             go to my page
           </Link>
         </Stack>

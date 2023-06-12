@@ -75,9 +75,9 @@
 //   return (
 //     <div onClick={handleLike}>
 //       {heartLiked ? (
-//         <AiFillHeart id="heartLikes" color="#FD6853" size={20} />
+//         <AiFillHeart id="heartLikes" color="#00ADB5" size={20} />
 //       ) : (
-//         <AiOutlineHeart color="#FD6853" size={20} />
+//         <AiOutlineHeart color="#00ADB5" size={20} />
 //       )}{" "}
 //       {heartLikesCount > 0 && <span>{heartLikesCount}</span>}
 //     </div>

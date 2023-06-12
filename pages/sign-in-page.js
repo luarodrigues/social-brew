@@ -3,7 +3,6 @@ import {
   Box,
   Stack,
   Button,
-  Heading,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -15,6 +14,7 @@ import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import React, { useState, useEffect } from "react";
+import { MdCoffee } from "react-icons/md";
 
 export default function SignInCard() {
   const router = useRouter();
@@ -38,11 +38,11 @@ export default function SignInCard() {
     if (isRedirecting) {
       setTimeout(() => {
         router.push("/home-page");
-      }, 4000);
+      }, 100);
     }
   }, [isRedirecting, router]);
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
+    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#393E46"}>
       <title>sign in page</title>
       <Stack
         spacing={8}
@@ -53,12 +53,18 @@ export default function SignInCard() {
         fontFamily={"avenir"}
       >
         <Stack align={"center"}>
-          <Text fontSize={"66px"} color={"white"} textTransform={"uppercase"}>
+          <Text fontSize={"58px"} color={"white"} textTransform={"uppercase"}>
             Social <span style={{ fontWeight: "bold" }}>brew</span>
           </Text>
-          <Heading fontSize={"2xl"} color={"white"}>
-            sign in ☕️
-          </Heading>
+          <Flex
+            fontSize={"2xl"}
+            color={"white"}
+            align={"center"}
+            justify={"center"}
+          >
+            sign in {"  "}
+            <MdCoffee style={{ marginLeft: "10px" }} />
+          </Flex>
         </Stack>
         <Box
           rounded={"lg"}
@@ -79,7 +85,7 @@ export default function SignInCard() {
                 onClick={handleGoogleSignIn}
                 leftIcon={<FcGoogle />}
               >
-                Sign up with Google
+                Sign in with Google
               </Button>
             </Stack>
           </Stack>

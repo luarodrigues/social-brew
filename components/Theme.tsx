@@ -5,20 +5,19 @@ const theme = extendTheme({
     Button: {
       variants: {
         brandColorGhost: {
-          bg: "#A7D2DD",
+          bg: "#393E46",
           color: "white",
           _hover: {
-            bg: "#A7D2DD",
-            color: "#FD6853",
+            bg: "#393E46",
+            color: "#00ADB5",
           },
         },
         brandColor: {
-          bg: "#FD6853",
+          bg: "#00ADB5",
           color: "white",
           _hover: {
-            bg: "white",
-            color: "#FD6853",
-            border: "2px solid #FD6853",
+            bg: "#EEEEEE",
+            color: "#00ADB5",
           },
         },
       },
