@@ -50,7 +50,7 @@ export default function SignUpCard() {
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
-      <title>create an account</title>
+      <title>create an account w/email</title>
       <Stack
         spacing={8}
         mx={"auto"}

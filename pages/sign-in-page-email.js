@@ -62,7 +62,7 @@ export default function SignInCard() {
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#A7D2DD"}>
-      <title>sign in</title>
+      <title>sign in with email</title>
       <Stack
         spacing={8}
         mx={"auto"}
