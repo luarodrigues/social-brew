@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import {
   getFirestore,
   collection,
@@ -7,6 +8,8 @@ import {
   getDoc,
   getDocs,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { Box, Flex, VStack, Text, Stack, Avatar } from "@chakra-ui/react";
@@ -15,6 +18,7 @@ import { RiUserSmileLine } from "react-icons/ri";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
+const auth = getAuth();
 
 interface CoffeeRecipe {
   id: string;
@@ -35,6 +39,7 @@ interface coffeeLikeProps {
 function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
   const [coffeeLiked, setCoffeeLiked] = useState(false);
   const [coffeeLikesCount, setCoffeeLikesCount] = useState(0);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchLikesCount = async () => {
@@ -46,28 +51,49 @@ function CoffeeLike({ recipeId, onClick }: coffeeLikeProps) {
       }
     };
 
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+
     fetchLikesCount();
+
+    return () => {
+      unsubscribe();
+    };
   }, [db, recipeId]);
 
   const handleLike = async () => {
     try {
-      const recipeRef = doc(db, "recipes", recipeId);
-      const recipeSnapshot = await getDoc(recipeRef);
+      if (currentUser) {
+        const recipeRef = doc(db, "recipes", recipeId);
+        const recipeSnapshot = await getDoc(recipeRef);
 
-      if (recipeSnapshot.exists()) {
-        const currentCoffeeLikes = recipeSnapshot.data().coffeeLikes || 0;
-        const newCoffeeLikesCount = coffeeLiked
-          ? currentCoffeeLikes - 1
-          : currentCoffeeLikes + 1;
+        if (recipeSnapshot.exists()) {
+          const currentCoffeeLikes = recipeSnapshot.data().coffeeLikes || 0;
+          const newCoffeeLikesCount = coffeeLiked
+            ? currentCoffeeLikes - 1
+            : currentCoffeeLikes + 1;
 
-        await updateDoc(recipeRef, {
-          coffeeLikes: newCoffeeLikesCount,
-          likedByCurrentUser: !coffeeLiked,
-        });
+          await updateDoc(recipeRef, {
+            coffeeLikes: newCoffeeLikesCount,
+          });
 
-        setCoffeeLiked(!coffeeLiked);
-        onClick();
-        setCoffeeLikesCount(newCoffeeLikesCount);
+          const likedByCurrentUser = !coffeeLiked;
+
+          if (likedByCurrentUser) {
+            await updateDoc(recipeRef, {
+              likedBy: arrayUnion(currentUser.uid),
+            });
+          } else {
+            await updateDoc(recipeRef, {
+              likedBy: arrayRemove(currentUser.uid),
+            });
+          }
+
+          setCoffeeLiked(likedByCurrentUser);
+          onClick();
+          setCoffeeLikesCount(newCoffeeLikesCount);
+        }
       }
     } catch (error) {
       console.error("Error updating coffeeLikes:", error);
