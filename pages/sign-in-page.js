@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import React, { useState, useEffect } from "react";
 import { MdCoffee } from "react-icons/md";
+import Head from "next/head";
 
 export default function SignInCard() {
   const router = useRouter();

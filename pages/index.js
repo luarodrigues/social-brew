@@ -7,11 +7,9 @@ import {
   Heading,
   Text,
   Image,
-  Icon,
-  Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import SocialBrewLinks from "../components/SocialBrewLinks";
+import Head from "next/head";
 
 export default function IndexPage() {
   const router = useRouter();
