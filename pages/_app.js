@@ -9,10 +9,11 @@ export default function App({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
       <Head>
         <Script
-          async
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-39S3TF2VHV"
         ></Script>
         <Script
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
             window.dataLayer = window.dataLayer || [];
