@@ -8,10 +8,7 @@ export default function App({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-39S3TF2VHV"
-        ></Script>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-39S3TF2VHV"></Script>
         <Script
           dangerouslySetInnerHTML={{
             __html: `
