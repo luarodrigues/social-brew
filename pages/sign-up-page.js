@@ -37,7 +37,7 @@ export default function SignUpCard() {
     if (isRedirecting) {
       setTimeout(() => {
         router.push("/home-page");
-      }, 2000);
+      }, 100);
     }
   }, [isRedirecting, router]);
 
