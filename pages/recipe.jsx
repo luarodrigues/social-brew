@@ -186,7 +186,15 @@ const CoffeeRecipe = () => {
       bg={"#393E46"}
       fontFamily={"avenir"}
     >
-      <title>recipe</title>
+      <Head>
+        <script>
+          window.dataLayer = window.dataLayer || []; function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()); gtag('config', 'G-39S3TF2VHV');
+        </script>
+        <title>Recipe</title>
+      </Head>
+
       <Stack
         spacing={5}
         mx={"auto"}
