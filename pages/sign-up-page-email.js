@@ -34,7 +34,7 @@ export default function SignUpCard() {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        router.push("/sign-in-page");
+        router.push("/home-page");
       })
       .catch((error) => {
         const errorCode = error.code;
