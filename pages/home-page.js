@@ -40,15 +40,6 @@ export default function HomePage() {
   return (
     <Box>
       <Head>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-39S3TF2VHV"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || []; function gtag()
-          {dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-39S3TF2VHV');
-        </script>
         <title>Social Brew feed</title>
         <meta
           name="viewport"
