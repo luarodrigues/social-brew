@@ -45,15 +45,6 @@ const CoffeeCalculatorPage = () => {
       fontFamily="avenir"
     >
       <Head>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-39S3TF2VHV"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || []; function gtag()
-          {dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-39S3TF2VHV');
-        </script>
         <title>coffee calculator</title>
       </Head>
       <Stack
