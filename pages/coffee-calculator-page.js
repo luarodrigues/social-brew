@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import {
   Box,
   Button,
-  Heading,
-  Text,
   Flex,
   FormControl,
   FormLabel,

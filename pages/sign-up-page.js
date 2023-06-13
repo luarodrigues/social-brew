@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Flex,
-  Box,
-  Stack,
-  Link,
-  Button,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Box, Stack, Link, Button, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
