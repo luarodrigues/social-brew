@@ -8,6 +8,7 @@ import {
   FormControl,
   FormLabel,
   Link,
+  Input,
   Select,
   Stack,
   NumberInput,
@@ -46,6 +47,12 @@ const CoffeeRecipe = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
+    beans: "",
+    roaster: "",
+    brewMethod: "",
+  });
+
+  const [otherOptions, setOtherOptions] = useState({
     beans: "",
     roaster: "",
     brewMethod: "",
@@ -96,9 +103,18 @@ const CoffeeRecipe = () => {
       const recipe = {
         date: formattedDate,
         userName: user.email.split("@")[0],
-        beans: selectedOptions.beans,
-        roaster: selectedOptions.roaster,
-        brewMethod: selectedOptions.brewMethod,
+        beans:
+          selectedOptions.beans === "Other"
+            ? otherOptions.beans
+            : selectedOptions.beans,
+        roaster:
+          selectedOptions.roaster === "Other"
+            ? otherOptions.roaster
+            : selectedOptions.roaster,
+        brewMethod:
+          selectedOptions.brewMethod === "Other"
+            ? otherOptions.brewMethod
+            : selectedOptions.brewMethod,
 
         coffeeLikes: coffeeLikes,
         coffeeAmmount: selectedOptions.coffeeAmmount,
@@ -129,7 +145,25 @@ const CoffeeRecipe = () => {
   };
 
   const handleOptionChange = (field, value) => {
-    setSelectedOptions((prevOptions) => ({
+    if (value === "Other") {
+      setSelectedOptions((prevOptions) => ({
+        ...prevOptions,
+        [field]: value,
+      }));
+      setOtherOptions((prevOptions) => ({
+        ...prevOptions,
+        [field]: "",
+      }));
+    } else {
+      setSelectedOptions((prevOptions) => ({
+        ...prevOptions,
+        [field]: value,
+      }));
+    }
+  };
+
+  const handleOtherOptionChange = (field, value) => {
+    setOtherOptions((prevOptions) => ({
       ...prevOptions,
       [field]: value,
     }));
@@ -192,6 +226,16 @@ const CoffeeRecipe = () => {
               ))}
               <option>Other</option>
             </Select>
+            {selectedOptions.beans === "Other" && (
+              <Input
+                placeholder="Enter beans origin"
+                value={otherOptions.beans}
+                onChange={(e) =>
+                  handleOtherOptionChange("beans", e.target.value)
+                }
+                isDisabled={submitted}
+              />
+            )}
           </FormControl>
 
           <FormControl id="roaster" mb={4}>
@@ -209,6 +253,16 @@ const CoffeeRecipe = () => {
               ))}
               <option>Other</option>
             </Select>
+            {selectedOptions.roaster === "Other" && (
+              <Input
+                placeholder="Enter roaster"
+                value={otherOptions.roaster}
+                onChange={(e) =>
+                  handleOtherOptionChange("roaster", e.target.value)
+                }
+                isDisabled={submitted}
+              />
+            )}
           </FormControl>
 
           <FormControl id="brew-method" mb={4}>
@@ -226,6 +280,16 @@ const CoffeeRecipe = () => {
               ))}
               <option>Other</option>
             </Select>
+            {selectedOptions.brewMethod === "Other" && (
+              <Input
+                placeholder="Enter brew method"
+                value={otherOptions.brewMethod}
+                onChange={(e) =>
+                  handleOtherOptionChange("brewMethod", e.target.value)
+                }
+                isDisabled={submitted}
+              />
+            )}
           </FormControl>
 
           <FormControl id="coffeeAmmount" mb={4}>
@@ -269,6 +333,7 @@ const CoffeeRecipe = () => {
               id="brewTime"
               mb={4}
               placeholder="Select a number"
+              color={"#B6B7B9"}
               bg={"white"}
               onChange={(e) => handleOptionChange("brewTime", e.target.value)}
               isDisabled={submitted}
@@ -283,19 +348,24 @@ const CoffeeRecipe = () => {
 
           <Box align={"center"} justify={"center"}>
             {!submitted ? (
-              <Button variant={"brandColor"} onClick={handleSubmit}>
-                submit recipe
-              </Button>
+              <>
+                <Button variant={"brandColor"} onClick={handleSubmit}>
+                  submit recipe
+                </Button>
+                <Stack align={"flex-end"}>
+                  {" "}
+                  <Link
+                    color={"#00ADB5"}
+                    onClick={() => router.push("/home-page")}
+                  >
+                    go to my page
+                  </Link>
+                </Stack>
+              </>
             ) : (
-              <SubmitAlert></SubmitAlert>
+              <SubmitAlert />
             )}
           </Box>
-          <Stack align={"flex-end"}>
-            {" "}
-            <Link color={"#00ADB5"} onClick={() => router.push("/home-page")}>
-              go to my page
-            </Link>
-          </Stack>
         </Box>
       </Stack>
     </Flex>

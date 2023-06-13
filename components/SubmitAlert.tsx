@@ -17,8 +17,8 @@ function SubmitAlert() {
 
   const router = useRouter();
 
-  const handleRefresh = () => {
-    router.push("/recipe");
+  const handleGoToHomePage = () => {
+    router.push("/home-page");
   };
 
   return isVisible ? (
@@ -38,8 +38,8 @@ function SubmitAlert() {
       />
     </Alert>
   ) : (
-    <Button variant={"brandColor"} onClick={handleRefresh}>
-      add new recipe
+    <Button variant={"brandColor"} onClick={handleGoToHomePage}>
+      go to feed
     </Button>
   );
 }
