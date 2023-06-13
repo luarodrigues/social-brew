@@ -22,8 +22,6 @@ import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { useRouter } from "next/router";
 import { MdCoffee } from "react-icons/md";
-import Head from "next/head";
-
 export default function SignInCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

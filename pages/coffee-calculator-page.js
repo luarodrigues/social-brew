@@ -14,7 +14,6 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react";
-import Head from "next/head";
 
 const CoffeeCalculatorPage = () => {
   const router = useRouter();

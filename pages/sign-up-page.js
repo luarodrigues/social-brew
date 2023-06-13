@@ -14,7 +14,6 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
 import { MdCoffee } from "react-icons/md";
-import Head from "next/head";
 
 export default function SignUpCard() {
   const router = useRouter();
