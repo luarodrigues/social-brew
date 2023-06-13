@@ -25,7 +25,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
-import { IoWaterOutline } from "react-icons/io";
+import Head from "next/head";
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
