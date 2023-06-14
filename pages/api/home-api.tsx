@@ -21,7 +21,7 @@ interface CoffeeRecipe {
   brewMethod: string;
   comments: string;
   date: string;
-
+  userProfilePicture: string;
   coffeeLikes: number;
 }
 
