@@ -20,6 +20,7 @@ interface CoffeeRecipe {
   comments: string;
   date: string;
   coffeeLikes: number;
+  userProfilePicture: string;
 }
 
 function AllRecipesFeed() {
@@ -71,13 +72,23 @@ function AllRecipesFeed() {
             mb={4}
           >
             <Stack direction="row" mb={2} alignItems="center">
-              <Avatar
-                size="sm"
-                bg="#00ADB5"
-                icon={<RiUserSmileLine fontSize="1.5rem" />}
-              />
+              {recipe.userProfilePicture ? (
+                <Avatar
+                  size="sm"
+                  bg="#00ADB5"
+                  name={recipe.userName}
+                  src={recipe.userProfilePicture}
+                />
+              ) : (
+                <Avatar
+                  size="sm"
+                  bg="#00ADB5"
+                  icon={<RiUserSmileLine fontSize="1.5rem" />}
+                />
+              )}
               <Text fontWeight={"bold"}>{recipe.userName}</Text>
             </Stack>
+
             <VStack align={"flex-start"}>
               <Box>
                 <strong>Beans origin:</strong> {recipe ? recipe.beans : ""}
