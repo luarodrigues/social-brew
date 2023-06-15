@@ -98,7 +98,7 @@ export default function IndexPage() {
               overflow={"hidden"}
             >
               <Image
-                alt={"Hero Image"}
+                alt={"SB Image"}
                 fit={"cover"}
                 align={"center"}
                 src={"https://shorturl.at/oVY18"}
@@ -106,26 +106,6 @@ export default function IndexPage() {
             </Box>
           </Flex>
         </Stack>
-        {/* <Stack direction={"row"} justifyContent={"space-evenly"} mt={10}>
-          {SocialBrewLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.url}
-              color={"#00ADB5"}
-              fontSize={{ base: "lg", sm: "xl" }}
-              _hover={{
-                color: "#222831",
-                cursor: "pointer",
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                router.push(link.url);
-              }}
-            >
-              {link.title}
-            </Link>
-          ))}
-        </Stack> */}
       </Container>
     </Flex>
   );

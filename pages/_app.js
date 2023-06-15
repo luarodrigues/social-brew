@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import React from "react";
 import theme from "../components/Theme";
-import Head from "next/head";
+
 import Script from "next/script";
 
 export default function App({ Component, pageProps }) {
