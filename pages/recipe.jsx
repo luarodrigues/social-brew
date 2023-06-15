@@ -18,7 +18,7 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import "firebase/firestore";
-import coffeeData from "coffee-data.json";
+import coffeeData from "../data/coffee-data.json";
 import { useRouter } from "next/router";
 import { SubmitAlert } from "../components/SubmitAlert";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -322,7 +322,6 @@ const CoffeeRecipe = () => {
             <FormLabel>Water Amount (g)</FormLabel>
             <NumberInput
               id="waterAmmount"
-              color={"#B6B7B9"}
               onChange={(value) => handleOptionChange("waterAmmount", value)}
               isDisabled={submitted}
               min={1}
