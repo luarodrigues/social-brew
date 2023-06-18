@@ -1,17 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  orderBy,
-  query,
-  DocumentData,
-} from "firebase/firestore";
-import { initializeApp } from "firebase/app";
-import firebaseConfig from "../../firebaseConfig/firebaseConfig";
-
-initializeApp(firebaseConfig);
-const db = getFirestore();
+// import {
+//   getFirestore,
+//   collection,
+//   getDocs,
+//   orderBy,
+//   query,
+// } from "firebase/firestore";
+// import { initializeApp } from "firebase/app";
+// import firebaseConfig from "../../firebaseConfig/firebaseConfig";
+import firebaseAdmin from "../../firebaseConfig/firebase-admin";
+// initializeApp(firebaseConfig);
+// const db = getFirestore();
 
 interface CoffeeRecipe {
   userName: string;
@@ -30,13 +29,16 @@ export default async function handler(
   res: NextApiResponse<CoffeeRecipe[] | string>
 ) {
   try {
-    const recipeRef = collection(db, "recipes");
-    const recipeQuery = query(recipeRef, orderBy("date", "desc"));
-    const recipeSnapshot = await getDocs(recipeQuery);
+    const db = firebaseAdmin.firestore();
+    const recipeRef = db.collection("recipes");
+    const recipeSnapshot = await recipeRef.orderBy("date", "desc").get();
+
+    // const recipeQuery = query(recipeRef, orderBy("date", "desc"));
+    // const recipeSnapshot = await getDocs(recipeQuery);
     const recipes: CoffeeRecipe[] = [];
 
     recipeSnapshot.forEach((doc) => {
-      if (doc.exists()) {
+      if (doc.exists) {
         const data = doc.data() as CoffeeRecipe;
 
         recipes.push({
