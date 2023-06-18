@@ -1,16 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import {
-//   getFirestore,
-//   collection,
-//   getDocs,
-//   orderBy,
-//   query,
-// } from "firebase/firestore";
-// import { initializeApp } from "firebase/app";
-// import firebaseConfig from "../../firebaseConfig/firebaseConfig";
 import firebaseAdmin from "../../firebaseConfig/firebase-admin";
-// initializeApp(firebaseConfig);
-// const db = getFirestore();
 
 interface CoffeeRecipe {
   userName: string;
