@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.10.6",
     "dotenv": "^16.0.3",
     "firebase": "^9.22.1",
+    "firebase-admin": "^11.9.0",
     "firebaseui": "^6.0.2",
     "framer-motion": "^10.12.16",
     "lodash.debounce": "^4.0.8",
