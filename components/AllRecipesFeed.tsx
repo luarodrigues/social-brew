@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, deleteDoc, doc } from "firebase/firestore";
 import firebaseConfig from "../firebaseConfig/firebaseConfig";
-import { Box, Flex, VStack, Text, Stack, Avatar } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  VStack,
+  Text,
+  Stack,
+  Avatar,
+  Button,
+  HStack,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
+import { BsThreeDots } from "react-icons/bs";
 import { RiUserSmileLine } from "react-icons/ri";
 import CoffeeLike from "./CoffeeLike";
 
@@ -14,6 +29,8 @@ const auth = getAuth();
 interface CoffeeRecipe {
   id: string;
   userName: string;
+  user: string;
+  userId: string;
   beans: string;
   roaster: string;
   brewMethod: string;
@@ -51,7 +68,19 @@ function AllRecipesFeed() {
   }, []);
 
   const handleCoffeeLike = (recipeId: string) => {
-    console.log("clicked for recipe ID:", recipeId);
+    // console.log("clicked for recipe ID:", recipeId);
+  };
+
+  const handleDeleteRecipe = async (recipeId: string) => {
+    try {
+      const recipeRef = doc(db, "recipes", recipeId);
+      await deleteDoc(recipeRef);
+      // console.log("Recipe deleted:", recipeId);
+
+      setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
   };
 
   return (
@@ -71,7 +100,7 @@ function AllRecipesFeed() {
             bg="#EEEEEE"
             mb={4}
           >
-            <Stack direction="row" mb={2} alignItems="center">
+            <Flex justifyContent="space-between" alignItems="center" mb={2}>
               {recipe.userProfilePicture ? (
                 <Avatar
                   size="sm"
@@ -86,8 +115,34 @@ function AllRecipesFeed() {
                   icon={<RiUserSmileLine fontSize="1.5rem" />}
                 />
               )}
-              <Text fontWeight={"bold"}>{recipe.userName}</Text>
-            </Stack>
+              <Box flex="1" ml={2}>
+                <Text fontWeight={"bold"}>{recipe.userName}</Text>
+              </Box>
+              <Flex justifyContent="flex-end" alignItems="flex-end">
+                {currentUser && currentUser.uid === recipe.userId && (
+                  <Menu>
+                    <MenuButton as={Link} variant="ghost">
+                      <BsThreeDots />
+                    </MenuButton>
+                    <MenuList
+                      alignItems="center"
+                      minW="0"
+                      maxW={"inherit"}
+                      minH="0"
+                      maxH={"inherit"}
+                    >
+                      <MenuItem
+                        fontSize={"sm"}
+                        fontFamily={"avenir"}
+                        onClick={() => handleDeleteRecipe(recipe.id)}
+                      >
+                        delete recipe
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                )}
+              </Flex>
+            </Flex>
 
             <VStack align={"flex-start"}>
               <Box>

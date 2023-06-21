@@ -43,6 +43,7 @@ const CoffeeRecipe = () => {
   const [coffeeAmmount, setCoffeeAmmount] = useState("");
   const [brewTime, setBrewTime] = useState("");
   const [userName, setuserName] = useState("");
+  const [userId, setUserId] = useState("");
   const [userProfilePicture, setuserProfilePicture] = useState("");
   const [date, setDate] = useState("");
 
@@ -103,6 +104,7 @@ const CoffeeRecipe = () => {
       const formattedDate = date.toLocaleString("en-GB", options);
       const recipe = {
         date: formattedDate,
+        userId: user.uid,
         userName:
           user.providerData[0].providerId === "google.com"
             ? user.displayName
@@ -138,6 +140,7 @@ const CoffeeRecipe = () => {
       });
       setComments("");
       setuserName("");
+      setUserId("");
       setuserProfilePicture("");
       setCoffeeLikes([]);
 
