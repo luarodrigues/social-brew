@@ -20,6 +20,15 @@ const theme = extendTheme({
             color: "#00ADB5",
           },
         },
+        brandColorDelete: {
+          bg: "#EEEEEE",
+          border: "1px solid #F47068",
+          color: "#F47068",
+          _hover: {
+            bg: "#F47068",
+            color: "#EEEEEE",
+          },
+        },
       },
     },
   },
