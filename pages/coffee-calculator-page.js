@@ -8,6 +8,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Text,
   Link,
   Select,
   Stack,
@@ -40,34 +41,27 @@ const CoffeeCalculatorPage = () => {
       minH="100vh"
       align="center"
       justify="center"
-      bg="#393E46"
-      fontFamily="avenir"
+      bg="white"
+      fontFamily="arial"
     >
       <Head>
         <title>coffee calculator</title>
       </Head>
       <Stack
-        spacing={5}
+        spacing={7}
         mx="auto"
-        maxW="lg"
+        maxW="sm"
         py={10}
         px={6}
-        bg="#EEEEEE"
+        bg="white"
+        border={"2px solid #222831"}
         rounded="lg"
       >
-        <Flex
-          fontSize="x-large"
-          fontWeight="bold"
-          color="#222831"
-          textTransform="uppercase"
-          align="center"
-          justifyContent="center"
-        >
-          Coffee {"  "}
-          <MdCoffee color="#222831" style={{ marginLeft: "10px" }} />
-        </Flex>
-        <Flex
-          fontSize="x-large"
+        <Stack align="center">
+          <MdCoffee color="#222831" size="45px" />
+        </Stack>
+        <Text
+          fontSize="xx-large"
           fontWeight="bold"
           color="#222831"
           textTransform="uppercase"
@@ -75,7 +69,7 @@ const CoffeeCalculatorPage = () => {
           justifyContent="center"
         >
           Calculator
-        </Flex>
+        </Text>
 
         <Box color="#222831">
           <FormControl id="coffee-amount" mb={4}>
@@ -120,7 +114,7 @@ const CoffeeCalculatorPage = () => {
             </Stack>
           )}
         </Box>
-        <Box fontSize="sm" textAlign="center" color="#393E46">
+        <Box fontSize="xs" textAlign="center" color="#393E46">
           Remember, this is a standard coffee recipe calculator. The most
           important factor is the taste - so be sure to try your coffee and
           adjust your recipe.

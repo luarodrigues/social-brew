@@ -29,6 +29,15 @@ const theme = extendTheme({
             color: "#EEEEEE",
           },
         },
+        brandColorSignOut: {
+          bg: "none",
+          border: "1px solid #F47068",
+          color: "#F47068",
+          _hover: {
+            bg: "#F47068",
+            color: "#EEEEEE",
+          },
+        },
       },
     },
   },
