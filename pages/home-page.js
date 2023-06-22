@@ -82,7 +82,7 @@ export default function HomePage() {
           <Text
             fontSize={{ base: "4xl", sm: "xl", lg: "5xl" }}
             textTransform="uppercase"
-            mb={8}
+            mb={4}
           >
             SOCIAL{" "}
             <Text fontWeight="bold" as="span">

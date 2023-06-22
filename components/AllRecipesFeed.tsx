@@ -86,6 +86,7 @@ function AllRecipesFeed() {
       align={"center"}
       justify={"center"}
       fontFamily={"arial"}
+      fontSize={"sm"}
       color={"#222831"}
     >
       <Box minW={"sm"} bg={"#393E46"} rounded={"lg"}>
@@ -114,7 +115,9 @@ function AllRecipesFeed() {
                 />
               )}
               <Box flex="1" ml={2}>
-                <Text fontWeight={"bold"}>{recipe.userName}</Text>
+                <Text fontWeight={"bold"} fontSize={"md"}>
+                  {recipe.userName}
+                </Text>
               </Box>
               <Flex justifyContent="flex-end" alignItems="flex-end">
                 {currentUser && currentUser.uid === recipe.userId && (
