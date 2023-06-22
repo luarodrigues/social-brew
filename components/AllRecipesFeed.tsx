@@ -10,8 +10,6 @@ import {
   Text,
   Stack,
   Avatar,
-  Button,
-  HStack,
   Link,
   Menu,
   MenuButton,
@@ -87,7 +85,7 @@ function AllRecipesFeed() {
     <Flex
       align={"center"}
       justify={"center"}
-      fontFamily={"avenir"}
+      fontFamily={"arial"}
       color={"#222831"}
     >
       <Box minW={"sm"} bg={"#393E46"} rounded={"lg"}>
@@ -133,7 +131,7 @@ function AllRecipesFeed() {
                     >
                       <MenuItem
                         fontSize={"sm"}
-                        fontFamily={"avenir"}
+                        fontFamily={"arial"}
                         onClick={() => handleDeleteRecipe(recipe.id)}
                       >
                         delete recipe

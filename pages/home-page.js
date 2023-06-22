@@ -50,36 +50,40 @@ export default function HomePage() {
       <Flex
         bg="#393E46"
         color="white"
-        fontFamily="avenir"
-        p="20px"
+        fontFamily="arial"
+        p={8}
         flexDirection="column"
         minHeight="50vh"
       >
-        <Flex align={"center"} justify={"flex-end"}>
+        <Flex align={"center"} justify={"flex-end"} p={2}>
           <Button
             variant={"brandColorGhost"}
-            fontSize="16px"
+            size={"sm"}
             onClick={() => router.push("/recipe")}
           >
             Add Recipe
           </Button>
           <Button
             variant={"brandColorGhost"}
-            fontSize="16px"
+            size={"sm"}
             onClick={() => router.push("/coffee-calculator-page")}
           >
             Coffee Calculator
           </Button>
           <Button
-            variant={"brandColor"}
-            fontSize="16px"
+            variant={"brandColorSignOut"}
+            size={"sm"}
             onClick={handleSignOut}
           >
             Sign Out
           </Button>
         </Flex>
         <Flex align={"center"} justify={"center"}>
-          <Text fontSize="58px" textTransform="uppercase" mb={5}>
+          <Text
+            fontSize={{ base: "4xl", sm: "xl", lg: "5xl" }}
+            textTransform="uppercase"
+            mb={8}
+          >
             SOCIAL{" "}
             <Text fontWeight="bold" as="span">
               BREw
