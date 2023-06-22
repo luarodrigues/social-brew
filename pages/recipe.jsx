@@ -193,7 +193,7 @@ const CoffeeRecipe = () => {
       align={"center"}
       justify={"center"}
       bg={"#393E46"}
-      fontFamily={"avenir"}
+      fontFamily={"arial"}
     >
       <Head>
         <title>Recipe</title>

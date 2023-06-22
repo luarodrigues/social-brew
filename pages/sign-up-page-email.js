@@ -55,7 +55,7 @@ export default function SignUpCard() {
         maxW={"lg"}
         py={12}
         px={6}
-        fontFamily={"avenir"}
+        fontFamily={"arial"}
       >
         <Stack align={"center"}>
           <Text fontSize={"58px"} color={"white"} textTransform={"uppercase"}>

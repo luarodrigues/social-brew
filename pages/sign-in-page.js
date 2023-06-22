@@ -38,7 +38,7 @@ export default function SignInCard() {
     if (isRedirecting) {
       setTimeout(() => {
         router.push("/home-page");
-      }, 100);
+      }, 90);
     }
   }, [isRedirecting, router]);
   return (
@@ -53,7 +53,7 @@ export default function SignInCard() {
         maxW={"lg"}
         py={12}
         px={6}
-        fontFamily={"avenir"}
+        fontFamily={"arial"}
       >
         <Stack align={"center"}>
           <Text fontSize={"58px"} color={"white"} textTransform={"uppercase"}>

@@ -20,7 +20,7 @@ export default function IndexPage() {
         <title>Social Brew</title>
       </Head>
 
-      <Container maxW={"7xl"} fontFamily={"avenir"} justify={"center"}>
+      <Container maxW={"7xl"} fontFamily={"arial"} justify={"center"}>
         <Stack
           align={"center"}
           spacing={8}
@@ -35,28 +35,32 @@ export default function IndexPage() {
               textAlign={{ base: "center", sm: "left" }}
             >
               <Text
-                fontFamily={"avenir"}
+                fontFamily={"arial"}
                 color=" #222831"
-                as={"span"}
-                position={"relative"}
-                _after={{
-                  content: "''",
-                  width: "full",
-                  height: "25%",
-                  position: "absolute",
-                  bottom: 1,
-                  left: 0,
-                  bg: "#B6B7B9",
-                  zIndex: -1,
-                }}
+
+                // as={"span"}
+                // position={"relative"}
+                // _after={{
+                //   content: "''",
+                //   width: "full",
+                //   height: "25%",
+                //   position: "absolute",
+                //   bottom: 1,
+                //   left: 0,
+                //   bg: "#B6B7B9",
+                //   zIndex: -1,
+                // }}
               >
                 Welcome to <br />
-                <Text as={"span"} color={"#00ADB5"}>
-                  SOCIAL BREW
-                </Text>
+                <Text color={"#00ADB5"}>SOCIAL BREW</Text>
               </Text>
-              <Text as={"span"} color={" #222831"} fontSize={"4xl"}>
-                your coffee community app
+              <Text
+                as={"span"}
+                color={" #222831"}
+                f
+                fontSize={{ base: "xl", sm: "xl", lg: "4xl" }}
+              >
+                the coffee community app
               </Text>
             </Heading>
             <Text color={"gray.500"} textAlign={{ base: "center", sm: "left" }}>
@@ -70,16 +74,28 @@ export default function IndexPage() {
               align={{ base: "center", sm: "flex-start" }}
             >
               <Button
+                size={"sm"}
                 variant={"brandColor"}
                 onClick={() => router.push("/sign-in-page")}
               >
                 Sign In
               </Button>
               <Button
+                size={"sm"}
                 variant={"brandColor"}
                 onClick={() => router.push("/sign-up-page")}
               >
                 Create Account
+              </Button>
+              <Button
+                bg="white"
+                border="1px solid #393E46"
+                color="#393E46"
+                _hover={{ bg: "#393E46", color: "white" }}
+                size={"sm"}
+                onClick={() => router.push("/coffee-calculator-page")}
+              >
+                Coffee Calculator
               </Button>
             </Stack>
           </Stack>
