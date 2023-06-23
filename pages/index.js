@@ -34,30 +34,13 @@ export default function IndexPage() {
               fontSize={{ base: "3xl", sm: "4xl", lg: "6xl" }}
               textAlign={{ base: "center", sm: "left" }}
             >
-              <Text
-                fontFamily={"arial"}
-                color=" #222831"
-
-                // as={"span"}
-                // position={"relative"}
-                // _after={{
-                //   content: "''",
-                //   width: "full",
-                //   height: "25%",
-                //   position: "absolute",
-                //   bottom: 1,
-                //   left: 0,
-                //   bg: "#B6B7B9",
-                //   zIndex: -1,
-                // }}
-              >
-                Welcome to <br />
-                <Text color={"#00ADB5"}>SOCIAL BREW</Text>
+              <Text fontFamily="arial" color="#222831">
+                Welcome to <br />{" "}
+                <span style={{ color: "#00ADB5" }}>SOCIAL BREW</span>
               </Text>
               <Text
-                as={"span"}
-                color={" #222831"}
-                f
+                as="span"
+                color="#222831"
                 fontSize={{ base: "xl", sm: "xl", lg: "4xl" }}
               >
                 the coffee community app
