@@ -147,7 +147,7 @@ function AllRecipesFeed() {
 
             <VStack align={"flex-start"}>
               <Box>
-                <strong>Beans origin:</strong> {recipe ? recipe.beans : ""}
+                <strong>Origin:</strong> {recipe ? recipe.beans : ""}
               </Box>
               <Box>
                 <strong>Roaster:</strong> {recipe ? recipe.roaster : ""}
