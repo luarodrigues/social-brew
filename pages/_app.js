@@ -20,7 +20,10 @@ export default function App({ Component, pageProps }) {
           gtag('config', 'G-39S3TF2VHV');
         `}
       </Script>
-
+      <Script
+        src="//app.orangejuice.so/widget.js"
+        data-id="FSR2OBDIeUUSaLbGhJbN"
+      ></Script>
       <Component {...pageProps} />
     </ChakraProvider>
   );
