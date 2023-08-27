@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
         `}
       </Script>
       <Script
-        src="//app.orangejuice.so/widget.js"
+        // src="//app.arialjuice.so/widget.js"
         data-id="FSR2OBDIeUUSaLbGhJbN"
       ></Script>
       <Component {...pageProps} />
